@@ -3,6 +3,7 @@
   border: 4px solid black;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 4em;
 }
 
 #canvas table td {
@@ -15,4 +16,11 @@
   outline: 4px dashed lightcoral;
   outline-offset: -6px;
 }
+
+/* !Not sure of purpose */
+/* .canvas {
+  background-color: black;
+  color: white;
+} */
+
 /*----------------------------Some other CSS-------------------------*/

@@ -16,7 +16,7 @@ cell.style.backgroundColor = correct[r][c];
 /*create the canvas
 #Not sure yet how large the canvas should be
 #Need to consider how well it would feel on a phone*/
-createCanvas(16,16);
+createCanvas(8,8);
 
 /* Multipurpose function
 Creates a canvas with a specified number of rows and 
