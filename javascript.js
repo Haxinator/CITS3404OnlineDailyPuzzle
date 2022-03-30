@@ -22,6 +22,7 @@ cell.style.backgroundColor = correct[r][c];
 #Need to consider how well it would feel on a phone*/
 createCanvas(8, 8);
 
+
 /* createCanvas
 Creates a canvas with a specified number of rows and
 columns.

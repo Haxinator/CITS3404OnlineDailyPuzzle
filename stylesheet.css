@@ -23,6 +23,7 @@
   color: white;
 } */
 
+
 /*------------------------Color Pallet CSS-------------------------*/
 #colorPallet table {
   padding: 2%;
@@ -41,3 +42,6 @@
   outline: 4px dashed lightcoral;
   outline-offset: -6px;
 }
+
+/*----------------------------Some other CSS-------------------------*/
+
