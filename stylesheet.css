@@ -23,4 +23,25 @@
   color: white;
 } */
 
+
+/*------------------------Color Pallet CSS-------------------------*/
+#colorPallet table {
+  padding: 2%;
+  border: 4px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#colorPallet table td {
+  padding: 20px;
+}
+
+/*#currently overlaps with table border
+#Needs to be adjusted for mobile users*/
+#colorPallet table td:hover {
+  outline: 4px dashed lightcoral;
+  outline-offset: -6px;
+}
+
 /*----------------------------Some other CSS-------------------------*/
+
