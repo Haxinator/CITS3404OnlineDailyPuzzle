@@ -1,83 +1,80 @@
-*{
-    padding: 0;
-    margin: 0;
+/*--------------------------Homepage CSS---------------------------*/
+#homepage * {
+  padding: 0;
+  margin: 0;
 }
 
-.logos,.logo_texts{
-    height: 50vh;
-    background: linear-gradient(
-        to right,
-        pink 0%,
-        pink 33.33%,
-        orange 33.33%,
-        orange 66.66%,
-        turquoise 66.66%,
-        turquoise 100%
-    );
-    display: flex;
-    justify-content: center;
-    align-items:center;
-  
-    
-}
-.logos{
-    height: 37.5vh;
-}
-form{
-    text-align: center;
-    background: linear-gradient(
-        to right,
-        pink 0%,
-        pink 33.33%,
-        orange 33.33%,
-        orange 66.66%,
-        turquoise 66.66%,
-        turquoise 100%
-    );
-    height: 70px;
-    
-}
-select{
-    text-align: center;
-    background-color: orange;
-    
-}
-.warrior, h1{
-    flex:4;
-}
-.Assassin{
-    flex:4;
-}
-.mage{
-    flex:4;
+#homepage .logos,
+#homepage .logo_texts {
+  height: 50vh;
+  background: linear-gradient(
+    to right,
+    pink 0%,
+    pink 33.33%,
+    orange 33.33%,
+    orange 66.66%,
+    turquoise 66.66%,
+    turquoise 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-img{
-    margin-top: 250px;
-    margin-left: 50px;
-    opacity: 0.2;
-}
-h1{
-    padding-top: 100px;
-    margin-left: 110px;
-    
+#homepage .logos {
+  height: 37.5vh;
 }
 
-
-
-#play:hover,#leaderboard:hover,#rules:hover{
-    color: black;
+#homepage form {
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    pink 0%,
+    pink 33.33%,
+    orange 33.33%,
+    orange 66.66%,
+    turquoise 66.66%,
+    turquoise 100%
+  );
+  height: 70px;
 }
 
-#play{
-    margin-left: 235px;
-    color:#ff8c00;
+#homepage select {
+  text-align: center;
+  background-color: orange;
 }
-#leaderboard{
-    margin-right: 50px;
-    color: #00ced1;
+
+#homepage .warrior,
+#homepage h1,
+#homepage .mage,
+#homepage .Assassin {
+  flex: 4;
 }
-#rules{
-    color: #da95aa;
+
+#homepage img {
+  margin-top: 250px;
+  margin-left: 50px;
+  opacity: 0.2;
+}
+#homepage h1 {
+  padding-top: 100px;
+  margin-left: 110px;
+}
+
+#homepage #play:hover,
+#homepage #leaderboard:hover,
+#homepage #rules:hover {
+  color: black;
+}
+
+#homepage #play {
+  margin-left: 235px;
+  color: #ff8c00;
+}
+#homepage #leaderboard {
+  margin-right: 50px;
+  color: #00ced1;
+}
+#homepage #rules {
+  color: #da95aa;
 }
