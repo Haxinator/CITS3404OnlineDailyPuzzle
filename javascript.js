@@ -1,7 +1,54 @@
 //Constants
 COLOR = "rgb(255, 168, 168)"
-CHOSENCELLS = []
-
+COLOR1 = "rgb(182, 255, 206)"
+CHOSENCELLS = {}
+CANVAS_SIZE = 16 * 16
+STARTING_ARRAY = {
+  133: COLOR,
+  116: COLOR1,
+  100: COLOR,
+  85: COLOR1,
+  70: COLOR,
+  71: COLOR1,
+  72: COLOR,
+  89: COLOR1,
+  106: COLOR,
+  122: COLOR1,
+  138: COLOR,
+  153: COLOR1,
+  168: COLOR,
+  183: COLOR1,
+  199: COLOR,
+  231: COLOR1
+}
+SAMPLE_ARRAY = {
+  99: 'rgb(27, 26, 23)',
+  102: 'rgb(27, 26, 23)',
+  104: 'rgb(27, 26, 23)',
+  105: 'rgb(27, 26, 23)',
+  115: 'rgb(27, 26, 23)',
+  118: 'rgb(27, 26, 23)',
+  120: 'rgb(27, 26, 23)',
+  122: 'rgb(27, 26, 23)',
+  131: 'rgb(27, 26, 23)',
+  134: 'rgb(27, 26, 23)',
+  136: 'rgb(27, 26, 23)',
+  139: 'rgb(27, 26, 23)',
+  147: 'rgb(27, 26, 23)',
+  148: 'rgb(27, 26, 23)',
+  149: 'rgb(27, 26, 23)',
+  150: 'rgb(27, 26, 23)',
+  152: 'rgb(27, 26, 23)',
+  155: 'rgb(27, 26, 23)',
+  163: 'rgb(27, 26, 23)',
+  166: 'rgb(27, 26, 23)',
+  168: 'rgb(27, 26, 23)',
+  170: 'rgb(27, 26, 23)',
+  179: 'rgb(27, 26, 23)',
+  182: 'rgb(27, 26, 23)',
+  184: 'rgb(27, 26, 23)',
+  185: 'rgb(27, 26, 23)'
+}
 
 /*                  #TODO
 create inital array or randomly generate inital array
@@ -31,10 +78,6 @@ function createCanvas(numRows, numColumns) {
   var canvas = document.getElementById("canvas");
   var table = document.createElement("table");
 
-
-
-
-
   for (let r = 0; r < numRows; r++) {
     var row = document.createElement("tr");
 
@@ -45,19 +88,25 @@ function createCanvas(numRows, numColumns) {
       //setting box classname so we can give style
       cell.setAttribute("class", "box");
       cell.setAttribute("id", index.toString());
-      //adding addEventListener after click change the color
-      cell.addEventListener("click", () => {
-        console.log(cell.style.backgroundColor);
-        if (cell.style.backgroundColor == COLOR) {
-          cell.style.backgroundColor = null;
-          CHOSENCELLS.pop(index)
-          // console.log(CHOSENCELLS);
-        } else {
-          cell.style.backgroundColor = COLOR;
-          CHOSENCELLS.push(index)
-          // console.log(CHOSENCELLS);
-        }
-      });
+      //adding addEventListener after click and dragg change the color
+      ['click', 'dragenter'].forEach(evt =>
+        cell.addEventListener(evt, () => {
+          //console.log(cell.style.backgroundColor);
+          if (cell.style.backgroundColor == COLOR  ) {
+            cell.style.backgroundColor = null;
+
+            delete CHOSENCELLS[index]
+            console.log(CHOSENCELLS);
+          } else {
+            cell.style.backgroundColor = COLOR;
+            CHOSENCELLS[index] = COLOR
+            console.log(CHOSENCELLS);
+
+
+          }
+        }, false)
+      );
+
       row.appendChild(cell);
     }
 
@@ -65,6 +114,8 @@ function createCanvas(numRows, numColumns) {
   }
   canvas.appendChild(table);
 }
+
+
 
 /*                  #TODO
 ------------------------Colour pallet.---------------
@@ -86,15 +137,15 @@ function createColorPallet(colorArray) {
   var colorPallet = document.getElementById("colorPallet");
   var table = document.createElement("table");
 
-
   var row = document.createElement("tr");
 
   //going through color element that we get from each image
   colorArray.forEach(item => {
 
     let color = document.createElement("td");
-    color.setAttribute("class", "colorPallet");
+
     //we might need id later
+
     color.setAttribute("id", item);
 
     color.style.backgroundColor = item;
@@ -114,8 +165,9 @@ function createColorPallet(colorArray) {
 //Totally random color pallete
 //why rgb because document item return rgb if we wanna check we need rgb
 color = ["rgb(182, 255, 206)", "rgb(246, 255, 164)", "rgb(253, 215, 170)",
-   "rgb(255, 168, 168)", "rgb(240, 165, 0)","rgb(228, 88, 38)",
-    "rgb(27, 26, 23)"];
+  "rgb(255, 168, 168)", "rgb(240, 165, 0)", "rgb(228, 88, 38)",
+  "rgb(27, 26, 23)"
+];
 createColorPallet(color)
 
 /*                  #TODO
@@ -143,3 +195,73 @@ using colourSelected.
 
 May be helpful to read the comment on colour pallet above.
 */
+/*
+Drawing function
+Which will draw the wanted sample which get as input as a dictionary
+*/
+
+function draw(canvasSize, index) {
+  for (const [key, value] of Object.entries(index)) {
+    let box = document.getElementById(key.toString());
+    box.style.backgroundColor = value
+  }
+}
+
+draw(CANVAS_SIZE, STARTING_ARRAY);
+/*
+Reset the Canvas
+Which will
+*/
+function reset() {
+  for (let i = 0; i < CANVAS_SIZE; i++) {
+    let box = document.getElementById(i.toString());
+    box.style.backgroundColor = "rgb(255,255, 255)";
+  }
+  CHOSENCELLS = {}
+}
+/*
+Adding functionality to start the game wich will draw base on the sample wanted
+*/
+document.getElementById("Start").addEventListener("click", () => {
+  reset()
+  draw(CANVAS_SIZE, SAMPLE_ARRAY)
+});
+
+/*
+Clear the Canvas for Drawing
+*/
+document.getElementById("Ready").addEventListener("click", reset);
+
+/*
+Adding functionality to start the game wich will draw base on the sample wanted
+*/
+document.getElementById("Check").addEventListener("click", () => {
+let sampleArray = Object.keys(SAMPLE_ARRAY).sort()
+let choosenArray = Object.keys(CHOSENCELLS).sort()
+let flag = true
+console.log("hello");
+if(sampleArray.length === choosenArray.length){
+  for(let i =0; i<sampleArray.length; i++){
+    if(SAMPLE_ARRAY[sampleArray[i]] != CHOSENCELLS[choosenArray[i]]){
+      flag =false;
+    }
+  }
+}else{
+  flag =false
+}
+if (flag){
+  alert("You Won the game")
+}else{
+  alert("You Lost the game")
+}
+
+});
+
+/*
+Clear the Canvas for Drawing
+*/
+
+
+document.getElementById("Eraser").addEventListener("click", () => {
+  COLOR = "rgb(255, 255, 255)"
+});
