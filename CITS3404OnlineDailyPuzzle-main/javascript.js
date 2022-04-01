@@ -14,42 +14,39 @@ cell.style.backgroundColor = correct[r][c];
 
 
 
-/* createCanvas
-Creates a canvas with a specified number of rows and
-columns.
-@param numRows - number of rows the table will have.
-@param numColumns - number of columns the table will have.*/
-
-
-
 /*create the canvas
 #Not sure yet how large the canvas should be
 #Need to consider how well it would feel on a phone*/
 
 
-/* Multipurpose function
-Creates a canvas with a specified number of rows and 
-columns.
-@param numRows - number of rows the table will have.
-@param numColumns - number of columns the table will have.*/
+
 COLOR = "rgb(255, 255, 255)";
 CHOSENCELLS = [];
+// Fixed color array for the palette(length must fit the palette total length, total length = row* column)
+PALETTE1 = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 
+// function generate_random_color(rows,columns){
+//     const num_cells = rows * columns;
+//     const col_array = [];
+//     for(let i = 0; i< num_cells; i++){
+//         var r = Math.round(Math.random()*255);
+//         var g = Math.round(Math.random()*255);
+//         var b = Math.round(Math.random()*255);
+//         col_array.splice(i,0,`rgb(${r}, ${g}, ${b})`);
+//     }
+//     return col_array
 
-function generate_random_color(rows,columns){
-    const num_cells = rows * columns;
-    const col_array = [];
-    for(let i = 0; i< num_cells; i++){
-        var r = Math.round(Math.random()*255);
-        var g = Math.round(Math.random()*255);
-        var b = Math.round(Math.random()*255);
-        col_array.splice(i,0,`rgb(${r}, ${g}, ${b})`);
-    }
-    return col_array
+// }
 
-}
+/*
+Generates an array with size = rows*columns with color randomly chosen in the color_array
+@param color_array is the array that we used as the colors for the palette
+@param rows - number of rows the table will have.
+@param columns - number of columns the table will have.
+@return the generated array
 
+*/
 function generate_random_puzzle(color_array, rows,columns){
     const num_cells = rows * columns;
     const puzzle_color_array = [];
@@ -60,16 +57,26 @@ function generate_random_puzzle(color_array, rows,columns){
     return puzzle_color_array;
 }
 
-
-function CreateCanvas(numRows,numColumns,location = "canvas",color = ["#d55e00","#cc79a7","#0072b2","#f0e442"],type = "grid"){
+/* Multipurpose function(prototype/Object)
+Creates a canvas with a specified number of rows and 
+columns.
+@param numRows - number of rows the table will have.
+@param numColumns - number of columns the table will have.
+@param location - the id that the table html will be appended to
+@param color - the color array that is intended for the respective canvas that will be created(e.g. if creating grid 8*8, the lenght of the color array will be 8*8 = 64)
+*/
+function CreateCanvas(numRows,numColumns,location = "canvas",color){
     this.numRows = numRows;
     this.numColumns = numColumns;
     this.location = location;
     this.color = color;
-    this.type = type;
 
 }
-
+/* Grid method
+Creates a grid with a specified number of rows and 
+columns.
+@return the table html
+*/
 CreateCanvas.prototype.grid = function(){
     var canvas = document.getElementById(this.location);
     var table = document.createElement("table");
@@ -90,14 +97,12 @@ CreateCanvas.prototype.grid = function(){
                 cell.style.backgroundColor = null;
                 CHOSENCELLS.pop(index)
                 console.log(CHOSENCELLS);
-               // console.log(COLOR);
+
               } 
               else {
                 cell.style.backgroundColor = COLOR;
                 CHOSENCELLS.push(index)
-                //console.log(CHOSENCELLS);
-                //console.log(COLOR);
-                //console.log(cell.style.backgroundColor);
+
               }
             });
             row.appendChild(cell);
@@ -109,7 +114,10 @@ CreateCanvas.prototype.grid = function(){
     return table;
 }
 
-
+/* palette method
+Creates a palette with a specified number of columns.
+@return the table html
+*/
 CreateCanvas.prototype.palette = function(){
     var colorPallet = document.getElementById(this.location);
     var table = document.createElement("table");
@@ -141,20 +149,25 @@ CreateCanvas.prototype.palette = function(){
     return table;
 }
 
+
+/* initialise_color method
+Fills the respective canvas(grid or palette) with colors according to the input color array*/
 CreateCanvas.prototype.initialise_color = function() {
+    // Select all the td(cells) within the id(location)
     var cell = document.getElementById(this.location).getElementsByTagName("td");
-    
+    // for each cell assign the background color of the cell according to the color array using the index c (e.g. c = 0 => the first index of the color array and the first index of the canvas(first cell))
     for(let c = 0; c<this.color.length;c++){
         cell[c].style.backgroundColor = this.color[c];   
         
     }
-             
-
 }
 
+/* reset method
+Reset the respective canvas(grid or palette) to transparent*/
 CreateCanvas.prototype.reset = function() {
+    // Select all the td(cells) within the id(location)
     var cell = document.getElementById(this.location).getElementsByTagName("td");
-    
+    // for each cell assign the background color of the cell to transparent using the index c (e.g. c = 0 => the first index of the color array and the first index of the canvas(first cell))
     for(let c = 0; c<this.color.length;c++){
         cell[c].style.backgroundColor = "transparent";   
     }
@@ -165,17 +178,31 @@ CreateCanvas.prototype.reset = function() {
 }
 
 
+/*How the following works
+First we create a object Create Canvas and assign it to a variable to store it(this object is for the palette)
+Then we create the palette using palette() and fill in the color according to the array initialise_color()
+* The color array length should be the same as the total cells/length of the palette created(e.g. palette with row = 1, columns = 5, col_array should have a length of 1*5 = 5)
+* Note that the palette's row should always be 1(becuase we are doing it horizontally) and the column size is flexible
+*/ 
 
-var col_array = generate_random_color(1,4);
-var canvas2 = new CreateCanvas(1,4,"colorPallet",col_array);
+var col_array = PALETTE1;
+var canvas2 = new CreateCanvas(1,5,"colorPallet",col_array);
 canvas2.palette();
 canvas2.initialise_color();
 
-var puzzle_array = generate_random_puzzle(col_array, 6,6);
-var canvas = new CreateCanvas(6,6,"canvas",puzzle_array);
+/*How the following works
+After creating the palette we should be the color array that we used for the palette into the generate_random_puzzle function.
+The generate_random_puzzle function is going to create another color array for the grid using the limited color choices that we used in the color array for palette
+e.g. The col_array consist of red, blue, green, yellow, purple and the grid size is 8*8 = 64. Then the the grid color array will be a 8*8 = 64 lenght array will add red, blue, yellow, purple color in random order until the grid color array is filled
+Then we create the grid using palette() and fill in the color according to the array initialise_color()
+*/ 
+
+var puzzle_array = generate_random_puzzle(col_array, 8,8);
+var canvas = new CreateCanvas(8,8,"canvas",puzzle_array);
 canvas.grid();
 canvas.initialise_color();
-//canvas.reset();
+
+
 
 
 
