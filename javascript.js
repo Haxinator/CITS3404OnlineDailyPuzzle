@@ -3,6 +3,10 @@ COLOR = "rgb(255, 168, 168)"
 COLOR1 = "rgb(182, 255, 206)"
 CHOSENCELLS = {}
 CANVAS_SIZE = 16 * 16
+color = ["rgb(182, 255, 206)", "rgb(246, 255, 164)", "rgb(253, 215, 170)",
+  "rgb(255, 168, 168)", "rgb(240, 165, 0)", "rgb(228, 88, 38)",
+  "rgb(27, 26, 23)"
+];
 STARTING_ARRAY = {
   133: COLOR,
   116: COLOR1,
@@ -88,19 +92,34 @@ function createCanvas(numRows, numColumns) {
       //setting box classname so we can give style
       cell.setAttribute("class", "box");
       cell.setAttribute("id", index.toString());
+
       //adding addEventListener after click and dragg change the color
       ['click', 'dragenter'].forEach(evt =>
         cell.addEventListener(evt, () => {
-          //console.log(cell.style.backgroundColor);
-          if (cell.style.backgroundColor == COLOR  ) {
+          //checking the color of cell
+          var flag = false;
+          color.forEach( col =>{
+            if(cell.style.backgroundColor === col){
+              flag = true;
+            }
+          });
+
+          if (flag) {
+
             cell.style.backgroundColor = null;
 
             delete CHOSENCELLS[index]
             console.log(CHOSENCELLS);
           } else {
-            cell.style.backgroundColor = COLOR;
-            CHOSENCELLS[index] = COLOR
-            console.log(CHOSENCELLS);
+            //don't add white color to our array
+            //white used for earaser
+            if(COLOR !== "rgb(255, 255, 255)"){
+              cell.style.backgroundColor = COLOR;
+              CHOSENCELLS[index] = COLOR
+              console.log(CHOSENCELLS);
+
+            }
+
 
 
           }
@@ -164,10 +183,7 @@ function createColorPallet(colorArray) {
 }
 //Totally random color pallete
 //why rgb because document item return rgb if we wanna check we need rgb
-color = ["rgb(182, 255, 206)", "rgb(246, 255, 164)", "rgb(253, 215, 170)",
-  "rgb(255, 168, 168)", "rgb(240, 165, 0)", "rgb(228, 88, 38)",
-  "rgb(27, 26, 23)"
-];
+
 createColorPallet(color)
 
 /*                  #TODO
@@ -215,7 +231,7 @@ Which will
 function reset() {
   for (let i = 0; i < CANVAS_SIZE; i++) {
     let box = document.getElementById(i.toString());
-    box.style.backgroundColor = "rgb(255,255, 255)";
+    box.style.backgroundColor = "rgb(255, 255, 255)";
   }
   CHOSENCELLS = {}
 }
@@ -263,5 +279,6 @@ Clear the Canvas for Drawing
 
 
 document.getElementById("Eraser").addEventListener("click", () => {
+  //set the color to white
   COLOR = "rgb(255, 255, 255)"
 });
