@@ -1,284 +1,328 @@
-//Constants
-COLOR = "rgb(255, 168, 168)"
-COLOR1 = "rgb(182, 255, 206)"
-CHOSENCELLS = {}
-CANVAS_SIZE = 16 * 16
-color = ["rgb(182, 255, 206)", "rgb(246, 255, 164)", "rgb(253, 215, 170)",
-  "rgb(255, 168, 168)", "rgb(240, 165, 0)", "rgb(228, 88, 38)",
-  "rgb(27, 26, 23)"
-];
-STARTING_ARRAY = {
-  133: COLOR,
-  116: COLOR1,
-  100: COLOR,
-  85: COLOR1,
-  70: COLOR,
-  71: COLOR1,
-  72: COLOR,
-  89: COLOR1,
-  106: COLOR,
-  122: COLOR1,
-  138: COLOR,
-  153: COLOR1,
-  168: COLOR,
-  183: COLOR1,
-  199: COLOR,
-  231: COLOR1
-}
-SAMPLE_ARRAY = {
-  99: 'rgb(27, 26, 23)',
-  102: 'rgb(27, 26, 23)',
-  104: 'rgb(27, 26, 23)',
-  105: 'rgb(27, 26, 23)',
-  115: 'rgb(27, 26, 23)',
-  118: 'rgb(27, 26, 23)',
-  120: 'rgb(27, 26, 23)',
-  122: 'rgb(27, 26, 23)',
-  131: 'rgb(27, 26, 23)',
-  134: 'rgb(27, 26, 23)',
-  136: 'rgb(27, 26, 23)',
-  139: 'rgb(27, 26, 23)',
-  147: 'rgb(27, 26, 23)',
-  148: 'rgb(27, 26, 23)',
-  149: 'rgb(27, 26, 23)',
-  150: 'rgb(27, 26, 23)',
-  152: 'rgb(27, 26, 23)',
-  155: 'rgb(27, 26, 23)',
-  163: 'rgb(27, 26, 23)',
-  166: 'rgb(27, 26, 23)',
-  168: 'rgb(27, 26, 23)',
-  170: 'rgb(27, 26, 23)',
-  179: 'rgb(27, 26, 23)',
-  182: 'rgb(27, 26, 23)',
-  184: 'rgb(27, 26, 23)',
-  185: 'rgb(27, 26, 23)'
-}
+//*----------------GLOBAL VARIABLES AND CONSTANTS-----------------------------------------------//
 
-/*                  #TODO
-create inital array or randomly generate inital array
-(what the user has to copy), it's contents will be colours
-represented as strings (as they're known in css). To make
-your life easier maybe create a 2D array and use a nested
-loop to assign values to the array.
+//need a color pallet that has black? Or maybe a larger pallet for future.
+// Fixed color array for the palette(length must fit the palette total length, total length = row* column)
+const PALETTE1 = {
+    "#648FFF": "#648FFF",
+    "#785EF0": "#785EF0",
+    "#DC267F": "#DC267F",
+    "#FE6100": "#FE6100",
+    "#FFB000": "#FFB000"
+};
 
-once you create the inital array assign the colours using the
-second loop of the createCanvas function. E.g. I call the inital
-array correct, since it's the pattern the user needs to copy.
-cell.style.backgroundColor = correct[r][c];
+//may be a better way to do this, used to create IDs for colour pallet cells.
+//also used for random puzzle generator
+const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
+
+//controls the number of rows and columns a grid has.
+//! Small sizes for easy testing. Size to be determined.
+const GRIDROWS = 2;
+const GRIDCOL = 2;
+
+//SAMPLE PUZZLES
+//puzzles may need to be changed to be for smaller grid sizes
+//or better user feedback needed for puzzles.
+const PUZZLE_HD = {
+    99: "#648FFF",
+    102: "#648FFF",
+    104: "#648FFF",
+    105: "#648FFF",
+    115: "#648FFF",
+    118: "#648FFF",
+    120: "#648FFF",
+    122: "#648FFF",
+    131: "#648FFF",
+    134: "#648FFF",
+    136: "#648FFF",
+    139: "#648FFF",
+    147: "#648FFF",
+    148: "#648FFF",
+    149: "#648FFF",
+    150: "#648FFF",
+    152: "#648FFF",
+    155: "#648FFF",
+    163: "#648FFF",
+    166: "#648FFF",
+    168: "#648FFF",
+    170: "#648FFF",
+    179: "#648FFF",
+    182: "#648FFF",
+    184: "#648FFF",
+    185: "#648FFF"
+  }
+const QMARK = {
+    133: PALETTE1["#648FFF"],
+    116: PALETTE1["#785EF0"],
+    100: PALETTE1["#648FFF"],
+    85: PALETTE1["#785EF0"],
+    70: PALETTE1["#648FFF"],
+    71: PALETTE1["#785EF0"],
+    72: PALETTE1["#648FFF"],
+    89: PALETTE1["#785EF0"],
+    106: PALETTE1["#648FFF"],
+    122: PALETTE1["#785EF0"],
+    138: PALETTE1["#648FFF"],
+    153: PALETTE1["#785EF0"],
+    168: PALETTE1["#648FFF"],
+    183: PALETTE1["#785EF0"],
+    199: PALETTE1["#648FFF"],
+    231: PALETTE1["#785EF0"]
+  }
+
+
+  //Global Variables
+var COLOR = null;
+var USERCANVAS = {};
+
+
+//*---------------SUPPORTING FUNCTIONS-------------------------------------------//
+/*
+Generates a random puzzle (supported for all grid sizes)
+@param color_array is the array that we used as the colors for the palette
+@return the generated puzzle
 */
+function generate_random_puzzle(color_array){
+    let num_cells = GRIDROWS * GRIDCOL;
+    const puzzle_color_dict = {};
 
+    for(let i = 0; i< num_cells; i++){
+        //get a random cell
+        let key = Math.round(Math.random()*(num_cells-1));
+        //get a random colour
+        let index = Math.round(Math.random()*(color_array.length-1));
+        //add random color to random cell
+        puzzle_color_dict[key] = color_array[index];
+    }
 
-/*create the canvas
-#Not sure yet how large the canvas should be
-#Need to consider how well it would feel on a phone*/
-createCanvas(16, 16);
+    return puzzle_color_dict;
+}
 
-/* Multipurpose function
-Creates a canvas with a specified number of rows and
+//*----------------------------CREATETABLE-------------------------------------------------------------//
+//Below are the functions used to initalise and create the canvas and pallet.
+
+/* Multipurpose function(prototype/Object)
+Creates a canvas with a specified number of rows and 
 columns.
 @param numRows - number of rows the table will have.
-@param numColumns - number of columns the table will have.*/
-function createCanvas(numRows, numColumns) {
-  var canvas = document.getElementById("canvas");
-  var table = document.createElement("table");
+@param numColumns - number of columns the table will have.
+@param location - the id that the table html will be appended to
+@param data - the color array that is intended for the respective canvas that will be created(e.g. if creating grid 8*8, the lenght of the color array will be 8*8 = 64)
+*/
+function CreateTable(numRows,numColumns,location,data){
+    this.numRows = numRows;
+    this.numColumns = numColumns;
+    this.location = location;
+    this.data = data;
 
-  for (let r = 0; r < numRows; r++) {
-    var row = document.createElement("tr");
+}
 
-    for (let c = 0; c < numColumns; c++) {
-      //allocating index to element in the Table
-      let index = c + numColumns * r
-      let cell = document.createElement("td");
-      //setting box classname so we can give style
-      cell.setAttribute("class", "box");
-      cell.setAttribute("id", index.toString());
+/* make method for CreateTable
+Creates a grid (for canvas or pallet) with a specified number of rows and columns.
+///! USED TO BE TWO SEPERATE METHODS, NOW JUST ONE.
+@return the table html
+*/
+CreateTable.prototype.make = function(){
+    let locationHTML = document.getElementById(this.location);
+    let table = document.createElement("table");
 
-      //adding addEventListener after click and dragg change the color
-      ['click', 'dragenter'].forEach(evt =>
-        cell.addEventListener(evt, () => {
-          //checking the color of cell
-          var flag = false;
-          color.forEach( col =>{
-            if(cell.style.backgroundColor === col){
-              flag = true;
-            }
-          });
+    for(let r = 0; r<this.numRows; r++){
+        let row = document.createElement("tr");
 
-          if (flag) {
+        for (let c = 0; c < this.numColumns; c++) {
+            //allocating index to element in the Table
+            let index = c + (this.numColumns * r);
+            let cell = document.createElement("td");
 
-            cell.style.backgroundColor = null;
+            //Apply relevant settings.
+            switch(this.location)
+            {
+                //If the table is for canvas
+                case "canvas":
+                    cell.classList.add("box");
+                    cell.setAttribute("id", index.toString());
 
-            delete CHOSENCELLS[index]
-            console.log(CHOSENCELLS);
-          } else {
-            //don't add white color to our array
-            //white used for earaser
-            if(COLOR !== "rgb(255, 255, 255)"){
-              cell.style.backgroundColor = COLOR;
-              CHOSENCELLS[index] = COLOR
-              console.log(CHOSENCELLS);
+                    //adding addEventListener after click change the color
+                    //adding addEventListener after drag to change the color
+                    cell.addEventListener("click", () => color(index, cell));
+                    cell.addEventListener("dragenter", () => color(index, cell));
+                break;
 
-            }
+                //If the table is for colorPallet
+                case "colorPallet": 
+                    let cellColor = PALETTEIDS[c]; //number of colours match the number of columns
 
+                    cell.classList.add("colorPallet");
+                    cell.setAttribute("id", cellColor);
+                    cell.style.backgroundColor = cellColor;
 
-
+                    //Event listener to remember color chosen
+                    cell.addEventListener("click", () => COLOR = cellColor);
+                break;
+            } 
+            row.appendChild(cell);
           }
-        }, false)
-      );
 
-      row.appendChild(cell);
+        table.appendChild(row);
     }
+    locationHTML.appendChild(table);
 
-    table.appendChild(row);
-  }
-  canvas.appendChild(table);
+    return table;
+}
+
+/*Event Listener function for canvas
+may remove, "drag enter" doesn't work well.
+*/
+function color(index, cell) {
+    if (COLOR === null) { //if using eraser //! same color click to remove functionality was removed (Drag colouring didn't work well with it on)
+        cell.style.backgroundColor = null;
+        console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
+        delete USERCANVAS[index];
+
+    } else {
+        cell.style.backgroundColor = COLOR;
+        console.log("added: " + COLOR + " at: " + index); //for debugging check function
+        USERCANVAS[index] = COLOR;
+    }
 }
 
 
+/* initialise_color method for CreateTable
+Fills the respective table (grid or palette) with colors according to the input 
+! Merged Amir's draw function and Will's initalise_color function
+color array property of createTable*/
+CreateTable.prototype.initialise_color = function() {
 
-/*                  #TODO
-------------------------Colour pallet.---------------
-I think the best way is to make a new function similar
-to createCanvas, that assigns the each cell a colour in the second
-loop. You may need to make an array that contains the colors we'll use,
-to make your life easier. Name the function "createPallet". It may be
-helpful to the guy doing the task below you for you to add text inside
-the colour pallet cells (make them the same colour as the cell so
-they're hidden). That way he can get the innerHTML to find out what
-colour is selected. Unless you have a better way.
+    //retrieves each key value pair in puzzle as an array
+    for (const [key, value] of Object.entries(this.data)) {
+        //get cell
+        let box = document.getElementById(key.toString());
+        //change color of cell
+        box.style.backgroundColor = value;
+      }
+}
 
-May be helpful to read the comment on colour pallet functionality below.
+/* clear method for CreateTable
+clears all colours from the respective table (grid or palette) 
+! SHOULD ONLY BE USED FOR CANVAS
+AKA changing the colour of all cells to null (white)*/
+CreateTable.prototype.clear = function() {
+    //get cell.
+    let cell = document.getElementById(this.location).getElementsByTagName("td");
 
-@param array of colours we need
-*/
+    // Assign the background color of each cell to null (white).
+    for(let c = 0; c < (this.numRows * this.numColumns); c++){
+        cell[c].style.backgroundColor = null;   
+    }
 
-function createColorPallet(colorArray) {
-  var colorPallet = document.getElementById("colorPallet");
-  var table = document.createElement("table");
+    //clear user canvas.
+    USERCANVAS = {};
+}
 
-  var row = document.createElement("tr");
 
-  //going through color element that we get from each image
-  colorArray.forEach(item => {
+//*-----------------------------------------INITALISATION---------------------------------------------------------------------------//
+//below are the function calls
 
-    let color = document.createElement("td");
+/*
+First we create a new instance of CreateTable and assign it to a variable to store it (this object is for the palette).
+Then we create the palette using make() and fill in the color using the constant array that stores the colors of the pallet (PALETTE1).
+!NOTE:
+    * The color array length should match the number of cells in the color pallet.
+    * Note that the palette's row should always be 1(becuase we are doing it horizontally) and the column size is flexible.
+*/ 
 
-    //we might need id later
+//Create a new CreateTable object with all the parameters needed for creation.
+var pallet = new CreateTable(1,5,"colorPallet",PALETTE1);
+//create a table for the pallet.
+pallet.make();
+//color the pallet.
+pallet.initialise_color();
 
-    color.setAttribute("id", item);
+/*
+generate_random_puzzle function uses the color pallet to generate the random puzzle dictionary.
+Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using initialise_color().
+!NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
+*/ 
 
-    color.style.backgroundColor = item;
-    //Choosing the desired color
-    color.addEventListener("click", () => {
-      COLOR = item;
+//generate random puzzle
+var puzzle_random = generate_random_puzzle(PALETTEIDS);
+
+
+//puzzle_random for random puzzle else use a predefined puzzle.
+const PUZZLE = puzzle_random;
+
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+canvas.make();
+canvas.initialise_color();
+
+//for visuals
+var table = document.getElementById(canvas.location).querySelector("table"); 
+
+document.getElementById("Start").addEventListener("click", () => {
+    //Visual indication of game start
+    table.style.borderCollapse = null;
+    //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
+    canvas.clear(); 
+    //give canvas puzzle data.
+    canvas.data = PUZZLE; 
+    //initalise canvas using the new puzzle.
+    canvas.initialise_color(); 
+});
+
+
+//Clear the Canvas for Drawing when user clicks "Ready" Button.
+document.getElementById("Ready").addEventListener("click", () => {
+    //clear cavnas for drawing
+    canvas.clear()
+    //Visual indication of game start
+    table.style.borderCollapse = "separate";
+});
+
+
+//check if the user canvas matches the puzzle
+document.getElementById("Check").addEventListener("click", () => {
+    //Get the keys of the Puzzle and UserCanvas dictionaries.
+    let puzzleKeys = Object.keys(PUZZLE); //!used to have sort(), not needed
+    let choosenArray = Object.keys(USERCANVAS); //!only used for length
+    let hasWon = true
+
+    //check if dictionaries have the same length
+    if(puzzleKeys.length === choosenArray.length){
+      for(let i = 0 ; i < puzzleKeys.length ; i++){
+        //if one colour doesn't match, user has not won
+        if(PUZZLE[puzzleKeys[i]] != USERCANVAS[puzzleKeys[i]]){
+          hasWon = false;
+        }
+      }
+    }else{
+      //if dictionary lengths don't match, user has not won
+      hasWon = false;
+    }
+
+    if(hasWon) {
+      //added to give a small visual indication of winning
+      table.style.borderCollapse = null;
+      alert("You Won!");
+    }else{
+      alert("Incorrect");
+    }
+    
     });
 
-    row.appendChild(color);
+//Activates the eraser.
+document.getElementById("Eraser").addEventListener("click", () => COLOR = null);
 
-  });
-  //console.log(row);
-  table.appendChild(row);
+//*-------------------------MISC------------------------//
 
-  colorPallet.appendChild(table);
-}
-//Totally random color pallete
-//why rgb because document item return rgb if we wanna check we need rgb
+//!RANDOM COLOR GEN IF NEEDED
+// function generate_random_color(rows,columns){
+//     const num_cells = rows * columns;
+//     const col_array = [];
+//     for(let i = 0; i< num_cells; i++){
+//         var r = Math.round(Math.random()*255);
+//         var g = Math.round(Math.random()*255);
+//         var b = Math.round(Math.random()*255);
+//         col_array.splice(i,0,`rgb(${r}, ${g}, ${b})`);
+//     }
+//     return col_array
 
-createColorPallet(color)
-
-/*                  #TODO
-------------------------Colour pallet functionality.---------------
-
-I think the best way is
-to add a event listener for a 'click' event to each cell
-of the colour pallet, have it copy the color stored in the
-cell to a global variable (lets call it colourSelected).
-Add another on 'click' event this time to the cells of
-the canvas, and use the global variable colourSelected to
-assign that colour to the canvas cell on click.
-
-This should be simple, provided whoever does colour pallet does it
-the way I suggested (if not use jQuery). You should be able to assign
-a 'click' eventto each cell of the colour pallet by using the second
-loop of "createPallet". You should also be able to assign a click
-event to each cell on the canvas using the second loop in createTable.
-
-I'm pretty sure event listener have two arguments, the event and the
-function to execute when the even occurs. So you will have to make
-two functions one for the colour pallet event to assign a colour to
-colourSelected and another for assigning a colour to a canvas cell
-using colourSelected.
-
-May be helpful to read the comment on colour pallet above.
-*/
-/*
-Drawing function
-Which will draw the wanted sample which get as input as a dictionary
-*/
-
-function draw(canvasSize, index) {
-  for (const [key, value] of Object.entries(index)) {
-    let box = document.getElementById(key.toString());
-    box.style.backgroundColor = value
-  }
-}
-
-draw(CANVAS_SIZE, STARTING_ARRAY);
-/*
-Reset the Canvas
-Which will
-*/
-function reset() {
-  for (let i = 0; i < CANVAS_SIZE; i++) {
-    let box = document.getElementById(i.toString());
-    box.style.backgroundColor = "rgb(255, 255, 255)";
-  }
-  CHOSENCELLS = {}
-}
-/*
-Adding functionality to start the game wich will draw base on the sample wanted
-*/
-document.getElementById("Start").addEventListener("click", () => {
-  reset()
-  draw(CANVAS_SIZE, SAMPLE_ARRAY)
-});
-
-/*
-Clear the Canvas for Drawing
-*/
-document.getElementById("Ready").addEventListener("click", reset);
-
-/*
-Adding functionality to start the game wich will draw base on the sample wanted
-*/
-document.getElementById("Check").addEventListener("click", () => {
-let sampleArray = Object.keys(SAMPLE_ARRAY).sort()
-let choosenArray = Object.keys(CHOSENCELLS).sort()
-let flag = true
-console.log("hello");
-if(sampleArray.length === choosenArray.length){
-  for(let i =0; i<sampleArray.length; i++){
-    if(SAMPLE_ARRAY[sampleArray[i]] != CHOSENCELLS[choosenArray[i]]){
-      flag =false;
-    }
-  }
-}else{
-  flag =false
-}
-if (flag){
-  alert("You Won the game")
-}else{
-  alert("You Lost the game")
-}
-
-});
-
-/*
-Clear the Canvas for Drawing
-*/
-
-
-document.getElementById("Eraser").addEventListener("click", () => {
-  //set the color to white
-  COLOR = "rgb(255, 255, 255)"
-});
+// }
