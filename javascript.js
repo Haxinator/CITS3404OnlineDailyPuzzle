@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 3;
-const GRIDCOL = 3;
+const GRIDROWS = 2;
+const GRIDCOL = 2;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -71,10 +71,8 @@ const QMARK = {
 
 
   //Global Variables
-var WRONGCELL = "#FF0000"; 
 var COLOR = null;
 var USERCANVAS = {};
-var CHECKEDCANVAS = {}
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -287,74 +285,25 @@ document.getElementById("Check").addEventListener("click", () => {
     let choosenArray = Object.keys(USERCANVAS); //!only used for length
     let hasWon = true
 
-   //item that exist in original array but not in the choosen array
-    let diff1 = puzzleKeys.filter(x => !choosenArray.includes(x));
-    //item that exist in choosen array but not in the original
-    let diff2 = choosenArray.filter(x => !puzzleKeys.includes(x));
-    
-    //check all the element of chosen cells
-    for(let i=0; i < choosenArray.length; i++){
-        let item = choosenArray[i]
-        if(puzzleKeys.includes(item)){
-            if(PUZZLE[item] != USERCANVAS[item]){
-                hasWon = false;
-                CHECKEDCANVAS[item] = WRONGCELL;
-            }else{
-                CHECKEDCANVAS[item] = USERCANVAS[item];
-            }
-        }
-    }
-    //Check items that have been in puzzle and conestant missed it
-    if(!diff1.length==0){
-        hasWon = false;
-        for(let i = 0; i < diff1.length; i++){
-            let item = diff1[i];
-            CHECKEDCANVAS[item] = WRONGCELL;
-        }
-    }
-    //check items that have been choosen but not in the puzzle
-    if(!diff2.length==0){
-        hasWon = false;
-        for(let i = 0; i < diff2.length; i++){
-            let item = diff2[i];
-            CHECKEDCANVAS[item] = WRONGCELL;
-        }
-    }
-    
     //check if dictionaries have the same length
-    // if(puzzleKeys.length === choosenArray.length){
-    //   for(let i = 0 ; i < puzzleKeys.length ; i++){
-    //     //if one colour doesn't match, user has not won
-    //     if(PUZZLE[puzzleKeys[i]] != USERCANVAS[puzzleKeys[i]]){
-    //       hasWon = false;
-    //     }
-    //   }
-    // }else{
-    //   //if dictionary lengths don't match, user has not won
-    //   hasWon = false;
-    // }
+    if(puzzleKeys.length === choosenArray.length){
+      for(let i = 0 ; i < puzzleKeys.length ; i++){
+        //if one colour doesn't match, user has not won
+        if(PUZZLE[puzzleKeys[i]] != USERCANVAS[puzzleKeys[i]]){
+          hasWon = false;
+        }
+      }
+    }else{
+      //if dictionary lengths don't match, user has not won
+      hasWon = false;
+    }
 
     if(hasWon) {
-        //added to give a small visual indication of winning
-        table.style.borderCollapse = null;
-        //   alert("You Won!");
-        document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
-        
+      //added to give a small visual indication of winning
+      table.style.borderCollapse = null;
+      alert("You Won!");
     }else{
-
-        //------------------------------- This will display the wrong cells in red color ----------------
-        console.log(CHECKEDCANVAS);
-        //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
-        canvas.clear(); 
-        //give canvas puzzle data.
-        canvas.data = CHECKEDCANVAS; 
-        //initalise canvas using the new puzzle.
-        canvas.initialise_color();
-        
-        let result = document.getElementById("result");
-        result.innerHTML= '<img src="pictures/GameOver.jpg" class="rounded" alt=""></img>' +
-        '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
-        
+      alert("Incorrect");
     }
     
     });
