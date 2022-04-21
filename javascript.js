@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 3;
-const GRIDCOL = 3;
+const GRIDROWS = 7;
+const GRIDCOL = 7;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -51,22 +51,12 @@ const PUZZLE_HD = {
     185: "#648FFF"
   }
 const QMARK = {
-    133: PALETTE1["#648FFF"],
-    116: PALETTE1["#785EF0"],
-    100: PALETTE1["#648FFF"],
-    85: PALETTE1["#785EF0"],
-    70: PALETTE1["#648FFF"],
-    71: PALETTE1["#785EF0"],
-    72: PALETTE1["#648FFF"],
-    89: PALETTE1["#785EF0"],
-    106: PALETTE1["#648FFF"],
-    122: PALETTE1["#785EF0"],
-    138: PALETTE1["#648FFF"],
-    153: PALETTE1["#785EF0"],
-    168: PALETTE1["#648FFF"],
-    183: PALETTE1["#785EF0"],
-    199: PALETTE1["#648FFF"],
-    231: PALETTE1["#785EF0"]
+    16: PALETTE1["#648FFF"],
+    10: PALETTE1["#785EF0"],
+    18: PALETTE1["#648FFF"],
+    25: PALETTE1["#785EF0"],
+    31: PALETTE1["#648FFF"],
+    45: PALETTE1["#785EF0"],
   }
 
 
@@ -252,12 +242,14 @@ var puzzle_random = generate_random_puzzle(PALETTEIDS);
 //puzzle_random for random puzzle else use a predefined puzzle.
 const PUZZLE = puzzle_random;
 
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", QMARK);
 canvas.make();
 canvas.initialise_color();
 
 //for visuals
 var table = document.getElementById(canvas.location).querySelector("table"); 
+
+//*-----------------------------------------Buttons---------------------------------------------------------------------------//
 
 document.getElementById("Start").addEventListener("click", () => {
     //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
@@ -266,6 +258,8 @@ document.getElementById("Start").addEventListener("click", () => {
     canvas.data = PUZZLE; 
     //initalise canvas using the new puzzle.
     canvas.initialise_color(); 
+    //visual indication of start
+    table.classList.add("start");
 });
 
 
@@ -273,7 +267,7 @@ document.getElementById("Start").addEventListener("click", () => {
 document.getElementById("Ready").addEventListener("click", () => {
     //clear cavnas for drawing
     canvas.clear()
-    //Visual indication of game start
+    //Visual indication of ready
     table.classList.add("ready");
 });
 
@@ -333,7 +327,9 @@ document.getElementById("Check").addEventListener("click", () => {
     // }
 
     if(hasWon) {
+        //Visual indication of win
         table.classList.remove("ready");
+        table.classList.remove("start");
         //   alert("You Won!");
         document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
     }else{

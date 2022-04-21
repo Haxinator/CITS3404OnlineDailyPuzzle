@@ -22,21 +22,17 @@ body {
   /* opacity: 1; */
 }
 
+#canvas table.start {
+  border-collapse: separate;
+}
+
 /* canvas styles when ready is clicked */
 #canvas table.ready {
-  border-collapse: separate;
   border: 5px solid blue;
 }
 
-#canvas table.ready td {
-  border: 1px solid black;
-  /* opacity: 1; */
-}
-
 #canvas table.ready td:hover {
-  /* outline: 4px dashed lightcoral; */
-  /* outline-offset: -6px; */
-  border: 1px solid white;
+  outline: 1px solid white;
 }
 
 /*------------------------Color Pallet CSS-------------------------*/
