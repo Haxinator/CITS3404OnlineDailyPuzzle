@@ -260,8 +260,6 @@ canvas.initialise_color();
 var table = document.getElementById(canvas.location).querySelector("table"); 
 
 document.getElementById("Start").addEventListener("click", () => {
-    //Visual indication of game start
-    table.style.borderCollapse = null;
     //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
     canvas.clear(); 
     //give canvas puzzle data.
@@ -276,7 +274,7 @@ document.getElementById("Ready").addEventListener("click", () => {
     //clear cavnas for drawing
     canvas.clear()
     //Visual indication of game start
-    table.style.borderCollapse = "separate";
+    table.classList.add("ready");
 });
 
 
@@ -335,13 +333,10 @@ document.getElementById("Check").addEventListener("click", () => {
     // }
 
     if(hasWon) {
-        //added to give a small visual indication of winning
-        table.style.borderCollapse = null;
+        table.classList.remove("ready");
         //   alert("You Won!");
         document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
-        
     }else{
-
         //------------------------------- This will display the wrong cells in red color ----------------
         console.log(CHECKEDCANVAS);
         //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
