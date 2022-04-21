@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 3;
-const GRIDCOL = 3;
+const GRIDROWS = 7;
+const GRIDCOL = 7;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -50,23 +50,15 @@ const PUZZLE_HD = {
     184: "#648FFF",
     185: "#648FFF"
   }
+
+  //for 7x7 grid size
 const QMARK = {
-    133: PALETTE1["#648FFF"],
-    116: PALETTE1["#785EF0"],
-    100: PALETTE1["#648FFF"],
-    85: PALETTE1["#785EF0"],
-    70: PALETTE1["#648FFF"],
-    71: PALETTE1["#785EF0"],
-    72: PALETTE1["#648FFF"],
-    89: PALETTE1["#785EF0"],
-    106: PALETTE1["#648FFF"],
-    122: PALETTE1["#785EF0"],
-    138: PALETTE1["#648FFF"],
-    153: PALETTE1["#785EF0"],
-    168: PALETTE1["#648FFF"],
-    183: PALETTE1["#785EF0"],
-    199: PALETTE1["#648FFF"],
-    231: PALETTE1["#785EF0"]
+    16: PALETTE1["#648FFF"],
+    10: PALETTE1["#785EF0"],
+    18: PALETTE1["#648FFF"],
+    25: PALETTE1["#785EF0"],
+    31: PALETTE1["#648FFF"],
+    45: PALETTE1["#785EF0"],
   }
 
 
@@ -97,6 +89,24 @@ function generate_random_puzzle(color_array){
     }
 
     return puzzle_color_dict;
+}
+
+//-------------------------Game Buttons-------------------------------
+//function hides start button and reveals Ready Button
+function hideStart(){
+    document.getElementById("Start").style.display = "none";
+    document.getElementById("Ready").style.opacity = 1;
+}
+
+//hides Ready button and reveals Check Button
+function hideReady(){
+    document.getElementById("Ready").style.display = "none"; 
+    document.getElementById("Check").style.opacity = 1;
+}
+
+//hides check button
+function hideCheck(){
+    document.getElementById("Check").style.display = "none";
 }
 
 //*----------------------------CREATETABLE-------------------------------------------------------------//
@@ -224,6 +234,8 @@ CreateTable.prototype.clear = function() {
 //*-----------------------------------------INITALISATION---------------------------------------------------------------------------//
 //below are the function calls
 
+//! Need to have initalization only occur in dailypuzzle.html
+
 /*
 First we create a new instance of CreateTable and assign it to a variable to store it (this object is for the palette).
 Then we create the palette using make() and fill in the color using the constant array that stores the colors of the pallet (PALETTE1).
@@ -252,22 +264,26 @@ var puzzle_random = generate_random_puzzle(PALETTEIDS);
 //puzzle_random for random puzzle else use a predefined puzzle.
 const PUZZLE = puzzle_random;
 
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", QMARK);
 canvas.make();
 canvas.initialise_color();
 
 //for visuals
 var table = document.getElementById(canvas.location).querySelector("table"); 
 
+//*-----------------------------------------Buttons---------------------------------------------------------------------------//
+
 document.getElementById("Start").addEventListener("click", () => {
-    //Visual indication of game start
-    table.style.borderCollapse = null;
     //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
     canvas.clear(); 
     //give canvas puzzle data.
     canvas.data = PUZZLE; 
     //initalise canvas using the new puzzle.
     canvas.initialise_color(); 
+    //visual indication of start
+    table.classList.add("start");
+    //hide start button
+    hideStart();
 });
 
 
@@ -275,13 +291,18 @@ document.getElementById("Start").addEventListener("click", () => {
 document.getElementById("Ready").addEventListener("click", () => {
     //clear cavnas for drawing
     canvas.clear()
-    //Visual indication of game start
-    table.style.borderCollapse = "separate";
+    //Visual indication of ready
+    table.classList.add("ready");
+    //hide ready button
+    hideReady();
 });
 
 
 //check if the user canvas matches the puzzle
 document.getElementById("Check").addEventListener("click", () => {
+    //hide check button
+    hideCheck();
+
     //Get the keys of the Puzzle and UserCanvas dictionaries.
     let puzzleKeys = Object.keys(PUZZLE); //!used to have sort(), not needed
     let choosenArray = Object.keys(USERCANVAS); //!only used for length
@@ -335,13 +356,12 @@ document.getElementById("Check").addEventListener("click", () => {
     // }
 
     if(hasWon) {
-        //added to give a small visual indication of winning
-        table.style.borderCollapse = null;
+        //Visual indication of win
+        table.classList.remove("ready");
+        table.classList.remove("start");
         //   alert("You Won!");
         document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
-        
     }else{
-
         //------------------------------- This will display the wrong cells in red color ----------------
         console.log(CHECKEDCANVAS);
         //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
@@ -378,20 +398,145 @@ document.getElementById("Eraser").addEventListener("click", () => COLOR = null);
 
 // }
 
-//-------------------------Game Buttons-------------------------------
-//function hides start button and reveals Ready Button
-function hideStart(){
-    document.getElementById("Start").style.display = "none";
-    document.getElementById("Ready").style.opacity = 1;
+//*-------------------------Login Page JS------------------------//
+
+//!all these don't work, as the on click event is in HTML
+//!if using event listeners you would be able to declare
+//!them globally
+const login = document.querySelector(".login");
+const signup = document.querySelector(".signup");
+const form = document.querySelector("#form");
+const loginform = document.querySelectorAll(".loginForm");
+
+let current = 1;
+
+//Only Signup Form is visible
+function toggleright(){
+    const login = document.querySelector(".login");
+    const signup = document.querySelector(".signup");
+    const form = document.querySelector("#form");
+    const loginform = document.querySelectorAll(".loginForm");
+    let current = 1;
+    form.style.marginLeft = "-100%";
+    login.style.background = "none";
+    signup.style.background = "white";
+    loginform[current-1].classList.add("active");
+}
+//Only Login Page is visible
+function toggleleft(){
+    const login = document.querySelector(".login");
+    const signup = document.querySelector(".signup");
+    const form = document.querySelector("#form");
+    const loginform = document.querySelectorAll(".loginForm");
+    let current = 1;
+    form.style.marginLeft = "0";
+    signup.style.background = "none";
+    login.style.background = "white";
+    loginform[current-1].classList.remove("active");
 }
 
-//hides Ready button and reveals Check Button
-function hideReady(){
-    document.getElementById("Ready").style.display = "none"; 
-    document.getElementById("Check").style.opacity = 1;
+//Function to write error messages for the Login Form
+function setLoginFormErrorMessage(message){
+    const messageElement = document.querySelector(".login_error");
+
+    messageElement.textContent = message;
 }
 
-//hides check button
-function hideCheck(){
-    document.getElementById("Check").style.display = "none";
+//Removes Login Error messages
+function clearLoginErrorMessage(){
+    document.getElementById("user/psd").addEventListener("click" , e=> {
+        document.querySelector(".login_error").textContent = "";
+    });
+}
+
+//To write error messages for the signup form
+function setSignupFormErrorMessage(message){
+    const messageElement = document.querySelector(".signup_error");
+
+    messageElement.textContent = message;
+}
+
+//Removes Error messages
+function clearSignupErrorMessage(){
+    document.getElementById("newUser/psd").addEventListener("click" , e=> {
+        document.querySelector(".signup_error").textContent = "";
+    });
+}
+
+//lets Signup form work
+function userData(){
+    let uname, psw, conf;
+    uname = document.getElementById("newUser").value;
+    psw = document.getElementById("pass").value;
+    conf = document.getElementById("confpass").value;
+    
+    //saves user information in the array
+    let user_info = new Array();
+    user_info = JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+
+    //All the fields of the sign up must be filled by the User
+    if(uname.length==0 || psw.length==0 || conf.length==0){
+        setSignupFormErrorMessage("*Please fill in all the fields");
+    }
+    else{
+        //Username should be at least 5 letters and cannot have only numbers.
+        if(uname.length >= 5 &&  /[a-zA-Z]/.test(uname)){
+            //Password and Confirm Password should match
+            if(psw == conf){
+                //Password should be at least 6 letters. Password should be mixture of numbers, alphabets and special characters(@,#,$)
+                if(psw.length >= 6 && /\d/.test(psw) && /[a-zA-Z]/.test(psw) && /[@$#]/.test(psw)){
+                    //If User is unique then adds info in the array
+                    if(!user_info.some(el=>el.uname==uname)){
+              
+                        user_info.push({
+                            "Username":uname,
+                            "Password":psw
+                        })
+                        localStorage.setItem("users",JSON.stringify(user_info));
+                    } 
+                    else{
+                        setSignupFormErrorMessage("*Username Unavailable"); 
+                    }
+                }
+                else{
+                    setSignupFormErrorMessage("*Password must contain at least 6 letters,alphabets and 1 special character");
+                }
+            }
+            else{
+                setSignupFormErrorMessage("*Password doesn't match");
+            }
+        }
+        else{
+            setSignupFormErrorMessage("*Invalid Username");
+        }
+    }
+    clearSignupErrorMessage();
+    return user_info;
+}
+
+//lets Login Page work
+
+function getInputValue(){
+    var inputUser = document.getElementById("user").value;
+    var inputpsd = document.getElementById("psd").value;
+    
+    let user_records = new Array;
+    //gets the array containing user information
+    user_records = userData();
+
+    //All the fields must be filled by the user
+    if(inputUser.length != 0 && inputpsd.length != 0){
+        //checks if user information exists in the array
+        for(i = 0; i < user_records.length; i++){
+            if(inputUser == user_records[i].Username && inputpsd == user_records[i].Password){
+                alert("Logged in");
+                return
+            }
+        }
+        setLoginFormErrorMessage("*Incorrect Username or Password");
+    }
+    else{
+        setLoginFormErrorMessage("*Please fill in all the fields");
+    }  
+    clearLoginErrorMessage();
 }
