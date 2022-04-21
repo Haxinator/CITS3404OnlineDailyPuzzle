@@ -1,15 +1,20 @@
 /*----------------------------canvas CSS--------------------------*/
 #canvas table {
-  border: 4px solid black;
+  border-radius: 8px;
+  /* border-collapse: separate; */
+  border: 5px solid black;
+  margin-top: 1em;
+  margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4em;
+
 }
 
 #canvas table td {
+  /* background: white; */
   padding: 20px;
+  /* opacity: 1; */
 }
-
 /*#currently overlaps with table border
 #Needs to be adjusted for mobile users*/
 #canvas table td:hover {
@@ -25,13 +30,19 @@
 
 /*------------------------Color Pallet CSS-------------------------*/
 #colorPallet table {
-  padding: 2%;
+  border-radius: 10px;
+  border-collapse: separate;
   border: 4px solid black;
+  border-spacing: 5px;
+  margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
+
 }
 
 #colorPallet table td {
+
+  border: 4px solid black;
   padding: 20px;
 }
 
@@ -124,5 +135,11 @@
 }
 
 /*----------------------------Some other CSS-------------------------*/
+/* Font Awsome */
+
+/*Top level div */
+/* .TopLevel{ */
+  /* opacity: 1; */
+/* } */
 
 /*--------------------------Game page CSS---------------------------*/
