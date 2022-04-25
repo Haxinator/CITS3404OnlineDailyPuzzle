@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 7;
-const GRIDCOL = 7;
+const GRIDROWS = 3;
+const GRIDCOL = 3;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -50,6 +50,8 @@ const PUZZLE_HD = {
     184: "#648FFF",
     185: "#648FFF"
   }
+
+  //for 7x7 grid size
 const QMARK = {
     16: PALETTE1["#648FFF"],
     10: PALETTE1["#785EF0"],
@@ -64,10 +66,18 @@ const QMARK = {
 var WRONGCELL = "#FF0000"; 
 var COLOR = null;
 var USERCANVAS = {};
-var CHECKEDCANVAS = {}
+var CHECKEDCANVAS = {};
+//puzzle currently selected
+var puzzle;
+//container for multiple puzzles
+const PUZZLES = [];
+//number of puzzles
+const PUZZLENO = 2;
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
+//ALL SUPPORTING FUNCTIONS ARE WRITTEN IN snake_case.
+
 /*
 Generates a random puzzle (supported for all grid sizes)
 @param color_array is the array that we used as the colors for the palette
@@ -87,6 +97,79 @@ function generate_random_puzzle(color_array){
     }
 
     return puzzle_color_dict;
+}
+
+
+//Initalises the PUZZLES array
+function initalize_puzzle(){
+    //add as many puzzles as directed by PUZZLENO
+    for(let i = 0; i<PUZZLENO; i++)
+    {
+        //add random puzzle
+        PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+    }
+}
+
+//Goes to the next puzzle in PUZZLES
+function next_puzzle(){
+    //if PUZZLES is not empty
+    if(PUZZLES.length != 0)
+    {
+        //assign new puzzle
+        puzzle = PUZZLES.shift();
+    } else {
+        //end the game
+        end_game();
+    }
+
+}
+
+//events that occur when the game ends
+//hides everything, except the results
+function end_game(){
+    document.getElementById("Start").style.display = "none";
+    document.getElementById("colorPallet").style.display = "none";
+    document.getElementById("canvas").style.display = "none";
+    document.getElementById("Eraser").style.display = "none";
+    result.innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>';
+}
+
+//-------------------------Game Buttons-------------------------------
+//function hides start button and reveals Ready Button
+function hide_start(){
+    document.getElementById("Start").style.display = "none";
+    document.getElementById("Ready").style.display = "inline-block";
+}
+
+//hides Ready button and reveals Check Button
+function hide_ready(){
+    document.getElementById("Ready").style.display = "none"; 
+    document.getElementById("Check").style.display = "inline-block";
+}
+
+//hides check button and reveals Start
+function reveal_start(){
+    document.getElementById("Check").style.display = "none";
+    document.getElementById("Start").style.display = "inline-block";
+    //hide lose screen
+    result.innerHTML='';
+}
+
+//hides check button and reveals next
+function hide_check(){
+    document.getElementById("Check").style.display = "none";
+    document.getElementById("Next").style.display = "inline-block";
+}
+
+function hide_next(){
+    document.getElementById("Next").style.display = "none";
+    document.getElementById("Start").style.display = "inline-block";
+    //hide lose screen
+    result.innerHTML='';
+    //clear canvas
+    canvas.clear();
+    //go to next puzzle
+    next_puzzle();
 }
 
 //*----------------------------CREATETABLE-------------------------------------------------------------//
@@ -178,11 +261,11 @@ function color(index, cell) {
 }
 
 
-/* initialise_color method for CreateTable
+/* draw method for CreateTable
 Fills the respective table (grid or palette) with colors according to the input 
 ! Merged Amir's draw function and Will's initalise_color function
 color array property of createTable*/
-CreateTable.prototype.initialise_color = function() {
+CreateTable.prototype.draw = function() {
 
     //retrieves each key value pair in puzzle as an array
     for (const [key, value] of Object.entries(this.data)) {
@@ -214,6 +297,8 @@ CreateTable.prototype.clear = function() {
 //*-----------------------------------------INITALISATION---------------------------------------------------------------------------//
 //below are the function calls
 
+//! Need to have initalization only occur in dailypuzzle.html
+
 /*
 First we create a new instance of CreateTable and assign it to a variable to store it (this object is for the palette).
 Then we create the palette using make() and fill in the color using the constant array that stores the colors of the pallet (PALETTE1).
@@ -227,24 +312,22 @@ var pallet = new CreateTable(1,5,"colorPallet",PALETTE1);
 //create a table for the pallet.
 pallet.make();
 //color the pallet.
-pallet.initialise_color();
+pallet.draw();
 
 /*
 generate_random_puzzle function uses the color pallet to generate the random puzzle dictionary.
-Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using initialise_color().
+Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using draw().
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
 
-//generate random puzzle
-var puzzle_random = generate_random_puzzle(PALETTEIDS);
+//initalises the puzzles array
+initalize_puzzle();
+//gets first puzzle
+next_puzzle();
 
-
-//puzzle_random for random puzzle else use a predefined puzzle.
-const PUZZLE = puzzle_random;
-
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", QMARK);
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
-canvas.initialise_color();
+canvas.draw();
 
 //for visuals
 var table = document.getElementById(canvas.location).querySelector("table"); 
@@ -255,11 +338,13 @@ document.getElementById("Start").addEventListener("click", () => {
     //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
     canvas.clear(); 
     //give canvas puzzle data.
-    canvas.data = PUZZLE; 
+    canvas.data = puzzle; 
     //initalise canvas using the new puzzle.
-    canvas.initialise_color(); 
+    canvas.draw(); 
     //visual indication of start
     table.classList.add("start");
+    //hide start button
+    hide_start();
 });
 
 
@@ -269,13 +354,16 @@ document.getElementById("Ready").addEventListener("click", () => {
     canvas.clear()
     //Visual indication of ready
     table.classList.add("ready");
+    //hide ready button
+    hide_ready();
 });
 
 
 //check if the user canvas matches the puzzle
 document.getElementById("Check").addEventListener("click", () => {
+
     //Get the keys of the Puzzle and UserCanvas dictionaries.
-    let puzzleKeys = Object.keys(PUZZLE); //!used to have sort(), not needed
+    let puzzleKeys = Object.keys(puzzle); //!used to have sort(), not needed
     let choosenArray = Object.keys(USERCANVAS); //!only used for length
     let hasWon = true
 
@@ -288,7 +376,7 @@ document.getElementById("Check").addEventListener("click", () => {
     for(let i=0; i < choosenArray.length; i++){
         let item = choosenArray[i]
         if(puzzleKeys.includes(item)){
-            if(PUZZLE[item] != USERCANVAS[item]){
+            if(puzzle[item] != USERCANVAS[item]){
                 hasWon = false;
                 CHECKEDCANVAS[item] = WRONGCELL;
             }else{
@@ -332,6 +420,10 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("start");
         //   alert("You Won!");
         document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
+        //hide check button
+        hide_check();
+        //reset checked canvas
+        CHECKEDCANVAS = {};
     }else{
         //------------------------------- This will display the wrong cells in red color ----------------
         console.log(CHECKEDCANVAS);
@@ -340,15 +432,19 @@ document.getElementById("Check").addEventListener("click", () => {
         //give canvas puzzle data.
         canvas.data = CHECKEDCANVAS; 
         //initalise canvas using the new puzzle.
-        canvas.initialise_color();
+        canvas.draw();
         
         let result = document.getElementById("result");
         result.innerHTML= '<img src="pictures/GameOver.jpg" class="rounded" alt=""></img>' +
         '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
-        
+        reveal_start();
     }
     
-    });
+});
+
+document.getElementById("Next").addEventListener("click", () => {
+    hide_next();
+});
 
 //Activates the eraser.
 document.getElementById("Eraser").addEventListener("click", () => COLOR = null);
@@ -368,3 +464,146 @@ document.getElementById("Eraser").addEventListener("click", () => COLOR = null);
 //     return col_array
 
 // }
+
+//*-------------------------Login Page JS------------------------//
+
+//!all these don't work, as the on click event is in HTML
+//!if using event listeners you would be able to declare
+//!them globally
+const login = document.querySelector(".login");
+const signup = document.querySelector(".signup");
+const form = document.querySelector("#form");
+const loginform = document.querySelectorAll(".loginForm");
+
+let current = 1;
+
+//Only Signup Form is visible
+function toggleright(){
+    const login = document.querySelector(".login");
+    const signup = document.querySelector(".signup");
+    const form = document.querySelector("#form");
+    const loginform = document.querySelectorAll(".loginForm");
+    let current = 1;
+    form.style.marginLeft = "-100%";
+    login.style.background = "none";
+    signup.style.background = "white";
+    loginform[current-1].classList.add("active");
+}
+//Only Login Page is visible
+function toggleleft(){
+    const login = document.querySelector(".login");
+    const signup = document.querySelector(".signup");
+    const form = document.querySelector("#form");
+    const loginform = document.querySelectorAll(".loginForm");
+    let current = 1;
+    form.style.marginLeft = "0";
+    signup.style.background = "none";
+    login.style.background = "white";
+    loginform[current-1].classList.remove("active");
+}
+
+//Function to write error messages for the Login Form
+function setLoginFormErrorMessage(message){
+    const messageElement = document.querySelector(".login_error");
+
+    messageElement.textContent = message;
+}
+
+//Removes Login Error messages
+function clearLoginErrorMessage(){
+    document.getElementById("user/psd").addEventListener("click" , e=> {
+        document.querySelector(".login_error").textContent = "";
+    });
+}
+
+//To write error messages for the signup form
+function setSignupFormErrorMessage(message){
+    const messageElement = document.querySelector(".signup_error");
+
+    messageElement.textContent = message;
+}
+
+//Removes Error messages
+function clearSignupErrorMessage(){
+    document.getElementById("newUser/psd").addEventListener("click" , e=> {
+        document.querySelector(".signup_error").textContent = "";
+    });
+}
+
+//lets Signup form work
+function userData(){
+    let uname, psw, conf;
+    uname = document.getElementById("newUser").value;
+    psw = document.getElementById("pass").value;
+    conf = document.getElementById("confpass").value;
+    
+    //saves user information in the array
+    let user_info = new Array();
+    user_info = JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+
+    //All the fields of the sign up must be filled by the User
+    if(uname.length==0 || psw.length==0 || conf.length==0){
+        setSignupFormErrorMessage("*Please fill in all the fields");
+    }
+    else{
+        //Username should be at least 5 letters and cannot have only numbers.
+        if(uname.length >= 5 &&  /[a-zA-Z]/.test(uname)){
+            //Password and Confirm Password should match
+            if(psw == conf){
+                //Password should be at least 6 letters. Password should be mixture of numbers, alphabets and special characters(@,#,$)
+                if(psw.length >= 6 && /\d/.test(psw) && /[a-zA-Z]/.test(psw) && /[@$#]/.test(psw)){
+                    //If User is unique then adds info in the array
+                    if(!user_info.some(el=>el.uname==uname)){
+              
+                        user_info.push({
+                            "Username":uname,
+                            "Password":psw
+                        })
+                        localStorage.setItem("users",JSON.stringify(user_info));
+                    } 
+                    else{
+                        setSignupFormErrorMessage("*Username Unavailable"); 
+                    }
+                }
+                else{
+                    setSignupFormErrorMessage("*Password must contain at least 6 letters,alphabets and 1 special character");
+                }
+            }
+            else{
+                setSignupFormErrorMessage("*Password doesn't match");
+            }
+        }
+        else{
+            setSignupFormErrorMessage("*Invalid Username");
+        }
+    }
+    clearSignupErrorMessage();
+    return user_info;
+}
+
+//lets Login Page work
+
+function getInputValue(){
+    var inputUser = document.getElementById("user").value;
+    var inputpsd = document.getElementById("psd").value;
+    
+    let user_records = new Array;
+    //gets the array containing user information
+    user_records = userData();
+
+    //All the fields must be filled by the user
+    if(inputUser.length != 0 && inputpsd.length != 0){
+        //checks if user information exists in the array
+        for(i = 0; i < user_records.length; i++){
+            if(inputUser == user_records[i].Username && inputpsd == user_records[i].Password){
+                alert("Logged in");
+                return
+            }
+        }
+        setLoginFormErrorMessage("*Incorrect Username or Password");
+    }
+    else{
+        setLoginFormErrorMessage("*Please fill in all the fields");
+    }  
+    clearLoginErrorMessage();
+}
