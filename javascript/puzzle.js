@@ -405,7 +405,7 @@ document.getElementById("Check").addEventListener("click", () => {
         }
     }
     //Check items that have been in puzzle and conestant missed it
-    if(!diff1.length==0){
+    if(diff1.length!==0){
         hasWon = false;
         for(let i = 0; i < diff1.length; i++){
             let item = diff1[i];
@@ -413,7 +413,7 @@ document.getElementById("Check").addEventListener("click", () => {
         }
     }
     //check items that have been choosen but not in the puzzle
-    if(!diff2.length==0){
+    if(diff2.length!==0){
         hasWon = false;
         for(let i = 0; i < diff2.length; i++){
             let item = diff2[i];
@@ -438,13 +438,32 @@ document.getElementById("Check").addEventListener("click", () => {
     USERCANVAS = correctCells;
 
     if(hasWon) {
+        console.log("you win");
         //Visual indication of win
         table.classList.remove("start");
         //   alert("You Won!");
-        document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>';
-        //hide check button
-        hide_check();
+        document.getElementById("result").innerHTML = '<img src="../pictures/win.png" class="rounded" alt=""></img>';
+        
+        
+        //waiting for 3 seconds and then reset the display
+        async function delay() {
+            
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            //hide check button
+            hide_check();
+            //clearing canvas
+            canvas.clear();
+            //reset checked canvas
+            CHECKEDCANVAS = {};
+            //don't allow user to draw
+            table.classList.remove("ready");
+            
+            
+        }
+          
+        delay();
     }else{
+        console.log("you lost");
         //------------------------------- This will display the wrong cells in red color ----------------
         console.log(CHECKEDCANVAS);
         //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
@@ -455,15 +474,29 @@ document.getElementById("Check").addEventListener("click", () => {
         canvas.draw();
         
         let result = document.getElementById("result");
-        result.innerHTML= '<img src="pictures/GameOver.jpg" class="rounded" alt=""></img>' +
+        result.innerHTML= '<img src="../pictures/GameOver.jpg" class="rounded" alt=""></img>' +
         '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
-        reveal_start();
+        
+        //waiting for 3 seconds and then reset the display
+        async function delay() {
+            
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            reveal_start();
+            //clearing canvas
+            canvas.clear();
+            //reset checked canvas
+            CHECKEDCANVAS = {};
+            //don't allow user to draw
+            table.classList.remove("ready");
+            
+            
+        }
+          
+        delay();
+        
     }
     
-    //reset checked canvas
-    CHECKEDCANVAS = {};
-    //don't allow user to draw
-    table.classList.remove("ready");
+    
 });
 
 document.getElementById("Next").addEventListener("click", () => {
