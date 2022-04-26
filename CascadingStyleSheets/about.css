@@ -1,0 +1,32 @@
+/*----------------------------About page CSS-------------------------*/
+#about {
+    color: white;
+  }
+  #about span:first-child{
+    font-weight: bold;
+  }
+  #about span:nth-child(2){
+    text-decoration: underline;
+  }
+  #about .text {
+    background-color: black;
+    padding: 10px;
+  }
+  #about h1 {
+    text-align: center;
+  }
+  #about h2 {
+    margin-left: 50px;
+  }
+  #about article {
+    margin-left: 30px;
+    /* margin-right: 50%; */
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    /* border-radius: 20px; */
+    background-color: blue;
+    /* box-shadow: 10px 10px rgba(19, 19, 19, 0.5); */
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(31, 31, 31);
+    text-align: center;
+  }
+  
