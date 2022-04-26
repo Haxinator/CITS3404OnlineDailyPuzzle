@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 3;
-const GRIDCOL = 3;
+const GRIDROWS = 7;
+const GRIDCOL = 7;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -164,10 +164,14 @@ function hide_check(){
 function hide_next(){
     document.getElementById("Next").style.display = "none";
     document.getElementById("Start").style.display = "inline-block";
-    //hide lose screen
+    //remove lose screen
     result.innerHTML='';
-    //clear canvas
-    canvas.clear();
+    //clear User array and canvas
+    canvas.clear(USERCANVAS);
+    //change back to QMARK
+    canvas.data = QMARK;
+    //draw QMARK
+    canvas.draw();
     //go to next puzzle
     next_puzzle();
 }
@@ -248,15 +252,20 @@ CreateTable.prototype.make = function(){
 may remove, "drag enter" doesn't work well.
 */
 function color(index, cell) {
-    if (COLOR === null) { //if using eraser //! same color click to remove functionality was removed (Drag colouring didn't work well with it on)
-        cell.style.backgroundColor = null;
-        console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
-        delete USERCANVAS[index];
+    if(table.classList.contains("ready"))
+    {
+        if (COLOR === null) { //if using eraser //! same color click to remove functionality was removed (Drag colouring didn't work well with it on)
+            cell.style.backgroundColor = null;
+            console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
+            delete USERCANVAS[index];
 
+        } else {
+            cell.style.backgroundColor = COLOR;
+            console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            USERCANVAS[index] = COLOR;
+        }
     } else {
-        cell.style.backgroundColor = COLOR;
-        console.log("added: " + COLOR + " at: " + index); //for debugging check function
-        USERCANVAS[index] = COLOR;
+        alert("can only draw once ready is pressed!");
     }
 }
 
@@ -289,8 +298,12 @@ CreateTable.prototype.clear = function() {
         cell[c].style.backgroundColor = null;   
     }
 
-    //clear user canvas.
-    USERCANVAS = {};
+    //if an argument is given, clear the user canvas.
+    if(arguments.length > 0)
+    {
+        //clear user canvas.
+        USERCANVAS = {};
+    }
 }
 
 
@@ -325,7 +338,7 @@ initalize_puzzle();
 //gets first puzzle
 next_puzzle();
 
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", QMARK);
 canvas.make();
 canvas.draw();
 
@@ -351,7 +364,10 @@ document.getElementById("Start").addEventListener("click", () => {
 //Clear the Canvas for Drawing when user clicks "Ready" Button.
 document.getElementById("Ready").addEventListener("click", () => {
     //clear cavnas for drawing
-    canvas.clear()
+    canvas.clear();
+    //draw user's canvas
+    canvas.data = USERCANVAS;
+    canvas.draw();
     //Visual indication of ready
     table.classList.add("ready");
     //hide ready button
@@ -366,6 +382,7 @@ document.getElementById("Check").addEventListener("click", () => {
     let puzzleKeys = Object.keys(puzzle); //!used to have sort(), not needed
     let choosenArray = Object.keys(USERCANVAS); //!only used for length
     let hasWon = true
+    let correctCells = {};
 
    //item that exist in original array but not in the choosen array
     let diff1 = puzzleKeys.filter(x => !choosenArray.includes(x));
@@ -379,8 +396,11 @@ document.getElementById("Check").addEventListener("click", () => {
             if(puzzle[item] != USERCANVAS[item]){
                 hasWon = false;
                 CHECKEDCANVAS[item] = WRONGCELL;
+                //should remove incorrect cell from user canvas
+                // delete USERCANVAS[item]; 
             }else{
                 CHECKEDCANVAS[item] = USERCANVAS[item];
+                correctCells[item] = USERCANVAS[item];
             }
         }
     }
@@ -414,16 +434,16 @@ document.getElementById("Check").addEventListener("click", () => {
     //   hasWon = false;
     // }
 
+    //remember the correct cells in the user canvas
+    USERCANVAS = correctCells;
+
     if(hasWon) {
         //Visual indication of win
-        table.classList.remove("ready");
         table.classList.remove("start");
         //   alert("You Won!");
-        document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>'
+        document.getElementById("result").innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>';
         //hide check button
         hide_check();
-        //reset checked canvas
-        CHECKEDCANVAS = {};
     }else{
         //------------------------------- This will display the wrong cells in red color ----------------
         console.log(CHECKEDCANVAS);
@@ -440,6 +460,10 @@ document.getElementById("Check").addEventListener("click", () => {
         reveal_start();
     }
     
+    //reset checked canvas
+    CHECKEDCANVAS = {};
+    //don't allow user to draw
+    table.classList.remove("ready");
 });
 
 document.getElementById("Next").addEventListener("click", () => {
