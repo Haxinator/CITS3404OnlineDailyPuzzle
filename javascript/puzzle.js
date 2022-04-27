@@ -73,6 +73,8 @@ var puzzle;
 const PUZZLES = [];
 //number of puzzles
 const PUZZLENO = 2;
+//length of delays
+const TIMER = 1500;
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -117,9 +119,21 @@ function next_puzzle(){
     {
         //assign new puzzle
         puzzle = PUZZLES.shift();
+
+        //clear User array and canvas
+        canvas.clear(USERCANVAS);
+        //change data to QMARK and draw
+        canvas.data = QMARK;
+        canvas.draw();
     } else {
-        //end the game
-        end_game();
+        //wait one second before showing end game screen
+        async function delay() {
+            await new Promise(resolve => setTimeout(resolve, TIMER));
+            //end the game
+            end_game();
+        }
+        
+        delay();
     }
 
 }
@@ -131,49 +145,30 @@ function end_game(){
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
     document.getElementById("Eraser").style.display = "none";
-    result.innerHTML = '<img src="pictures/win.png" class="rounded" alt=""></img>';
+    result.innerHTML = '<img src="../pictures/win.png" class="rounded" alt=""></img>';
 }
 
-//-------------------------Game Buttons-------------------------------
-//function hides start button and reveals Ready Button
-function hide_start(){
-    document.getElementById("Start").style.display = "none";
-    document.getElementById("Ready").style.display = "inline-block";
-}
+/*
+Collapsed all button changes into one function
+Nice clean code
+@param from the button to hide
+@param to the button to show
+*/
+function change_button(from, to) {
+    document.getElementById(from).style.display = "none";
 
-//hides Ready button and reveals Check Button
-function hide_ready(){
-    document.getElementById("Ready").style.display = "none"; 
-    document.getElementById("Check").style.display = "inline-block";
-}
+    result.innerHTML = "Please wait..." + "<br>" + result.innerHTML;
 
-//hides check button and reveals Start
-function reveal_start(){
-    document.getElementById("Check").style.display = "none";
-    document.getElementById("Start").style.display = "inline-block";
-    //hide lose screen
-    result.innerHTML='';
-}
+    //wait one second before showing next button
+    async function delay() {
+        await new Promise(resolve => setTimeout(resolve, TIMER));
+        document.getElementById(to).style.display = "inline-block";
+        //hide lose screen
+        result.innerHTML='';
+    }
+      
+    delay();
 
-//hides check button and reveals next
-function hide_check(){
-    document.getElementById("Check").style.display = "none";
-    document.getElementById("Next").style.display = "inline-block";
-}
-
-function hide_next(){
-    document.getElementById("Next").style.display = "none";
-    document.getElementById("Start").style.display = "inline-block";
-    //remove lose screen
-    result.innerHTML='';
-    //clear User array and canvas
-    canvas.clear(USERCANVAS);
-    //change back to QMARK
-    canvas.data = QMARK;
-    //draw QMARK
-    canvas.draw();
-    //go to next puzzle
-    next_puzzle();
 }
 
 //*----------------------------CREATETABLE-------------------------------------------------------------//
@@ -223,7 +218,7 @@ CreateTable.prototype.make = function(){
                     //adding addEventListener after click change the color
                     //adding addEventListener after drag to change the color
                     cell.addEventListener("click", () => color(index, cell));
-                    cell.addEventListener("dragenter", () => color(index, cell));
+                    cell.addEventListener("dragenter", () => dragColor(index, cell));
                 break;
 
                 //If the table is for colorPallet
@@ -248,13 +243,14 @@ CreateTable.prototype.make = function(){
     return table;
 }
 
-/*Event Listener function for canvas
-may remove, "drag enter" doesn't work well.
+/*
+Event Listener function for clicking canvas
 */
 function color(index, cell) {
     if(table.classList.contains("ready"))
     {
-        if (COLOR === null) { //if using eraser //! same color click to remove functionality was removed (Drag colouring didn't work well with it on)
+        //same color click to remove functionality (Drag colouring doesn't work well with it on)
+        if (COLOR === USERCANVAS[index]) { 
             cell.style.backgroundColor = null;
             console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
             delete USERCANVAS[index];
@@ -265,7 +261,21 @@ function color(index, cell) {
             USERCANVAS[index] = COLOR;
         }
     } else {
-        alert("can only draw once ready is pressed!");
+        alert("Can only draw once ready is pressed!");
+    }
+}
+
+/*
+Event Listener function for click dragging canvas
+*/
+function dragColor(index, cell) {
+    if(table.classList.contains("ready"))
+    {
+        cell.style.backgroundColor = COLOR;
+        console.log("added: " + COLOR + " at: " + index); //for debugging check function
+        USERCANVAS[index] = COLOR;
+    } else {
+        alert("Can only draw once ready is pressed!");
     }
 }
 
@@ -333,14 +343,13 @@ Create the canvas using make() and fill in the color (according to the data para
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
 
+var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+canvas.make();
+
 //initalises the puzzles array
 initalize_puzzle();
 //gets first puzzle
 next_puzzle();
-
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", QMARK);
-canvas.make();
-canvas.draw();
 
 //for visuals
 var table = document.getElementById(canvas.location).querySelector("table"); 
@@ -356,8 +365,8 @@ document.getElementById("Start").addEventListener("click", () => {
     canvas.draw(); 
     //visual indication of start
     table.classList.add("start");
-    //hide start button
-    hide_start();
+    //change start button to ready
+    change_button("Start", "Ready");
 });
 
 
@@ -370,8 +379,8 @@ document.getElementById("Ready").addEventListener("click", () => {
     canvas.draw();
     //Visual indication of ready
     table.classList.add("ready");
-    //hide ready button
-    hide_ready();
+    //change ready button to check
+    change_button("Ready", "Check");
 });
 
 
@@ -441,27 +450,11 @@ document.getElementById("Check").addEventListener("click", () => {
         console.log("you win");
         //Visual indication of win
         table.classList.remove("start");
-        //   alert("You Won!");
+        table.classList.remove("ready");
+        
+        //show win screen
         document.getElementById("result").innerHTML = '<img src="../pictures/win.png" class="rounded" alt=""></img>';
-        
-        
-        //waiting for 3 seconds and then reset the display
-        async function delay() {
-            
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            //hide check button
-            hide_check();
-            //clearing canvas
-            canvas.clear();
-            //reset checked canvas
-            CHECKEDCANVAS = {};
-            //don't allow user to draw
-            table.classList.remove("ready");
-            
-            
-        }
-          
-        delay();
+        change_button("Check", "Next");
     }else{
         console.log("you lost");
         //------------------------------- This will display the wrong cells in red color ----------------
@@ -474,33 +467,43 @@ document.getElementById("Check").addEventListener("click", () => {
         canvas.draw();
         
         let result = document.getElementById("result");
+
+        //show picture
         result.innerHTML= '<img src="../pictures/GameOver.jpg" class="rounded" alt=""></img>' +
         '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
         
-        //waiting for 3 seconds and then reset the display
+        //don't allow user to draw
+        table.classList.remove("ready");
+
+        //change check button to start
+        change_button("Check", "Ready");
+
+        //waiting for 2 seconds and then reset the display
+        //after delay it will show the correct answer
+        //user presses ready again to begin
+
         async function delay() {
             
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            reveal_start();
+            await new Promise(resolve => setTimeout(resolve, TIMER));
             //clearing canvas
             canvas.clear();
-            //reset checked canvas
-            CHECKEDCANVAS = {};
-            //don't allow user to draw
-            table.classList.remove("ready");
-            
-            
+            //Return to start state
+            canvas.data = puzzle;
+            canvas.draw(); 
         }
           
         delay();
-        
     }
-    
-    
+
+    //reset checked canvas
+    CHECKEDCANVAS = {};
 });
 
 document.getElementById("Next").addEventListener("click", () => {
-    hide_next();
+    //change next to start
+    change_button("Next", "Start");
+    //go to next puzzle
+    next_puzzle();
 });
 
 //Activates the eraser.
