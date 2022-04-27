@@ -1,136 +1,136 @@
 
 /*---------------------Login Page CSS--------------------------*/
-#loginpage{
-    margin: 0;
-    padding: 0;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-  }
-  #loginpage{
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background: url(../pictures/game3.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  #loginpage .container{
-    position: relative;
-    align-items: center;
-    padding: 50px;
-    width: 400px;
-    background: wheat;
-    border-style: double;
-    border-width: 10px;
-  }
-  #loginpage .loginForm{
-    position: absolute;
-    display: flex;
-    right: 20px;
-    margin-bottom: 150px;
-    border-bottom: 1px solid black;
-  }
-  #loginpage .loginForm.active{
-    border-bottom: 1px solid black;
-  }
-  #loginpage .loginForm::after{
-    content: '';
-    height: 3px;
-    width: 60px;
-    background: black;
-    border-radius: 50px;
-    position: absolute;
-    bottom: 0;
-    transition: 0.3s ease;
-  }
-  #loginpage .loginForm.active::after{
-    left: 65px;
-    width: 65px;
-    background: black;
-  }
-  #loginpage .login{
-    padding: 2px 5px;
-    background: white;
-    border-radius: 20px;
-    text-align: right;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-bottom: 2px;
-  }
-  #loginpage .signup{
-    padding: 2px 5px;
-    border-radius: 20px;
-    text-align: right;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-bottom: 2px;
-  }
-  #loginpage .formText{
-    width: 100%;
-    text-align: center;
-    margin-top: 50px;
-    position: relative;
-    overflow: hidden;
-  }
-  #loginpage .formText #form{
-    width: 210%;
-    text-align: center;
-    position: relative;
-    display: flex;
-    margin: auto;
-  }
-  #loginpage #page{
-    margin: auto;
-    width: 100%;
-  }
-  #loginpage label{
-    display: block;
-    margin-bottom: 7px;
-    padding: 5px 7px;
-    text-align: center;
-    letter-spacing: 0.5px;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  #loginpage .element{
-    position: relative;
-    margin-right: 20px;
-  }
-  #loginpage .element input{
-    width: 250px;
-    height: 40px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    padding-left: 10px;
-    letter-spacing: 0.5px;
-    font-size: 15px;
-  }
-  #loginpage #btn{
-    padding: 5px;
-    width: 30%;
-    margin-top: 10px;
-    border-radius: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 20px;
-  }
-  #loginpage .login_error{
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: rgb(204, 57, 57);
-  }
-  #loginpage .signup_error{
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: rgb(204, 57, 57);
-  }
+body{
+  margin: 0;
+  padding: 0;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+body{
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: url(../pictures/game3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container{
+  position: relative;
+  align-items: center;
+  padding: 50px;
+  width: 400px;
+  background: wheat;
+  border-style: double;
+  border-width: 10px;
+}
+.loginForm{
+  position: absolute;
+  display: flex;
+  right: 20px;
+  margin-bottom: 150px;
+  border-bottom: 1px solid black;
+}
+.loginForm.active{
+  border-bottom: 1px solid black;
+}
+.loginForm::after{
+  content: '';
+  height: 3px;
+  width: 60px;
+  background: black;
+  border-radius: 50px;
+  position: absolute;
+  bottom: 0;
+  transition: 0.3s ease;
+}
+.loginForm.active::after{
+  left: 65px;
+  width: 65px;
+  background: black;
+}
+.login{
+  padding: 2px 5px;
+  background: white;
+  border-radius: 20px;
+  text-align: right;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-left: 3px;
+  margin-bottom: 2px;
+}
+.signup{
+  padding: 2px 5px;
+  border-radius: 20px;
+  text-align: right;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-left: 3px;
+  margin-bottom: 2px;
+}
+.formText{
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+  overflow: hidden;
+}
+.formText #form{
+  width: 210%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  margin: auto;
+}
+#page{
+  margin: auto;
+  width: 100%;
+}
+label{
+  display: block;
+  margin-bottom: 7px;
+  padding: 5px 7px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.element{
+  position: relative;
+  margin-right: 20px;
+}
+.element input{
+  width: 250px;
+  height: 40px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  padding-left: 10px;
+  letter-spacing: 0.5px;
+  font-size: 15px;
+}
+#btn{
+  padding: 5px;
+  width: 30%;
+  margin-top: 10px;
+  border-radius: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.login_error{
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(204, 57, 57);
+}
+.signup_error{
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(204, 57, 57);
+}

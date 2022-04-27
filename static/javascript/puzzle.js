@@ -145,7 +145,7 @@ function end_game(){
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
     document.getElementById("Eraser").style.display = "none";
-    result.innerHTML = '<img src="../pictures/win.png" class="rounded" alt=""></img>';
+    result.innerHTML = '<img src="static/pictures/win.png" class="rounded" alt=""></img>';
 }
 
 /*
@@ -453,7 +453,7 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("ready");
         
         //show win screen
-        document.getElementById("result").innerHTML = '<img src="../pictures/win.png" class="rounded" alt=""></img>';
+        document.getElementById("result").innerHTML = '<img src="static/pictures/win.png" class="rounded" alt=""></img>';
         change_button("Check", "Next");
     }else{
         console.log("you lost");
@@ -469,7 +469,7 @@ document.getElementById("Check").addEventListener("click", () => {
         let result = document.getElementById("result");
 
         //show picture
-        result.innerHTML= '<img src="../pictures/GameOver.jpg" class="rounded" alt=""></img>' +
+        result.innerHTML= '<img src="static/pictures/GameOver.jpg" class="rounded" alt=""></img>' +
         '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
         
         //don't allow user to draw
