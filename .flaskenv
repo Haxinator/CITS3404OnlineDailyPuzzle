@@ -1,1 +1,1 @@
-FLASK_APP=Flask.py
+FLASK_APP=puzzle.py
