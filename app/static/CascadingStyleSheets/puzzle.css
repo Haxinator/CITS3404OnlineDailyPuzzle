@@ -27,9 +27,13 @@
 }
 
 #canvas table td {
-  background: black;
   padding: 20px;
   /* opacity: 1; */
+}
+
+#canvas table.Q {
+  background: url("../pictures/Qmark.png");
+  background-size: cover;
 }
 
 #canvas table.start {

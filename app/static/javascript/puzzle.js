@@ -16,8 +16,8 @@ const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 7;
-const GRIDCOL = 7;
+const GRIDROWS = 4;
+const GRIDCOL = 4;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -123,8 +123,9 @@ function next_puzzle(){
         //clear User array and canvas
         canvas.clear(USERCANVAS);
         //change data to QMARK and draw
-        canvas.data = QMARK;
-        canvas.draw();
+        // canvas.data = QMARK;
+        // canvas.draw();
+        table.classList.add("Q");
     } else {
         //wait one second before showing end game screen
         async function delay() {
@@ -346,19 +347,20 @@ Create the canvas using make() and fill in the color (according to the data para
 var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
+//for visuals
+var table = document.getElementById(canvas.location).querySelector("table"); 
+
 //initalises the puzzles array
 initalize_puzzle();
 //gets first puzzle
 next_puzzle();
 
-//for visuals
-var table = document.getElementById(canvas.location).querySelector("table"); 
-
 //*-----------------------------------------Buttons---------------------------------------------------------------------------//
 
 document.getElementById("Start").addEventListener("click", () => {
-    //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
+    //clear the canvas and inital Question Mark. 
     canvas.clear(); 
+    table.classList.remove("Q");
     //give canvas puzzle data.
     canvas.data = puzzle; 
     //initalise canvas using the new puzzle.
