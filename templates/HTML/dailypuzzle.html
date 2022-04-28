@@ -1,6 +1,6 @@
-{% extends "HTML/base.html" %}
+{% extends "HTML/navbar.html" %}
 
-{% block header %}
+{% block extraHeaders %}
   <script src="static/javascript/puzzle.js" defer></script>
   <!-- Font Awsome -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -8,13 +8,10 @@
 {% endblock %}
 
 
-{% block body %}
+{% block content %}
 <div class="container">
   <!-- canvas -->
   <div id="canvas" class="col"></div>
-
-  <!-- REMINDER TO MYSELF TO PUT THOSE STYLE TAGS BELOW INTO THE STYLESHEET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-
 </div>
 
 <!-- Color pallet -->
