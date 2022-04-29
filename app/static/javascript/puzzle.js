@@ -74,7 +74,7 @@ const PUZZLES = [];
 //number of puzzles
 const PUZZLENO = 2;
 //length of delays
-const TIMER = 1500;
+const TIMER = 2000;
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -146,7 +146,8 @@ function end_game(){
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
     document.getElementById("Eraser").style.display = "none";
-    result.innerHTML = '<img src="static/pictures/win.png" class="rounded" alt=""></img>';
+    display_message("<h1>Puzzle Supply Depleted <br> For Now...</h1>", false);
+    display_image("win.png", "YOU WIN");
 }
 
 /*
@@ -170,6 +171,31 @@ function change_button(from, to) {
       
     delay();
 
+}
+
+function display_message(text, clear){
+    //display text
+    result.innerHTML = text;
+
+    //if it should be cleared after displayed
+    if(clear === true)
+    {
+        //wait few seconds before removing the message
+        async function delay() {
+            await new Promise(resolve => setTimeout(resolve, TIMER));
+            result.innerHTML = "";
+        }
+    
+        delay();
+    }
+}
+
+function display_image(image, alt)
+{
+    let img = document.createElement("img");
+    img.setAttribute("alt", alt);
+    img.setAttribute("src", "static/pictures/" + image);
+    result.appendChild(img);
 }
 
 //*----------------------------CREATETABLE-------------------------------------------------------------//
@@ -217,9 +243,11 @@ CreateTable.prototype.make = function(){
                     cell.setAttribute("id", index.toString());
 
                     //adding addEventListener after click change the color
-                    //adding addEventListener after drag to change the color
-                    cell.addEventListener("click", () => color(index, cell));
-                    cell.addEventListener("dragenter", () => dragColor(index, cell));
+                    //adding addEventListener after drag to change the color (if left mouse is pressed)
+                    //adding addEventListener after drag to change the color (if left mouse is pressed)
+                    cell.addEventListener("mousedown", () => color(index, cell));
+                    cell.addEventListener("mouseover", (e) => dragColor(index, cell, e));
+                    cell.addEventListener("dragenter", (e) => dragColor(index, cell, e));
                 break;
 
                 //If the table is for colorPallet
@@ -262,21 +290,28 @@ function color(index, cell) {
             USERCANVAS[index] = COLOR;
         }
     } else {
-        alert("Can only draw once ready is pressed!");
+        //wait few seconds before removing the message
+        display_message("Can only draw once ready is pressed!", true);
     }
 }
 
 /*
 Event Listener function for click dragging canvas
 */
-function dragColor(index, cell) {
-    if(table.classList.contains("ready"))
+function dragColor(index, cell, e) {
+
+    console.log(e.buttons);
+
+    if(table.classList.contains("ready") && e.buttons === 1)
     {
         cell.style.backgroundColor = COLOR;
         console.log("added: " + COLOR + " at: " + index); //for debugging check function
         USERCANVAS[index] = COLOR;
-    } else {
-        alert("Can only draw once ready is pressed!");
+    } else if (e.buttons === 1) {
+           //wait few seconds before removing the message
+           
+        //wait few seconds before removing the message
+        display_message("Can only draw once ready is pressed!", true);
     }
 }
 
@@ -394,6 +429,7 @@ document.getElementById("Check").addEventListener("click", () => {
     let choosenArray = Object.keys(USERCANVAS); //!only used for length
     let hasWon = true
     let correctCells = {};
+    let result = document.getElementById("result");
 
    //item that exist in original array but not in the choosen array
     let diff1 = puzzleKeys.filter(x => !choosenArray.includes(x));
@@ -455,7 +491,7 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("ready");
         
         //show win screen
-        document.getElementById("result").innerHTML = '<img src="static/pictures/win.png" class="rounded" alt=""></img>';
+        display_image("win.png", "YOU WIN");
         change_button("Check", "Next");
     }else{
         console.log("you lost");
@@ -467,12 +503,11 @@ document.getElementById("Check").addEventListener("click", () => {
         canvas.data = CHECKEDCANVAS; 
         //initalise canvas using the new puzzle.
         canvas.draw();
-        
-        let result = document.getElementById("result");
 
         //show picture
-        result.innerHTML= '<img src="static/pictures/GameOver.jpg" class="rounded" alt=""></img>' +
-        '<h3>Wrong cells are filled <span style ="color:red">Red</span> </h3>';
+        display_message('<h3>Wrong cells are filled <span style ="color:red">Red</span></h3>', true);
+        display_image("GameOver.jpg", "Game Over");
+        
         
         //don't allow user to draw
         table.classList.remove("ready");
