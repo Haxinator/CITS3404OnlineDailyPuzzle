@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <title></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="javascript.js" defer></script>
-    <link rel="stylesheet" href="stylesheet.css">
-</head>
-<body id="loginpage">
+{% extends "HTML/base.html" %}
+
+{% block header %}
+    <!--<script src="static/javascript/login.js" defer></script>-->
+    <link rel="stylesheet" href="static/CascadingStyleSheets/login.css">
+{% endblock %}
+
+{% block body %}
     <div class="container">
         <!--let user toggle between Login page and Signup page-->
         <div class="loginForm">
@@ -21,19 +14,23 @@
         </div>
 
         <div class="formText">
-            <form id="form">
+            <!--Submitting the username and password information to the database using the post method-->
+            <form id='form' action="{{ url_for('database') }}" method="post">
                 <div id="page">
                     <!--Creates Login Form-->
                     <label>LOGIN FORM</label>
                     
                     <div class="element" id="user/psd">
-                        <input id="user" type="text" autofocus placeholder="Username"><br>
-                        <input id="psd" type="password" placeholder="Password">
+                        <input id="user" type="text" autofocus placeholder="Username" name="username"><br>
+                        <input id="psd" type="password" placeholder="Password" name="password">
                     </div>
+
                     
                     <div class="login_error"></div>
-                    
-                    <input type="button" value="Login" id="btn" onclick="getInputValue()">
+
+                    <button type="submit" value="Login" id="btn">Login</button>
+                    <!--If security is enabled-->
+                    <!--<input type="button" value="Login" id="btn" onclick="getInputValue()">-->
                 </div>
 
                 <div id="page">
@@ -46,11 +43,10 @@
                     </div>
 
                     <div class="signup_error"></div>
-
+                    <!--If security is enabled-->
                     <input type="button" value="Signup" id="btn" onclick="userData()">
                 </div>
             </form>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

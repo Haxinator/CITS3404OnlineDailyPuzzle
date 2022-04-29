@@ -1,0 +1,2 @@
+FLASK_APP=puzzle.py
+FLASK_DEBUG=1
