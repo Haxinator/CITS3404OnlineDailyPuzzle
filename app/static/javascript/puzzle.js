@@ -7,12 +7,13 @@ const PALETTE1 = {
     "#785EF0": "#785EF0",
     "#DC267F": "#DC267F",
     "#FE6100": "#FE6100",
-    "#FFB000": "#FFB000"
+    "#FFB000": "#FFB000",
+    "eraser" : null
 };
 
 //may be a better way to do this, used to create IDs for colour pallet cells.
 //also used for random puzzle generator
-const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000"];
+const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000", "eraser"];
 
 //controls the number of rows and columns a grid has.
 //! Small sizes for easy testing. Size to be determined.
@@ -146,7 +147,7 @@ function end_game(){
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
     document.getElementById("Eraser").style.display = "none";
-    display_message("<h1>Puzzle Supply Depleted <br> For Now...</h1>", false);
+    display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
     display_image("win.png", "YOU WIN");
 }
 
@@ -252,10 +253,11 @@ CreateTable.prototype.make = function(){
 
                 //If the table is for colorPallet
                 case "colorPallet": 
-                    let cellColor = PALETTEIDS[c]; //number of colours match the number of columns
+                    let colorName = PALETTEIDS[c];
+                    let cellColor = PALETTE1[colorName]; //number of colours match the number of columns
 
                     cell.classList.add("colorPallet");
-                    cell.setAttribute("id", cellColor);
+                    cell.setAttribute("id", colorName);
                     cell.style.backgroundColor = cellColor;
 
                     //Event listener to remember color chosen
@@ -278,8 +280,10 @@ Event Listener function for clicking canvas
 function color(index, cell) {
     if(table.classList.contains("ready"))
     {
+        //if COLOR===null isn't specifided it will add null to the USERCANVAS
+        //which causes the check function to break
         //same color click to remove functionality (Drag colouring doesn't work well with it on)
-        if (COLOR === USERCANVAS[index]) { 
+        if (COLOR === USERCANVAS[index] || COLOR === null) { 
             cell.style.backgroundColor = null;
             console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
             delete USERCANVAS[index];
@@ -304,9 +308,16 @@ function dragColor(index, cell, e) {
 
     if(table.classList.contains("ready") && e.buttons === 1)
     {
-        cell.style.backgroundColor = COLOR;
-        console.log("added: " + COLOR + " at: " + index); //for debugging check function
-        USERCANVAS[index] = COLOR;
+        if(COLOR === null)
+        {
+            cell.style.backgroundColor = null;
+            console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
+            delete USERCANVAS[index];
+        } else {
+            cell.style.backgroundColor = COLOR;
+            console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            USERCANVAS[index] = COLOR;
+        }
     } else if (e.buttons === 1) {
            //wait few seconds before removing the message
            
@@ -324,8 +335,10 @@ CreateTable.prototype.draw = function() {
 
     //retrieves each key value pair in puzzle as an array
     for (const [key, value] of Object.entries(this.data)) {
+        console.log(key);
         //get cell
         let box = document.getElementById(key.toString());
+        console.log(box);
         //change color of cell
         box.style.backgroundColor = value;
       }
@@ -367,7 +380,7 @@ Then we create the palette using make() and fill in the color using the constant
 */ 
 
 //Create a new CreateTable object with all the parameters needed for creation.
-var pallet = new CreateTable(1,5,"colorPallet",PALETTE1);
+var pallet = new CreateTable(1,6,"colorPallet",PALETTE1);
 //create a table for the pallet.
 pallet.make();
 //color the pallet.
