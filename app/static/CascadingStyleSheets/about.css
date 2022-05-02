@@ -3,10 +3,6 @@ body {
   color: white;
 }
 
-span:first-child{
-  font-weight: bold;
-}
-
 span:nth-child(2){
   text-decoration: underline;
 }
@@ -21,12 +17,12 @@ h1 {
 }
 
 h2 {
-  margin-left: 50px;
+  margin-left: 2em;
 }
 
-article {
-  margin-left: 30px;
-  /* margin-right: 50%; */
+.hold {
+  margin-left: 4em;
+  margin-right: 4em;
   margin-bottom: 20px;
   padding-bottom: 20px;
   /* border-radius: 20px; */
