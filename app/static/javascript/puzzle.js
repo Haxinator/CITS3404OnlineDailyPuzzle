@@ -15,10 +15,6 @@ const PALETTE1 = {
 //also used for random puzzle generator
 const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000", "eraser"];
 
-//controls the number of rows and columns a grid has.
-//! Small sizes for easy testing. Size to be determined.
-const GRIDROWS = 4;
-const GRIDCOL = 4;
 
 //SAMPLE PUZZLES
 //puzzles may need to be changed to be for smaller grid sizes
@@ -63,19 +59,20 @@ const QMARK = {
   }
 
 
-  //Global Variables
-var WRONGCELL = "#FF0000"; 
-var COLOR = null;
-var USERCANVAS = {};
-var CHECKEDCANVAS = {};
-//puzzle currently selected
-var puzzle;
 //container for multiple puzzles
 const PUZZLES = [];
 //number of puzzles
 const PUZZLENO = 2;
-//length of delays
-const TIMER = 2000;
+//controls the number of rows and columns a grid has.
+const GRIDROWS = 4;
+const GRIDCOL = 4;
+
+//Global Variables
+var color = null;
+//puzzle currently selected
+var puzzle;
+//record of user selected cells
+var userCanvas = {};
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -123,7 +120,7 @@ function next_puzzle(){
         puzzle = PUZZLES.shift();
 
         //clear User array and canvas
-        canvas.clear(USERCANVAS);
+        canvas.clear(userCanvas);
         //change data to QMARK and draw
         // canvas.data = QMARK;
         // canvas.draw();
@@ -219,9 +216,9 @@ CreateTable.prototype.make = function(){
                     //adding addEventListener after click change the color
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    cell.addEventListener("mousedown", () => color(index, cell));
-                    cell.addEventListener("mouseover", (e) => dragColor(index, cell, e));
-                    cell.addEventListener("dragenter", (e) => dragColor(index, cell, e));
+                    cell.addEventListener("mousedown", () => singleColor(index, cell));
+                    cell.addEventListener("mouseover", (e) => multiColor(index, cell, e));
+                    cell.addEventListener("dragenter", (e) => multiColor(index, cell, e));
                 break;
 
                 //If the table is for colorPallet
@@ -250,24 +247,23 @@ CreateTable.prototype.make = function(){
 /*
 Event Listener function for clicking canvas
 */
-function color(index, cell) {
+function singleColor(index, cell) {
     if(table.classList.contains("ready"))
     {
-        //if COLOR===null isn't specifided it will add null to the USERCANVAS
+        //if COLOR===null isn't specifided it will add null to the userCanvas
         //which causes the check function to break
         //same color click to remove functionality (Drag colouring doesn't work well with it on)
-        if (COLOR === USERCANVAS[index] || COLOR === null) { 
+        if (COLOR === userCanvas[index] || COLOR === null) { 
             cell.style.backgroundColor = null;
-            console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
-            delete USERCANVAS[index];
+            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
+            delete userCanvas[index];
 
         } else {
             cell.style.backgroundColor = COLOR;
-            console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            USERCANVAS[index] = COLOR;
+            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            userCanvas[index] = COLOR;
         }
     } else {
-        //wait few seconds before removing the message
         display_message("Can only draw once ready is pressed!");
     }
 }
@@ -275,7 +271,7 @@ function color(index, cell) {
 /*
 Event Listener function for click dragging canvas
 */
-function dragColor(index, cell, e) {
+function multiColor(index, cell, e) {
 
     // console.log(e.buttons);
 
@@ -286,19 +282,16 @@ function dragColor(index, cell, e) {
         if(COLOR === null)
         {
             cell.style.backgroundColor = null;
-            console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
-            delete USERCANVAS[index];
+            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
+            delete userCanvas[index];
 
             //else for an actual colour
         } else {
             cell.style.backgroundColor = COLOR;
-            console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            USERCANVAS[index] = COLOR;
+            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            userCanvas[index] = COLOR;
         }
     } else if (e.buttons === 1) {
-           //wait few seconds before removing the message
-           
-        //wait few seconds before removing the message
         display_message("Can only draw once ready is pressed!");
     }
 }
@@ -306,7 +299,6 @@ function dragColor(index, cell, e) {
 
 /* draw method for CreateTable
 Fills the respective table (grid or palette) with colors according to the input 
-! Merged Amir's draw function and Will's initalise_color function
 color array property of createTable*/
 CreateTable.prototype.draw = function() {
 
@@ -339,7 +331,7 @@ CreateTable.prototype.clear = function() {
     if(arguments.length > 0)
     {
         //clear user canvas.
-        USERCANVAS = {};
+        userCanvas = {};
     }
 }
 
@@ -358,7 +350,7 @@ Then we create the palette using make() and fill in the color using the constant
 */ 
 
 //Create a new CreateTable object with all the parameters needed for creation.
-var pallet = new CreateTable(1,6,"colorPallet",PALETTE1);
+var pallet = new CreateTable(1,PALETTEIDS.length,"colorPallet",PALETTE1);
 //create a table for the pallet.
 pallet.make();
 //color the pallet.
@@ -402,7 +394,7 @@ document.getElementById("Ready").addEventListener("click", () => {
     //clear cavnas for drawing
     canvas.clear();
     //draw user's canvas
-    canvas.data = USERCANVAS;
+    canvas.data = userCanvas;
     canvas.draw();
     //Visual indication of ready
     table.classList.add("ready");
@@ -414,66 +406,46 @@ document.getElementById("Ready").addEventListener("click", () => {
 //check if the user canvas matches the puzzle
 document.getElementById("Check").addEventListener("click", () => {
 
-    //Get the keys of the Puzzle and UserCanvas dictionaries.
-    let puzzleKeys = Object.keys(puzzle); //!used to have sort(), not needed
-    let choosenArray = Object.keys(USERCANVAS); //!only used for length
+    //Get the keys of the Puzzle and userCanvas dictionaries.
+    let puzzleKeys = Object.keys(puzzle);
+    let choosenArray = Object.keys(userCanvas);
     let hasWon = true
     let correctCells = {};
     let result = document.getElementById("result");
 
    //item that exist in original array but not in the choosen array
     let diff1 = puzzleKeys.filter(x => !choosenArray.includes(x));
-    //item that exist in choosen array but not in the original
-    let diff2 = choosenArray.filter(x => !puzzleKeys.includes(x));
     
     //check all the element of chosen cells
     for(let i=0; i < choosenArray.length; i++){
-        let item = choosenArray[i]
+        let item = choosenArray[i];
+        let cell = document.getElementById(item);
+
         if(puzzleKeys.includes(item)){
-            if(puzzle[item] != USERCANVAS[item]){
+            if(puzzle[item] != userCanvas[item]){
                 hasWon = false;
-                CHECKEDCANVAS[item] = WRONGCELL;
-                //should remove incorrect cell from user canvas
-                // delete USERCANVAS[item]; 
-            }else{
-                //conflicts with stripes
-                //CHECKEDCANVAS[item] = USERCANVAS[item];
-                correctCells[item] = USERCANVAS[item];
-            }
+                cell.classList.add("wrong");
+             }else{
+                correctCells[item] = userCanvas[item];
+             }
+        } else {
+            //if item chosen does not exist in the puzzle
+            hasWon = false;
+            cell.classList.add("wrong");
         }
     }
     //Check items that have been in puzzle and conestant missed it
     if(diff1.length!==0){
         hasWon = false;
+
         for(let i = 0; i < diff1.length; i++){
             let item = diff1[i];
-            CHECKEDCANVAS[item] = WRONGCELL;
+            document.getElementById(item).classList.add("wrong");
         }
     }
-    //check items that have been choosen but not in the puzzle
-    if(diff2.length!==0){
-        hasWon = false;
-        for(let i = 0; i < diff2.length; i++){
-            let item = diff2[i];
-            CHECKEDCANVAS[item] = WRONGCELL;
-        }
-    }
-    
-    //check if dictionaries have the same length
-    // if(puzzleKeys.length === choosenArray.length){
-    //   for(let i = 0 ; i < puzzleKeys.length ; i++){
-    //     //if one colour doesn't match, user has not won
-    //     if(PUZZLE[puzzleKeys[i]] != USERCANVAS[puzzleKeys[i]]){
-    //       hasWon = false;
-    //     }
-    //   }
-    // }else{
-    //   //if dictionary lengths don't match, user has not won
-    //   hasWon = false;
-    // }
 
     //remember the correct cells in the user canvas
-    USERCANVAS = correctCells;
+    userCanvas = correctCells;
 
     if(hasWon) {
         console.log("you win");
@@ -487,28 +459,16 @@ document.getElementById("Check").addEventListener("click", () => {
     }else{
         console.log("you lost");
         //------------------------------- This will display the wrong cells ----------------//
-        //console.log("Checked: " + JSON.stringify(CHECKEDCANVAS) + "\nUser: " + JSON.stringify(USERCANVAS) + "\nPuzzle " + JSON.stringify(puzzle));
-
-        //add stripes to wrong cells
-        for (const [key, value] of Object.entries(CHECKEDCANVAS)) {
-            //get cell
-            document.getElementById(key).classList.add("wrong");
-          }
+        //console.log("Checked: " + JSON.stringify(checkedCanvas) + "\nUser: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
 
         //change check button to start
         change_button("Check", "Start");
-
         //show picture
         display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
         display_image("GameOver.jpg", "Game Over");
         
-        
         //don't allow user to draw
         table.classList.remove("ready");
-
-
-        //reset checked canvas
-        CHECKEDCANVAS = {};
     }
 });
 
