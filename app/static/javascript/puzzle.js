@@ -436,7 +436,8 @@ document.getElementById("Check").addEventListener("click", () => {
 
         for(let i = 0; i < diff1.length; i++){
             let item = diff1[i];
-            document.getElementById(item).classList.add("wrong");
+            let cell = document.getElementById(item);
+            cell.classList.add("wrong");
             //remove item from canvas
             delete userCanvas[item];
         }

@@ -35,10 +35,10 @@
 
 /* might change the outline */
 #canvas table td.wrong {
+  outline: 3px solid white;
   background: repeating-linear-gradient(-45deg, transparent, transparent 10px, black 10px, black 20px);
-  outline: 1px solid white;
+ 
 }
-
 /*------------------------Color Pallet CSS-------------------------*/
 #colorPallet table {
   border-collapse: separate;
@@ -65,42 +65,23 @@
 #colorPallet #eraser{
   background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2YEkUSVqdx6setuRqIu78Zq50jxHaSeRL5wQ3nIhP4gK9vFZrEkB5Cnp46qZsiWggrPg&usqp=CAU");
   background-size: cover;
-  /* background: repeating-linear-gradient(-45deg, white, white 10px, black 10px, black 20px); */
 }
 
 /*---------------------Game Buttons CSS--------------------------*/
 .game_button{
   text-align: center;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 30px;
 }
-#Start{
+
+.game_button > input{
   background-color: palegreen;
   border-radius: 20px;
   border-width: 5px;
   padding: 10px;
 }
-#Ready{
-  text-align: center;
-  background-color: palegreen;
-  border-radius: 20px;
-  border-width: 5px;
-  padding: 10px;
+
+.game_button + .game_button input
+{
   display: none;
-}
-#Check{
-  text-align: center;
-  background-color: palegreen;
-  border-radius: 20px;
-  border-width: 5px;
-  padding: 10px;
-  display: none; 
-}
-#Next{
-  text-align: center;
-  background-color: palegreen;
-  border-radius: 20px;
-  border-width: 5px;
-  padding: 10px;
-  display: none; 
 }
