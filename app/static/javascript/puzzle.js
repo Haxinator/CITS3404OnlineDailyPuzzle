@@ -94,7 +94,8 @@ function generate_random_puzzle(color_array){
         //get a random cell
         let key = Math.round(Math.random()*(num_cells-1));
         //get a random colour
-        let index = Math.round(Math.random()*(color_array.length-1));
+        //-2 in stead of -1 so eraser isn't included
+        let index = Math.round(Math.random()*(color_array.length-2));
         //add random color to random cell
         puzzle_color_dict[key] = color_array[index];
     }
@@ -304,15 +305,19 @@ Event Listener function for click dragging canvas
 */
 function dragColor(index, cell, e) {
 
-    console.log(e.buttons);
+    // console.log(e.buttons);
 
+    //if ready and left mouse is down
     if(table.classList.contains("ready") && e.buttons === 1)
     {
+        //only if eraser
         if(COLOR === null)
         {
             cell.style.backgroundColor = null;
             console.log("deleted: " + USERCANVAS[index] + " at: " + index); //for debugging check function
             delete USERCANVAS[index];
+
+            //else for an actual colour
         } else {
             cell.style.backgroundColor = COLOR;
             console.log("added: " + COLOR + " at: " + index); //for debugging check function
@@ -335,10 +340,10 @@ CreateTable.prototype.draw = function() {
 
     //retrieves each key value pair in puzzle as an array
     for (const [key, value] of Object.entries(this.data)) {
-        console.log(key);
+        // console.log(key);
         //get cell
         let box = document.getElementById(key.toString());
-        console.log(box);
+        // console.log(box);
         //change color of cell
         box.style.backgroundColor = value;
       }
@@ -355,6 +360,7 @@ CreateTable.prototype.clear = function() {
     // Assign the background color of each cell to null (white).
     for(let c = 0; c < (this.numRows * this.numColumns); c++){
         cell[c].style.backgroundColor = null;   
+        cell[c].classList.remove("wrong");
     }
 
     //if an argument is given, clear the user canvas.
@@ -459,7 +465,8 @@ document.getElementById("Check").addEventListener("click", () => {
                 //should remove incorrect cell from user canvas
                 // delete USERCANVAS[item]; 
             }else{
-                CHECKEDCANVAS[item] = USERCANVAS[item];
+                //conflicts with stripes
+                //CHECKEDCANVAS[item] = USERCANVAS[item];
                 correctCells[item] = USERCANVAS[item];
             }
         }
@@ -509,13 +516,21 @@ document.getElementById("Check").addEventListener("click", () => {
     }else{
         console.log("you lost");
         //------------------------------- This will display the wrong cells in red color ----------------
-        console.log(CHECKEDCANVAS);
-        //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
-        canvas.clear(); 
-        //give canvas puzzle data.
-        canvas.data = CHECKEDCANVAS; 
-        //initalise canvas using the new puzzle.
-        canvas.draw();
+        console.log("Checked: " + JSON.stringify(CHECKEDCANVAS) + "\nUser: " + JSON.stringify(USERCANVAS) + "\nPuzzle " + JSON.stringify(puzzle));
+        // //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
+        // canvas.clear(); 
+        // //give canvas puzzle data.
+        // canvas.data = CHECKEDCANVAS; 
+        // //initalise canvas using the new puzzle.
+        // canvas.draw();
+
+        // //add strips to wrong cells
+        console.log("addwrong\n")
+        for (const [key, value] of Object.entries(CHECKEDCANVAS)) {
+            //get cell
+            document.getElementById(key).classList.add("wrong");
+          }
+        console.log("removewrong\n");
 
         //show picture
         display_message('<h3>Wrong cells are filled <span style ="color:red">Red</span></h3>', true);
@@ -526,27 +541,10 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("ready");
 
         //change check button to start
-        change_button("Check", "Ready");
-
-        //waiting for 2 seconds and then reset the display
-        //after delay it will show the correct answer
-        //user presses ready again to begin
-
-        async function delay() {
-            
-            await new Promise(resolve => setTimeout(resolve, TIMER));
-            //clearing canvas
-            canvas.clear();
-            //Return to start state
-            canvas.data = puzzle;
-            canvas.draw(); 
-        }
-          
-        delay();
+        change_button("Check", "Start");
+        //reset checked canvas
+        CHECKEDCANVAS = {};
     }
-
-    //reset checked canvas
-    CHECKEDCANVAS = {};
 });
 
 document.getElementById("Next").addEventListener("click", () => {

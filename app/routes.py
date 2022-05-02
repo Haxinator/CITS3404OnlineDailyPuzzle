@@ -5,6 +5,7 @@ from werkzeug.utils import redirect
 from app.create_database import Player
 
 @app.route('/')
+@app.route('/index')
 @app.route('/home')
 def home():
     return render_template("HTML/homepage.html", title ="Homepage")

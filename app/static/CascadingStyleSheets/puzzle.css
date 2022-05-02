@@ -49,6 +49,10 @@
   outline: 1px solid white;
 }
 
+#canvas table td.wrong {
+  background: repeating-linear-gradient(-45deg, transparent, transparent 10px, black 10px, black 20px);
+}
+
 /*------------------------Color Pallet CSS-------------------------*/
 #colorPallet table {
   border-collapse: separate;
