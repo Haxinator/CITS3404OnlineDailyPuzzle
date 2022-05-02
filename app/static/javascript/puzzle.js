@@ -410,7 +410,6 @@ document.getElementById("Check").addEventListener("click", () => {
     let puzzleKeys = Object.keys(puzzle);
     let choosenArray = Object.keys(userCanvas);
     let hasWon = true
-    let correctCells = {};
     let result = document.getElementById("result");
 
    //item that exist in original array but not in the choosen array
@@ -421,17 +420,14 @@ document.getElementById("Check").addEventListener("click", () => {
         let item = choosenArray[i];
         let cell = document.getElementById(item);
 
-        if(puzzleKeys.includes(item)){
-            if(puzzle[item] != userCanvas[item]){
-                hasWon = false;
-                cell.classList.add("wrong");
-             }else{
-                correctCells[item] = userCanvas[item];
-             }
-        } else {
-            //if item chosen does not exist in the puzzle
+        //if item is not in puzzle or if it is in puzzle
+        //and the wrong colour it is wrong
+        if((!puzzleKeys.includes(item)) || 
+        (puzzleKeys.includes(item) && puzzle[item] != userCanvas[item])){
             hasWon = false;
             cell.classList.add("wrong");
+            //remove item from canvas
+            delete userCanvas[item];
         }
     }
     //Check items that have been in puzzle and conestant missed it
@@ -441,11 +437,10 @@ document.getElementById("Check").addEventListener("click", () => {
         for(let i = 0; i < diff1.length; i++){
             let item = diff1[i];
             document.getElementById(item).classList.add("wrong");
+            //remove item from canvas
+            delete userCanvas[item];
         }
     }
-
-    //remember the correct cells in the user canvas
-    userCanvas = correctCells;
 
     if(hasWon) {
         console.log("you win");
