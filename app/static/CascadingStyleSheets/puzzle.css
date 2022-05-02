@@ -1,19 +1,6 @@
-/*----------------------------Some other CSS-------------------------*/
-/* Font Awsome */
-
-/*Top level div */
-/* .TopLevel{ */
-  /* opacity: 1; */
-/* } */
-
 /*--------------------------Game page CSS---------------------------*/
-#Eraser {
-  font-size:70px; 
-  margin-top:15px; 
-  margin-left:1em;
-}
 #result {
-  margin-top: 3em;
+  margin-top: 1em;
 }
 /*----------------------------Canvas CSS--------------------------*/
 #canvas table {
@@ -49,8 +36,10 @@
   outline: 1px solid white;
 }
 
+/* might change the outline */
 #canvas table td.wrong {
   background: repeating-linear-gradient(-45deg, transparent, transparent 10px, black 10px, black 20px);
+  outline: 1px solid white;
 }
 
 /*------------------------Color Pallet CSS-------------------------*/
@@ -74,6 +63,10 @@
 
 #colorPallet table td:active {
   filter: brightness(85%);
+}
+
+#colorPallet #eraser{
+  background: repeating-linear-gradient(-45deg, white, white 10px, black 10px, black 20px);
 }
 
 /*---------------------Game Buttons CSS--------------------------*/

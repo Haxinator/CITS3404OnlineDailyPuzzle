@@ -130,13 +130,7 @@ function next_puzzle(){
         table.classList.add("Q");
     } else {
         //wait one second before showing end game screen
-        async function delay() {
-            await new Promise(resolve => setTimeout(resolve, TIMER));
-            //end the game
-            end_game();
-        }
-        
-        delay();
+        end_game();
     }
 
 }
@@ -147,7 +141,6 @@ function end_game(){
     document.getElementById("Start").style.display = "none";
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
-    document.getElementById("Eraser").style.display = "none";
     display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
     display_image("win.png", "YOU WIN");
 }
@@ -159,37 +152,16 @@ Nice clean code
 @param to the button to show
 */
 function change_button(from, to) {
+    //remove any messages
+    display_message("");
     document.getElementById(from).style.display = "none";
-
-    result.innerHTML = "Please wait..." + "<br>" + result.innerHTML;
-
-    //wait one second before showing next button
-    async function delay() {
-        await new Promise(resolve => setTimeout(resolve, TIMER));
-        document.getElementById(to).style.display = "inline-block";
-        //hide lose screen
-        result.innerHTML='';
-    }
-      
-    delay();
+    document.getElementById(to).style.display = "inline-block";
 
 }
 
-function display_message(text, clear){
+function display_message(text){
     //display text
     result.innerHTML = text;
-
-    //if it should be cleared after displayed
-    if(clear === true)
-    {
-        //wait few seconds before removing the message
-        async function delay() {
-            await new Promise(resolve => setTimeout(resolve, TIMER));
-            result.innerHTML = "";
-        }
-    
-        delay();
-    }
 }
 
 function display_image(image, alt)
@@ -296,7 +268,7 @@ function color(index, cell) {
         }
     } else {
         //wait few seconds before removing the message
-        display_message("Can only draw once ready is pressed!", true);
+        display_message("Can only draw once ready is pressed!");
     }
 }
 
@@ -327,7 +299,7 @@ function dragColor(index, cell, e) {
            //wait few seconds before removing the message
            
         //wait few seconds before removing the message
-        display_message("Can only draw once ready is pressed!", true);
+        display_message("Can only draw once ready is pressed!");
     }
 }
 
@@ -402,8 +374,7 @@ var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
 //for visuals
-var table = document.getElementById(canvas.location).querySelector("table"); 
-
+var table = document.getElementById(canvas.location).querySelector("table");
 //initalises the puzzles array
 initalize_puzzle();
 //gets first puzzle
@@ -509,39 +480,33 @@ document.getElementById("Check").addEventListener("click", () => {
         //Visual indication of win
         table.classList.remove("start");
         table.classList.remove("ready");
-        
+        change_button("Check", "Next");
         //show win screen
         display_image("win.png", "YOU WIN");
-        change_button("Check", "Next");
+        
     }else{
         console.log("you lost");
-        //------------------------------- This will display the wrong cells in red color ----------------
-        console.log("Checked: " + JSON.stringify(CHECKEDCANVAS) + "\nUser: " + JSON.stringify(USERCANVAS) + "\nPuzzle " + JSON.stringify(puzzle));
-        // //clear the inital Question Mark. //! Question mark not supported yet, need better user hints for larger puzzles, or smaller Question mark size.
-        // canvas.clear(); 
-        // //give canvas puzzle data.
-        // canvas.data = CHECKEDCANVAS; 
-        // //initalise canvas using the new puzzle.
-        // canvas.draw();
+        //------------------------------- This will display the wrong cells ----------------//
+        //console.log("Checked: " + JSON.stringify(CHECKEDCANVAS) + "\nUser: " + JSON.stringify(USERCANVAS) + "\nPuzzle " + JSON.stringify(puzzle));
 
-        // //add strips to wrong cells
-        console.log("addwrong\n")
+        //add stripes to wrong cells
         for (const [key, value] of Object.entries(CHECKEDCANVAS)) {
             //get cell
             document.getElementById(key).classList.add("wrong");
           }
-        console.log("removewrong\n");
+
+        //change check button to start
+        change_button("Check", "Start");
 
         //show picture
-        display_message('<h3>Wrong cells are filled <span style ="color:red">Red</span></h3>', true);
+        display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
         display_image("GameOver.jpg", "Game Over");
         
         
         //don't allow user to draw
         table.classList.remove("ready");
 
-        //change check button to start
-        change_button("Check", "Start");
+
         //reset checked canvas
         CHECKEDCANVAS = {};
     }
@@ -553,9 +518,6 @@ document.getElementById("Next").addEventListener("click", () => {
     //go to next puzzle
     next_puzzle();
 });
-
-//Activates the eraser.
-document.getElementById("Eraser").addEventListener("click", () => COLOR = null);
 
 //*-------------------------MISC------------------------//
 
