@@ -63,7 +63,9 @@
 }
 
 #colorPallet #eraser{
-  background: repeating-linear-gradient(-45deg, white, white 10px, black 10px, black 20px);
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2YEkUSVqdx6setuRqIu78Zq50jxHaSeRL5wQ3nIhP4gK9vFZrEkB5Cnp46qZsiWggrPg&usqp=CAU");
+  background-size: cover;
+  /* background: repeating-linear-gradient(-45deg, white, white 10px, black 10px, black 20px); */
 }
 
 /*---------------------Game Buttons CSS--------------------------*/
