@@ -421,7 +421,7 @@ document.getElementById("Check").addEventListener("click", () => {
         let cell = document.getElementById(item);
 
         //if item is not in puzzle or if it is in puzzle
-        //and the wrong colour it is wrong
+        //and the wrong colour
         if((!puzzleKeys.includes(item)) || 
         (puzzleKeys.includes(item) && puzzle[item] != userCanvas[item])){
             hasWon = false;
