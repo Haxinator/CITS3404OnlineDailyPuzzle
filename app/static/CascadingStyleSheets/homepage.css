@@ -12,7 +12,6 @@ select {
 
 img {
   opacity: 0.2;
-  /* filter: invert(1); */
 }
 
 h1 {
@@ -32,8 +31,9 @@ a:hover img {
 }
 
 article {
-  padding-top: 30vh;
-  padding-bottom: 30vh;
+  margin-top: 15vh;
+  padding-top: 15vh;
+  /* padding-bottom: 30vh; */
 }
 
 .warrior {
