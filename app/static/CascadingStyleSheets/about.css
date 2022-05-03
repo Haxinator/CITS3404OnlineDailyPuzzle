@@ -1,6 +1,7 @@
 /*----------------------------About page CSS-------------------------*/
 body {
   color: white;
+  text-align: center;
 }
 
 span:nth-child(2){
@@ -12,23 +13,23 @@ span:nth-child(2){
   padding: 10px;
 }
 
-h1 {
-  text-align: center;
+article {
+  margin: 1em;
 }
 
-h2 {
-  margin-left: 2em;
+.row {
+  margin:auto;
+  margin-bottom: 2em;
+}
+
+img {
+  margin-bottom: 1em;
 }
 
 .hold {
-  margin-left: 4em;
-  margin-right: 4em;
-  margin-bottom: 20px;
   padding-bottom: 20px;
-  /* border-radius: 20px; */
   background-color: blue;
   /* box-shadow: 10px 10px rgba(19, 19, 19, 0.5); */
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(31, 31, 31);
-  text-align: center;
 }
   
