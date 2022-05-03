@@ -4,7 +4,7 @@ body {
   text-align: center;
 }
 
-span:nth-child(2){
+span:nth-child(2), h1{
   text-decoration: underline;
 }
 
