@@ -5,15 +5,19 @@ body {
   
 select {
   text-align: center;
-  background-color: orange;
+  background-color: black;
+  color: white;
+  font-size: 40px;
 }
 
 img {
   opacity: 0.2;
+  /* filter: invert(1); */
 }
 
 h1 {
   padding-top: 100px;
+  font-size: 50px;
 }
 
 a{
@@ -21,7 +25,7 @@ a{
   text-decoration: none;
 }
 a:hover {
-  color: black;
+  color: white;
 }
 a:hover img {
   opacity: 1;
@@ -33,13 +37,16 @@ article {
 }
 
 .warrior {
-  background-color: pink;
+  background-color: black;
+  border: 3px solid white;
 }
 .assassin {
-  background-color: orange;
+  background-color: black;
+  border: 3px solid white;
 }
 .mage {
-  background-color: turquoise;
+  background-color: black;
+  border: 3px solid white;
 }
 
 .row {
