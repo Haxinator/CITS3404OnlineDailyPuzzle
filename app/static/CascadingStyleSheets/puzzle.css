@@ -27,15 +27,11 @@
 /* canvas styles when ready is clicked */
 #canvas table.ready {
   border: 5px solid white;
+  cursor: crosshair;
 }
 
 #canvas table.ready td:hover {
   outline: 1px solid white;
-  /* cursor: crosshair; */
-}
-
-#canvas table.ready:hover {
-  cursor: crosshair;
 }
 
 /* might change the outline */
