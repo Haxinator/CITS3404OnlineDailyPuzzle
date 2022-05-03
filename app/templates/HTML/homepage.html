@@ -6,41 +6,41 @@
 {% endblock %}
 
 {% block body %}
-<div class="logos row min-vh-100">
+<div class="logos row justify-content-center min-vh-100">
 
-    <div class="col-lg-4 col-sm-12 warrior min-vh-100">
-        <a href="/rules">
-            <article>
-                <img src="static/pictures/about.png" alt="" id="warrior_logo">
+    <div class="col-lg-4 col-sm-12 warrior">
+        <div class="my-auto">
+            <a href="/rules">
+                <img src="static/pictures/about.png" alt="Incorrect Puzzle" class="d-none d-md-block">
                 <h1 id="rules" class="logo_texts">RULES</h1>
-            </article>
-        </a>
+            </a>
+        </div>
     </div>
 
-    <div class="col-lg-4 col-sm-12 assassin min-vh-100"">
-        <a href="/game">
-            <article>
-                <img src="static/pictures/play.png" alt="" id="assassin_logo">
+    <div class="col-lg-4 col-sm-12 assassin">
+        <div class="my-auto">
+            <a href="/game">
+                <img src="static/pictures/play.png" alt="Puzzle in progress" class="d-none d-md-block">
                 <h1 id="play" class="logo_texts">PLAY</h1>
-            </article>
-        </a>
-        <form action="">
-            <select name="" id="">
-                <option value="none" selected disabled hidden>DIFFICULTY</option>
-                <option value="easy">EASY</option>
-                <option value="normal">NORMAL</option>
-                <option value="hard">HARD</option>
-            </select>
-        </form>
+            </a>
+            <form action="">
+                <select name="" id="">
+                    <option value="none" selected disabled hidden>DIFFICULTY</option>
+                    <option value="easy">EASY</option>
+                    <option value="normal">NORMAL</option>
+                    <option value="hard">HARD</option>
+                </select>
+            </form>
+        </div>
     </div>
 
-    <div class="col-lg-4 col-sm-12 mage min-vh-100">   
-        <a href="/stats">
-            <article>
-                <img src="static/pictures/stat.png" alt="" id="magic_staff_logo">
+    <div class="col-lg-4 col-sm-12 mage">   
+        <div class="my-auto">
+            <a href="/stats">
+                <img src="static/pictures/stat.png" alt="Finished puzzle" class="d-none d-md-block">
                 <h1 id="leaderboard" class="logo_texts">LEADERBOARD</h1>
-            </article>
-        </a>
+            </a>
+        </div>
     </div>
     
 </div>

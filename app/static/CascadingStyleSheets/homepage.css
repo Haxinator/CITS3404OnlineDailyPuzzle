@@ -12,11 +12,13 @@ select {
 
 img {
   opacity: 0.2;
+  margin: auto;
 }
 
 h1 {
-  padding-top: 100px;
+  /* padding-top: 100px; */
   font-size: 50px;
+  margin: auto;
 }
 
 a{
@@ -29,24 +31,23 @@ a:hover {
 a:hover img {
   opacity: 1;
 }
-
-article {
-  margin-top: 15vh;
-  padding-top: 15vh;
-  /* padding-bottom: 30vh; */
-}
-
 .warrior {
   background-color: black;
   border: 3px solid white;
+  display: flex;
+  justify-content: center;
 }
 .assassin {
   background-color: black;
   border: 3px solid white;
+  display: flex;
+  justify-content: center;
 }
 .mage {
   background-color: black;
   border: 3px solid white;
+  display: flex;
+  justify-content: center;
 }
 
 .row {
