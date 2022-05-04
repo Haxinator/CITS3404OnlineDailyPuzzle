@@ -1,0 +1,97 @@
+{% extends "HTML/navbar.html" %}
+
+<!--Temporary replacement for the stats page-->
+
+<!-- Add any header in the block below to render it -->
+{% block extraHeaders %}
+<!-- <link rel="stylesheet" href="static/CascadingStyleSheets/statistic.css"> -->
+{% endblock %}
+
+<!-- add any body elements in the block below to render it -->
+{% block content %}
+<div class="container">
+    <div class="content">
+        <div id="userScore">
+            <div id="txt">Your score</div>
+            <!--<div id="verscroll">-->
+                <table id="tablecont">
+                    <tr>
+                        <th>Level No.</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>70</td>
+                    </tr>
+                    
+                </table>   
+            <!--</div>-->
+            
+            <div class="msg">Total Score: </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="overallscore">
+            <div id="txt">LeaderBoard</div>
+            <table id="tablecont">
+                <tr>
+                    <th>No.</th>
+                    <th>username</th>
+                    <th>Score</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>John123</td>
+                    <td>1250</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Hannah027</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>David8</td>
+                    <td>990</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>YOU</td>
+                    <td>980</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>YOU</td>
+                    <td>980</td>
+                </tr>
+            </table>
+            <div class="msg">You are at 4th position</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

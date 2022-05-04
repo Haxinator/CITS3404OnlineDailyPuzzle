@@ -1,0 +1,91 @@
+body{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    position: relative;
+    align-items: center;
+    padding: 50px;
+    width: 400px;
+    background: rgb(247, 150, 150);
+    border-style: double;
+    border-width: 10px;
+}
+.stat{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    
+    width: 70%;
+}
+.score{
+    padding: 2px 5px;
+    background: white;
+    border-radius: 10px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-bottom: 2px;
+}
+.overall{
+    padding: 2px 5px;
+    border-radius: 20px;
+    text-align: right;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-bottom: 2px;
+}
+#tablecont{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+      
+}
+th{
+    padding: 10px;
+    background-color: rgb(238, 133, 58);
+}
+td{
+    background-color: rgb(228, 149, 93);
+}
+table,th,td{
+    border: 1px solid black;
+    border-collapse: collapse; 
+}
+#userScore{
+    text-align: center;  
+}
+
+#verscroll{
+    height: 150px;  
+    overflow-y: scroll;
+}
+#overallscore{
+    text-align: center;
+}
+.msg{
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(224, 15, 57);
+    font-weight: 100px;
+}
+#txt{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: lightskyblue;
+}
+thead,tbody{
+    display: block;
+}
+tbody{
+    height: 150px;  
+    overflow-y: scroll  
+}
