@@ -1,0 +1,41 @@
+{% extends "HTML/navbar.html" %}
+
+{% block extraHeaders %}
+  <script src="static/javascript/puzzle.js" defer></script>
+  <link rel="stylesheet" href="static/CascadingStyleSheets/puzzle.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <!-- canvas -->
+  <div id="canvas" class="col"></div>
+</div>
+
+<!-- Color pallet -->
+<div class="row justify-content-md-center">
+  <!-- colorPallet -->
+  <div id="colorPallet" class="col col-lg-4"></div>
+</div>
+
+<!--Game Buttons START/READY/CHECK-->
+<div class="game_button">
+  <input type="button" class="game_button" value="START" id="Start">
+</div>
+<div class="game_button">
+  <input type="button" class="game_button" value="READY" id="Ready">
+</div>  
+<div class="game_button">  
+  <input type="button" class="game_button" value="CHECK" id="Check">        
+</div> 
+<div class="game_button">
+  <input type="button" class="game_button" value="NEXT" id="Next">
+</div>
+<div id="scores"></div>
+<!-- container for results -->
+<div id="result" class="text-center"></div>  
+
+</div>
+
+
+{% endblock %}
