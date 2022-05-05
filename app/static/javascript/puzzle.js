@@ -402,6 +402,7 @@ document.getElementById("Ready").addEventListener("click", () => {
     change_button("Ready", "Check");
 });
 
+let score = 0  
 
 //check if the user canvas matches the puzzle
 document.getElementById("Check").addEventListener("click", () => {
@@ -411,6 +412,11 @@ document.getElementById("Check").addEventListener("click", () => {
     let choosenArray = Object.keys(userCanvas);
     let hasWon = true
     let result = document.getElementById("result");
+<<<<<<< HEAD
+=======
+
+    let count = 0;    
+>>>>>>> dhwani
 
    //item that exist in original array but not in the choosen array
     let diff1 = puzzleKeys.filter(x => !choosenArray.includes(x));
@@ -428,6 +434,18 @@ document.getElementById("Check").addEventListener("click", () => {
             cell.classList.add("wrong");
             //remove item from canvas
             delete userCanvas[item];
+<<<<<<< HEAD
+=======
+
+            //Checks if score is greater than 0 
+            //Deducts 10 points from the score as wrong cell or color
+            if(score > 0){score = score - 10};
+        }
+        //Adds 10 points to the score for each correct cell
+        else{
+            count++;
+            score = score + 10;    //me
+>>>>>>> dhwani
         }
     }
     //Check items that have been in puzzle and conestant missed it
@@ -440,10 +458,22 @@ document.getElementById("Check").addEventListener("click", () => {
             cell.classList.add("wrong");
             //remove item from canvas
             delete userCanvas[item];
+<<<<<<< HEAD
         }
     }
+=======
+
+            //If user didn't select the required cells -> deduct 10 points
+            if(score > 0){score = score - 10};       
+        }
+    }
+    
+>>>>>>> dhwani
 
     if(hasWon) {
+        //Displays the score
+        document.getElementById("scores").innerHTML = "Score: " + score;
+
         console.log("you win");
         //Visual indication of win
         table.classList.remove("start");
@@ -451,14 +481,31 @@ document.getElementById("Check").addEventListener("click", () => {
         change_button("Check", "Next");
         //show win screen
         display_image("win.png", "YOU WIN");
+<<<<<<< HEAD
+=======
+
+        
+>>>>>>> dhwani
         
     }else{
+        //Displays the score
+        document.getElementById("scores").innerHTML = "Score: " + score;
+
         console.log("you lost");
+<<<<<<< HEAD
+=======
+       
+>>>>>>> dhwani
         //------------------------------- This will display the wrong cells ----------------//
         //console.log("Checked: " + JSON.stringify(checkedCanvas) + "\nUser: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
 
         //change check button to start
         change_button("Check", "Start");
+<<<<<<< HEAD
+=======
+        //If user lose and tries again, it deducts the score for the correct cells.
+        score = score - (10 * count);
+>>>>>>> dhwani
         //show picture
         display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
         display_image("GameOver.jpg", "Game Over");
