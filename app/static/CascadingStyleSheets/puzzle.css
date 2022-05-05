@@ -27,10 +27,6 @@
 /* canvas styles when ready is clicked */
 #canvas table.ready {
   border: 5px solid white;
-<<<<<<< HEAD
-  cursor: crosshair;
-=======
->>>>>>> dhwani
 }
 
 #canvas table.ready td:hover {
@@ -38,13 +34,10 @@
   /* cursor: crosshair; */
 }
 
-<<<<<<< HEAD
-=======
 #canvas table.ready:hover {
   cursor: crosshair;
 }
 
->>>>>>> dhwani
 /* might change the outline */
 #canvas table td.wrong {
   outline: 3px solid white;
@@ -97,13 +90,10 @@
 .game_button + .game_button input
 {
   display: none;
-<<<<<<< HEAD
-=======
 }
 
 #scores{
   text-align: center;
   color: rgb(238, 108, 108);
   
->>>>>>> dhwani
 }
