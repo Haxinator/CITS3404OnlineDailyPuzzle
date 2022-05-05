@@ -1,6 +1,5 @@
 #This file is purely responsible for routing
 
-
 from app import app
 from app import db
 from app import login
@@ -11,7 +10,6 @@ from werkzeug.utils import redirect
 from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
-
 
 
 #Temporarily all security systems are disabled and instead of signup when user enter the username and password the information will just get pass into the database
