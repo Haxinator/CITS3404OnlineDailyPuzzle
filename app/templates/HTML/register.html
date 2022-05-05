@@ -1,18 +1,23 @@
 {% extends "HTML/base.html" %}
 
 {% block header %}
-    <link rel="stylesheet" href="static/CascadingStyleSheets/login.css">
+    <link rel="stylesheet" href="static/CascadingStyleSheets/register.css">
 {% endblock %}
-
 {% block body %}
-
-    <img src="static/pictures/favicon.ico" alt="Picture Perfect Logo" "> PicturePerfect</a>
-    <form action={{url_for('login')}} method="post" novalidate>
+<h1>Register</h1>
+    <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
             {{ form.username }}<br>
             {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email }}<br>
+            {% for error in form.email.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -23,10 +28,14 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+        <p>
+            {{ form.password2.label }}<br>
+            {{ form.password2 }}<br>
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
         <p>{{ form.submit() }}</p>
-
-            </form>
+    </form>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 
-/*---------------------Login Page CSS--------------------------*/
+/*---------------------Register Page CSS--------------------------*/
 body{
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ body{
 }
 
 h1, body{
-    margin-top: 50px;
+    margin-top: 25px;
     color:white;
     display: flex;
     align-items: center;

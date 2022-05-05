@@ -20,6 +20,11 @@
   background-size: cover;
 }
 
+#canvas table.Q {
+  background: url("../pictures/Qmark.png");
+  background-size: cover;
+}
+
 #canvas table.start {
   border-collapse: separate;
 }
@@ -95,5 +100,19 @@
 #scores{
   text-align: center;
   color: rgb(255, 255, 255);
-  
+}
+
+/*******Upload button**********/
+.upload_button{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+#Upload{
+  background-color: palegreen;
+  border-radius: 20px;
+  border-width: 5px;
+  padding: 10px;
+  margin-left:590px;
 }

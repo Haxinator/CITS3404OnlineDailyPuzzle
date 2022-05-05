@@ -75,6 +75,7 @@ var color = null;
 var puzzle;
 //record of user selected cells
 var userCanvas = {};
+let result = document.getElementById("result");
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -142,6 +143,7 @@ function end_game(){
     document.getElementById("canvas").style.display = "none";
     display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
     display_image("win.png", "YOU WIN");
+    scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
 }
 
 /*
@@ -352,7 +354,7 @@ Then we create the palette using make() and fill in the color using the constant
 */ 
 
 //Create a new CreateTable object with all the parameters needed for creation.
-var pallet = new CreateTable(1,PALETTEIDS.length,"colorPallet",PALETTE1);
+let pallet = new CreateTable(1,PALETTEIDS.length,"colorPallet",PALETTE1);
 //create a table for the pallet.
 pallet.make();
 //color the pallet.
@@ -364,11 +366,13 @@ Create the canvas using make() and fill in the color (according to the data para
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
 
-var canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
+let canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
 //for visuals
-var table = document.getElementById(canvas.location).querySelector("table");
+let table = document.getElementById(canvas.location).querySelector("table");
+let score = 0  
+scoreDisplay = document.getElementById("scores");
 //initalises the puzzles array
 initalize_puzzle();
 //gets first puzzle
@@ -404,7 +408,6 @@ document.getElementById("Ready").addEventListener("click", () => {
     change_button("Ready", "Check");
 });
 
-let score = 0  
 
 //check if the user canvas matches the puzzle
 document.getElementById("Check").addEventListener("click", () => {
@@ -413,7 +416,6 @@ document.getElementById("Check").addEventListener("click", () => {
     let puzzleKeys = Object.keys(puzzle);
     let choosenArray = Object.keys(userCanvas);
     let hasWon = true
-    let result = document.getElementById("result");
 
     let count = 0;    
 
@@ -463,7 +465,7 @@ document.getElementById("Check").addEventListener("click", () => {
 
     if(hasWon) {
         //Displays the score
-        document.getElementById("scores").innerHTML = "Score: " + score;
+        scoreDisplay.innerHTML = "Score: " + score;
 
         console.log("you win");
         //Visual indication of win
@@ -477,7 +479,7 @@ document.getElementById("Check").addEventListener("click", () => {
         
     }else{
         //Displays the score
-        document.getElementById("scores").innerHTML = "Score: " + score;
+        scoreDisplay.innerHTML = "Score: " + score;
 
         console.log("you lost");
        
