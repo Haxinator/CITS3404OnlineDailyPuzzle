@@ -20,7 +20,12 @@
                         <th>Level No.</th>
                         <th>Score</th>
                     </tr>
-                    <tr>Player: {{current_user.password}} </tr>
+                    {% if current_user.is_authenticated %}
+                    <tr>Player: {{current_user.username}} </tr>
+                    {% else %}
+                    <tr>Player: Unknown </tr>
+                    {% endif %}
+
                     <tr>
                         <td>1</td>
                         <td>100</td>
