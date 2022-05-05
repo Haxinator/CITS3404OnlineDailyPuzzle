@@ -1,0 +1,39 @@
+{% extends "HTML/base.html" %}
+
+{% block header %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="static/CascadingStyleSheets/homepage.css">
+{% endblock %}
+
+{% block body %}
+<div class="logos">
+
+    <a class="warrior" href="/rules">
+    <img src="static/pictures/warrior.png" alt="" id="warrior_logo">
+    </a>
+    
+    <a class="Assassin" href="/game">
+        <img src="static/pictures/dagger.png" alt="" id="assassin_logo">
+        
+    </a>
+    <a class="mage" href="/stats">
+
+        <img src="static/pictures/magic_staff.png" alt="" id="magic_staff_logo">
+    </a>
+</div>
+    
+<div class="logo_texts">
+    <h1 id="rules">RULES</h1>
+    <h1 id="play">PLAY</h1>
+    <h1 id="leaderboard">LEADERBOARD</h1>
+</div>
+
+<form action="">
+    <select name="" id="">
+        <option value="none" selected disabled hidden>DIFFICULTY</option>
+        <option value="easy">EASY</option>
+        <option value="normal">NORMAL</option>
+        <option value="hard">HARD</option>
+    </select>
+</form>
+{% endblock %}
