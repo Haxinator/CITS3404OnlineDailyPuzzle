@@ -66,6 +66,8 @@ const PUZZLENO = 2;
 //controls the number of rows and columns a grid has.
 const GRIDROWS = 4;
 const GRIDCOL = 4;
+//incrementer/decrementer used for score
+const SCOREVAL = 10;
 
 //Global Variables
 var color = null;
@@ -434,12 +436,12 @@ document.getElementById("Check").addEventListener("click", () => {
 
             //Checks if score is greater than 0 
             //Deducts 10 points from the score as wrong cell or color
-            if(score > 0){score = score - 10};
+            if(score > 0){score = score - SCOREVAL};
         }
         //Adds 10 points to the score for each correct cell
         else{
             count++;
-            score = score + 10;    //me
+            score = score + SCOREVAL;    //me
         }
     }
     //Check items that have been in puzzle and conestant missed it
@@ -454,7 +456,7 @@ document.getElementById("Check").addEventListener("click", () => {
             delete userCanvas[item];
 
             //If user didn't select the required cells -> deduct 10 points
-            if(score > 0){score = score - 10};       
+            if(score > 0){score = score - SCOREVAL};       
         }
     }
     
@@ -485,7 +487,7 @@ document.getElementById("Check").addEventListener("click", () => {
         //change check button to start
         change_button("Check", "Start");
         //If user lose and tries again, it deducts the score for the correct cells.
-        score = score - (10 * count);
+        score = score - (SCOREVAL * count);
         //show picture
         display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
         display_image("GameOver.jpg", "Game Over");
