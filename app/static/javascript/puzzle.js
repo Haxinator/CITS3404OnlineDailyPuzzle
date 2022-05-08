@@ -53,9 +53,22 @@ const PUZZLES = [];
 //number of puzzles
 const PUZZLENO = 2;
 //controls the number of rows and columns a grid has.
-const EASYGRID = 4;
-const MEDGRID = 8;
-const HARDGRID = 16;
+var GRIDCOL;
+var GRIDROWS;
+const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
+console.log(DIFFICULTY);
+if(DIFFICULTY.toLowerCase() == "hard"){
+    GRIDCOL = 16;
+    GRIDROWS = 16;
+}
+else if(DIFFICULTY.toLowerCase() == "normal"){
+    GRIDCOL = 8;
+    GRIDROWS = 8;
+}
+else{
+    GRIDCOL = 4;
+    GRIDROWS = 4;
+}
 //incrementer/decrementer used for score
 const SCOREVAL = 10;
 
@@ -77,7 +90,7 @@ Generates a random puzzle (supported for all grid sizes)
 @return the generated puzzle
 */
 function generate_random_puzzle(color_array){
-    let num_cells = EASYGRID * EASYGRID;
+    let num_cells = GRIDROWS * GRIDCOL;
     const puzzle_color_dict = {};
 
     for(let i = 0; i< num_cells; i++){
@@ -356,7 +369,7 @@ Create the canvas using make() and fill in the color (according to the data para
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
 
-let canvas = new CreateTable(EASYGRID,EASYGRID,"canvas", {});
+let canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
 //for visuals

@@ -2,6 +2,12 @@
 #result {
   margin-top: 1em;
 }
+/*----------------------------Size of grid CSS--------------------------*/
+#Difficulty {
+  text-align:center;
+  color: white;
+  font-size: 50px;
+}
 /*----------------------------Canvas CSS--------------------------*/
 #canvas table {
   border: 5px solid black;

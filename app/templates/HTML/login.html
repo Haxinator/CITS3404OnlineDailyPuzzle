@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <img src="static/pictures/favicon.ico" alt="Picture Perfect Logo" "> PicturePerfect</a>
+    <a><img src="static/pictures/favicon.ico" alt="Picture Perfect Logo"> PicturePerfect</a>
     <form action={{url_for('login')}} method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>

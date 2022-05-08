@@ -15,15 +15,24 @@ from werkzeug.urls import url_parse
 def make_shell_context():
     return {'db': db, 'Player': User}
 
-@app.route('/home')
+@app.route('/home', methods=["GET","POST"])
 def home():
+    if request.method == "POST":
+        difficulty = request.form["Difficulty"]
+        return redirect(url_for('game', Difficulty = difficulty))
+
+    difficulty = request.args.get("Difficulty")
     return render_template("HTML/homepage.html", title ="Homepage")
 
+#
 @app.route('/game')
 def game():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    return render_template("HTML/dailypuzzle.html", title = "Puzzle")
+    difficulty = request.args.get("Difficulty")
+    if difficulty is None:
+        difficulty = "easy"
+    return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
 @app.route('/rules')
 def rules():
