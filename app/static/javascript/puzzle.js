@@ -203,7 +203,7 @@ Event Listener function for click dragging canvas
 */
 function multi_color(index, cell, e) {
 
-    console.log(e);
+    // console.log(e);
 
     //if ready and left mouse is down
     if(table.classList.contains("ready") && e.buttons === 1)
@@ -484,8 +484,8 @@ document.getElementById("Check").addEventListener("click", () => {
             //remove item from canvas
             delete userCanvas[item];
 
-            //If user didn't select the required cells -> deduct 10 points
-            if(score > 0){score = score - SCOREVAL};       
+            // //If user didn't select the required cells -> deduct 10 points
+            // if(score > 0){score = score - SCOREVAL};       
         }
     }
     
