@@ -1,7 +1,21 @@
 /*--------------------------Game page CSS---------------------------*/
-#result {
+/* #result {
   margin-top: 1em;
+} */
+.row {
+  margin: 0;
 }
+
+#scores{
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+#colorSelected {
+  text-align: center;
+  color: white
+}
+
 /*----------------------------Size of grid CSS--------------------------*/
 #Difficulty {
   text-align:center;
@@ -70,8 +84,12 @@
 }
 
 #colorPallet table td:hover {
-  border: 2px solid white;
+  border: 2px solid grey;
   cursor: copy;
+}
+
+#colorPallet table td.selected {
+  border: 2px solid white;
 }
 
 #colorPallet table td:active {
@@ -102,22 +120,16 @@
   display: none;
 }
 
-#scores{
-  text-align: center;
-  color: rgb(255, 255, 255);
-}
 
 /*******Upload button**********/
 .upload_button{
   text-align: center;
   margin-top: 20px;
   font-size: 20px;
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 #Upload{
-  background-color: palegreen;
+  background-color: skyblue;
   border-radius: 20px;
   border-width: 5px;
   padding: 10px;
-  margin-left:590px;
 }

@@ -73,7 +73,7 @@ else{
 const SCOREVAL = 10;
 
 //Global Variables
-var color = null;
+var COLOR = "eraser";
 //puzzle currently selected
 var puzzle;
 //record of user selected cells
@@ -163,17 +163,94 @@ function change_button(from, to) {
 
 }
 
+/*
+    displays a message in the result section
+    @param text text to display
+*/ 
 function display_message(text){
     //display text
     result.innerHTML = text;
 }
-
+/*
+    displays an image in the result section
+    @param image image name
+    @param alt the value of the alt attribute of the image
+*/
 function display_image(image, alt)
 {
     let img = document.createElement("img");
     img.setAttribute("alt", alt);
     img.setAttribute("src", "static/pictures/" + image);
     result.appendChild(img);
+}
+
+/*
+    Creates a visual indication of color change
+    @param colorSelected the new color selected
+*/ 
+function change_color(colorSelected)
+{
+    document.getElementById(COLOR).classList.remove("selected");
+    COLOR = colorSelected
+    document.getElementById(COLOR).classList.add("selected");
+}
+
+/*
+Event Listener function for click dragging canvas
+@param index the index of the cell to color
+@param cell the DOM reference of the cell
+@e the event (used to check what mouse button was pressed)
+*/
+function multi_color(index, cell, e) {
+
+    console.log(e);
+
+    //if ready and left mouse is down
+    if(table.classList.contains("ready") && e.buttons === 1)
+    {
+        //only if eraser
+        if(COLOR === "eraser")
+        {
+            cell.style.backgroundColor = null;
+            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
+            delete userCanvas[index];
+
+            //else for an actual colour
+        } else {
+            cell.style.backgroundColor = COLOR;
+            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            userCanvas[index] = COLOR;
+        }
+    } else if (e.buttons === 1) {
+        display_message("Can only draw once ready is pressed!");
+    }
+}
+
+/*
+Event Listener function for clicking canvas
+@param index the index of the cell to color
+@param cell the DOM reference of the cell
+@e the event (used to check what mouse button was pressed)
+*/
+function single_color(index, cell) {
+    if(table.classList.contains("ready"))
+    {
+        //if COLOR===null isn't specifided it will add null to the userCanvas
+        //which causes the check function to break
+        //same color click to remove functionality (Drag colouring doesn't work well with it on)
+        if (COLOR === userCanvas[index] || COLOR === "eraser") { 
+            cell.style.backgroundColor = null;
+            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
+            delete userCanvas[index];
+
+        } else {
+            cell.style.backgroundColor = COLOR;
+            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            userCanvas[index] = COLOR;
+        }
+    } else {
+        display_message("Can only draw once ready is pressed!");
+    }
 }
 
 //*----------------------------CREATETABLE-------------------------------------------------------------//
@@ -223,9 +300,9 @@ CreateTable.prototype.make = function(){
                     //adding addEventListener after click change the color
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    cell.addEventListener("mousedown", () => singleColor(index, cell));
-                    cell.addEventListener("mouseover", (e) => multiColor(index, cell, e));
-                    cell.addEventListener("dragenter", (e) => multiColor(index, cell, e));
+                    cell.addEventListener("mousedown", () => single_color(index, cell));
+                    cell.addEventListener("mouseover", (e) => multi_color(index, cell, e));
+                    cell.addEventListener("dragenter", (e) => multi_color(index, cell, e));
                 break;
 
                 //If the table is for colorPallet
@@ -238,7 +315,7 @@ CreateTable.prototype.make = function(){
                     cell.style.backgroundColor = cellColor;
 
                     //Event listener to remember color chosen
-                    cell.addEventListener("click", () => COLOR = cellColor);
+                    cell.addEventListener("click", () => change_color(colorName));
                 break;
             } 
             row.appendChild(cell);
@@ -250,59 +327,6 @@ CreateTable.prototype.make = function(){
 
     return table;
 }
-
-/*
-Event Listener function for clicking canvas
-*/
-function singleColor(index, cell) {
-    if(table.classList.contains("ready"))
-    {
-        //if COLOR===null isn't specifided it will add null to the userCanvas
-        //which causes the check function to break
-        //same color click to remove functionality (Drag colouring doesn't work well with it on)
-        if (COLOR === userCanvas[index] || COLOR === null) { 
-            cell.style.backgroundColor = null;
-            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
-            delete userCanvas[index];
-
-        } else {
-            cell.style.backgroundColor = COLOR;
-            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            userCanvas[index] = COLOR;
-        }
-    } else {
-        display_message("Can only draw once ready is pressed!");
-    }
-}
-
-/*
-Event Listener function for click dragging canvas
-*/
-function multiColor(index, cell, e) {
-
-    // console.log(e.buttons);
-
-    //if ready and left mouse is down
-    if(table.classList.contains("ready") && e.buttons === 1)
-    {
-        //only if eraser
-        if(COLOR === null)
-        {
-            cell.style.backgroundColor = null;
-            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
-            delete userCanvas[index];
-
-            //else for an actual colour
-        } else {
-            cell.style.backgroundColor = COLOR;
-            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            userCanvas[index] = COLOR;
-        }
-    } else if (e.buttons === 1) {
-        display_message("Can only draw once ready is pressed!");
-    }
-}
-
 
 /* draw method for CreateTable
 Fills the respective table (grid or palette) with colors according to the input 
@@ -475,11 +499,8 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("start");
         table.classList.remove("ready");
         change_button("Check", "Next");
-        //show win screen
-        display_image("win.png", "YOU WIN");
-
-        
-        
+        //display correct puzzle message
+        display_message('<h3><span style ="color:green">Correct!</span></h3>');
     }else{
         //Displays the score
         scoreDisplay.innerHTML = "Score: " + score;
@@ -493,9 +514,8 @@ document.getElementById("Check").addEventListener("click", () => {
         change_button("Check", "Start");
         //If user lose and tries again, it deducts the score for the correct cells.
         score = score - (SCOREVAL * count);
-        //show picture
-        display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
-        display_image("GameOver.jpg", "Game Over");
+        //Display incorrect puzzle message
+        display_message('<h3><span style ="color:red">Incorrect.</span><br>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
         
         //don't allow user to draw
         table.classList.remove("ready");

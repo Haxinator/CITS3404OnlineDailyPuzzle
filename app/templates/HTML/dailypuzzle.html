@@ -7,45 +7,55 @@
 
 
 {% block content %}
+
 <h1 id="Difficulty">{{Difficulty.upper()}}</h1>
-<div class="container">
+
+<div class="row justify-content-md-center">
   <!-- Size of colorPallet -->
   <!-- canvas -->
-  <div id="canvas" class="col"></div>
+  <div id="canvas" class="col-sm-12"></div>
 </div>
 
 <!-- Color pallet -->
 <div class="row justify-content-md-center">
   <!-- colorPallet -->
-  <div id="colorPallet" class="col col-lg-4"></div>
+  <div id="colorSelected" class="col-sm-12"></div>
+</div>
+
+<!-- Color pallet -->
+<div class="row justify-content-md-center">
+  <!-- colorPallet -->
+  <div id="colorPallet" class="col-sm-12"></div>
+</div>
+
+<div class="row justify-content-md-center">
+  <!-- container for scores -->
+  <div id="scores">Score: 0</div>
+</div>
+
+<div class="row justify-content-md-center">
+  <!-- container for results -->
+  <div id="result" class="text-center"></div>  
 </div>
 
 <!--Game Buttons START/READY/CHECK-->
-<div class="game_button">
-  <input type="button" class="game_button" value="START" id="Start">
-</div>
-<div class="game_button">
-  <input type="button" class="game_button" value="READY" id="Ready">
-</div>  
-<div class="game_button">  
-  <input type="button" class="game_button" value="CHECK" id="Check">        
-</div> 
-<div class="game_button">
-  <input type="button" class="game_button" value="NEXT" id="Next">
-</div>
 
-<div id="scores"></div>
-<!-- container for results -->
-<div id="result" class="text-center"></div>  
-
-<!--Upload puzzle to database button-->
-<div class="upload_button">
-  <input type="button" value="UPLOAD" id="Upload">
-</div>
-
-</div>
-<!-- container for results -->
-<div id="result" class="text-center"></div>
+  <div class="game_button col-sm-12">
+    <input type="button" class="game_button" value="START" id="Start">
+  </div>
+  <div class="game_button col-sm-12">
+    <input type="button" class="game_button" value="READY" id="Ready">
+  </div>  
+  <div class="game_button col-sm-12">  
+    <input type="button" class="game_button" value="CHECK" id="Check">        
+  </div> 
+  <div class="game_button col-sm-12">
+    <input type="button" class="game_button" value="NEXT" id="Next">
+  </div>
+  <!--Upload puzzle to database button-->
+  <div class="upload_button col-sm-12">
+    <input type="button" value="UPLOAD" id="Upload">
+  </div>
 
 
 {% endblock %}
