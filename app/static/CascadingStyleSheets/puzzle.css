@@ -53,7 +53,6 @@
 #canvas table td.wrong {
   outline: 3px solid white;
   background: repeating-linear-gradient(-45deg, transparent, transparent 10px, black 10px, black 20px);
- 
 }
 /*------------------------Color Pallet CSS-------------------------*/
 #colorPallet table {

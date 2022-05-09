@@ -30,5 +30,15 @@
     {% block body %}
     {% endblock %}
         
+    <!-- Displays any flashed messages from routes.py -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <p style="color:red">
+        {%for message in messages %}
+        <span>{{ message }}</span><br>
+        {% endfor%}
+    </p>
+    {% endif %}
+    {% endwith %}
     </body>
 </html>

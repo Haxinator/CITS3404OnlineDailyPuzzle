@@ -26,6 +26,7 @@ def home():
 
 #
 @app.route('/game')
+@login_required
 def game():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
@@ -53,27 +54,25 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('You have been registered!')
         return redirect(url_for('login'))
     return render_template('HTML/register.html', title='Register', form=form)
 
 #Temporarily all security systems are disabled and instead of signup when user enter the username and password the information will just get pass into the database
 @app.route('/')
 @app.route('/login',methods = ['GET','POST'])
-#@login_required
-
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.password == form.password.data and user.username == form.username.data:
-            flash('Invalid username or password')
+        if user is None or not user.check_password(form.password.data):
+            flash('[Invalid username or password.]')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
