@@ -1,4 +1,4 @@
-# CITS3404OnlineDailyPuzzle
+# CITS3403OnlineDailyPuzzle
 Online daily puzzle group project for CITS3404 - Agile Web Development
 
 In addition to the web application, you should create a private GitHub project that includes a readme describing:
