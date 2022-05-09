@@ -16,7 +16,9 @@ The purpose of the web application is to enhance the user's memory, whilst also 
 
 The daily puzzle developed is a memory game in nature. The user must complete the set of given puzzles to win the daily puzzle. A pattern/picture is shown to a user and they must recreate it in the web application. The puzzle allows an indefinite number of attempts until the user gets is correct, upon which a next button will appear allowing the user to go to the next puzzle in the set or if it is the last puzzle in the set, the user gets a final score and wins the game.
 
-There are three difficulties: easy, medium and hard. The size of puzzle to remember increases with an increase in difficutly. Meaning each puzzle in the set will take a longer time to complete and there is a greater chance of the user making a mistake.
+There are three difficulties: easy, medium and hard. The size of puzzle to remember increases with an increase in difficulty. Meaning each puzzle in the set will take a longer time to complete and there is a greater chance of the user making a mistake.
+
+Users can also create and upload their own puzzles via the upload button.
 
 The puzzle colour pallet was specifically chosen to contrast the different colours for those whom are colourblind.
 
@@ -27,7 +29,7 @@ Web pages in this application are rendered server side.
 Model View Controller architecture.
 Models are the tables stored in the database in this case the user and the puzzles.
 The controller (flask) prepares the view based on the route and information given by the model.
-View is what the client sees, which is what page the controller developed serverside and sent to the client's machine.
+View is what the client sees, which is the page the controller developed serverside and sent to the client's machine.
 
 **NEEDS TO BE REVIEWED**
 
