@@ -1,5 +1,6 @@
 //*----------------GLOBAL VARIABLES AND CONSTANTS-----------------------------------------------//
 
+//******GLOBAL CONSTANTS********/
 //need a color pallet that has black? Or maybe a larger pallet for future.
 // Fixed color array for the palette(length must fit the palette total length, total length = row* column)
 const PALETTE1 = {
@@ -52,33 +53,22 @@ const PUZZLE_HD = {
 const PUZZLES = [];
 //number of puzzles
 const PUZZLENO = 2;
-//controls the number of rows and columns a grid has.
-var GRIDCOL;
-var GRIDROWS;
+//get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
-console.log(DIFFICULTY);
-if(DIFFICULTY.toLowerCase() == "hard"){
-    GRIDCOL = 16;
-    GRIDROWS = 16;
-}
-else if(DIFFICULTY.toLowerCase() == "normal"){
-    GRIDCOL = 8;
-    GRIDROWS = 8;
-}
-else{
-    GRIDCOL = 4;
-    GRIDROWS = 4;
-}
 //incrementer/decrementer used for score
 const SCOREVAL = 10;
 
-//Global Variables
+//****************Global Variables************//
+
 var COLOR = "eraser";
-//puzzle currently selected
-var puzzle;
 //record of user selected cells
 var userCanvas = {};
-let result = document.getElementById("result");
+//controls the number of rows and columns a grid has.
+var GRIDCOL;
+var GRIDROWS;
+//puzzle currently selected
+var puzzle;
+var result = document.getElementById("result");
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -196,63 +186,58 @@ function change_color(colorSelected)
 }
 
 /*
-Event Listener function for click dragging canvas
+Event Listener function for coloring canvas
 @param index the index of the cell to color
 @param cell the DOM reference of the cell
-@e the event (used to check what mouse button was pressed)
+@param event the event
 */
-function multi_color(index, cell, e) {
-
-    // console.log(e);
+function color(index, cell, event) {
+    // console.log(event);
 
     //if ready and left mouse is down
-    if(table.classList.contains("ready") && e.buttons === 1)
+    if(table.classList.contains("ready"))
     {
-        //only if eraser
-        if(COLOR === "eraser")
+        //if the eraser is selected and the user is left clicking 
+        //or if the user clicked mouse and the
+        //color of the cell is the same as the color selected
+        //remove the color of the cell
+        if(COLOR === "eraser" && event.buttons === 1 || 
+        (event.type === "mousedown" && COLOR === userCanvas[index]))
         {
             cell.style.backgroundColor = null;
             //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
             delete userCanvas[index];
 
-            //else for an actual colour
-        } else {
+            //else if not eraser and left mouse is down, color.
+        } else if(event.buttons === 1){
             cell.style.backgroundColor = COLOR;
             //console.log("added: " + COLOR + " at: " + index); //for debugging check function
             userCanvas[index] = COLOR;
         }
-    } else if (e.buttons === 1) {
+        //if canvas isn't ready and the user tries to color 
+        //display message
+    } else if (event.buttons === 1) {
         display_message("Can only draw once ready is pressed!");
     }
 }
 
-/*
-Event Listener function for clicking canvas
-@param index the index of the cell to color
-@param cell the DOM reference of the cell
-@e the event (used to check what mouse button was pressed)
-*/
-function single_color(index, cell) {
-    if(table.classList.contains("ready"))
-    {
-        //if COLOR===null isn't specifided it will add null to the userCanvas
-        //which causes the check function to break
-        //same color click to remove functionality (Drag colouring doesn't work well with it on)
-        if (COLOR === userCanvas[index] || COLOR === "eraser") { 
-            cell.style.backgroundColor = null;
-            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
-            delete userCanvas[index];
-
-        } else {
-            cell.style.backgroundColor = COLOR;
-            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            userCanvas[index] = COLOR;
-        }
-    } else {
-        display_message("Can only draw once ready is pressed!");
+//uses DIFFICUTLY to determine the size of the grid.
+function determine_grid_size()
+{
+    console.log(DIFFICULTY);
+    if(DIFFICULTY.toLowerCase() == "hard"){
+        GRIDCOL = 16;
+        GRIDROWS = 16;
+    }
+    else if(DIFFICULTY.toLowerCase() == "normal"){
+        GRIDCOL = 8;
+        GRIDROWS = 8;
+    }
+    else{
+        GRIDCOL = 4;
+        GRIDROWS = 4;
     }
 }
-
 //*----------------------------CREATETABLE-------------------------------------------------------------//
 //Below are the functions used to initalise and create the canvas and pallet.
 
@@ -298,11 +283,11 @@ CreateTable.prototype.make = function(){
                     cell.setAttribute("id", index.toString());
 
                     //adding addEventListener after click change the color
+                    //adding addEventListener after mouse over to change the color (if left mouse is pressed)
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    cell.addEventListener("mousedown", () => single_color(index, cell));
-                    cell.addEventListener("mouseover", (e) => multi_color(index, cell, e));
-                    cell.addEventListener("dragenter", (e) => multi_color(index, cell, e));
+                    cell.addEventListener("mousedown", (e) => color(index, cell, e));
+                    cell.addEventListener("mouseover", (e) => color(index, cell, e));
+                    cell.addEventListener("dragenter", (e) => color(index, cell, e));
                 break;
 
                 //If the table is for colorPallet
@@ -392,7 +377,8 @@ generate_random_puzzle function uses the color pallet to generate the random puz
 Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using draw().
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
-
+//uses difficulty to determine size of grid.
+determine_grid_size();
 let canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
@@ -482,10 +468,7 @@ document.getElementById("Check").addEventListener("click", () => {
             let cell = document.getElementById(item);
             cell.classList.add("wrong");
             //remove item from canvas
-            delete userCanvas[item];
-
-            // //If user didn't select the required cells -> deduct 10 points
-            // if(score > 0){score = score - SCOREVAL};       
+            delete userCanvas[item];   
         }
     }
     
@@ -515,7 +498,8 @@ document.getElementById("Check").addEventListener("click", () => {
         //If user lose and tries again, it deducts the score for the correct cells.
         score = score - (SCOREVAL * count);
         //Display incorrect puzzle message
-        display_message('<h3><span style ="color:red">Incorrect.</span><br>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
+        display_message(`<h3><span style ="color:red">Incorrect.</span>
+        <br>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>`);
         
         //don't allow user to draw
         table.classList.remove("ready");
