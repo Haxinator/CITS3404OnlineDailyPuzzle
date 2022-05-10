@@ -4,6 +4,7 @@
 //need a color pallet that has black? Or maybe a larger pallet for future.
 // Fixed color array for the palette(length must fit the palette total length, total length = row* column)
 const PALETTE1 = {
+    "#FFFFFF": "#FFFFFF",
     "#648FFF": "#648FFF",
     "#785EF0": "#785EF0",
     "#DC267F": "#DC267F",
@@ -11,18 +12,17 @@ const PALETTE1 = {
     "#FFB000": "#FFB000",
     "eraser" : null
 };
-const PALETTEARRAY = [
+
+//may be a better way to do this, used to create IDs for colour pallet cells.
+//also used for random puzzle generator
+const PALETTEIDS = [
+    "#FFFFFF", 
     "#648FFF",
     "#785EF0",
     "#DC267F",
     "#FE6100",
-    "#FFB000",
-    "eraser" 
-];
-
-//may be a better way to do this, used to create IDs for colour pallet cells.
-//also used for random puzzle generator
-const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000", "eraser"];
+    "#FFB000", 
+    "eraser"];
 
 
 //SAMPLE PUZZLES
@@ -60,7 +60,7 @@ const PUZZLE_HD = {
 //container for multiple puzzles
 const PUZZLES = [];
 //number of puzzles
-const PUZZLENO = 2;
+const PUZZLENO = 1;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
 //incrementer/decrementer used for score
@@ -107,13 +107,33 @@ function generate_random_puzzle(color_array){
 
 //Initalises the PUZZLES array
 function initalize_puzzle(){
-    //add as many puzzles as directed by PUZZLENO
-    for(let i = 0; i<PUZZLENO; i++)
-    {
-        //add random puzzle
-        PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        //add as many puzzles as directed by PUZZLENO
+        // for(let i = 0; i<PUZZLENO; i++)
+        // {
+        //     //add random puzzle
+        //     PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+        // }
+        let response = JSON.parse(this.response);
+        let dictionary = JSON.parse(response.dict);
+        PUZZLES.push(dictionary);
+        next_puzzle();
     }
+    xhttp.open("GET", "/getData?Difficulty="+DIFFICULTY);
+    xhttp.send();
 }
+
+//Initalises the PUZZLES array
+// function initalize_puzzle(){
+//     //add as many puzzles as directed by PUZZLENO
+//     for(let i = 0; i<PUZZLENO; i++)
+//     {
+//         //add random puzzle
+//         PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+//     }
+//     next_puzzle();
+// }
 
 //Goes to the next puzzle in PUZZLES
 function next_puzzle(){
@@ -328,10 +348,11 @@ CreateTable.prototype.draw = function() {
 
     //retrieves each key value pair in puzzle as an array
     for (const [key, value] of Object.entries(this.data)) {
-        // console.log(key);
+        console.log(this.data);
+        console.log(key);
         //get cell
         let box = document.getElementById(key.toString());
-        // console.log(box);
+        console.log(box);
         //change color of cell
         box.style.backgroundColor = value;
       }
@@ -396,8 +417,8 @@ let score = 0
 scoreDisplay = document.getElementById("scores");
 //initalises the puzzles array
 initalize_puzzle();
-//gets first puzzle
-next_puzzle();
+// //gets first puzzle
+// next_puzzle();
 
 //*-----------------------------------------Buttons---------------------------------------------------------------------------//
 
@@ -413,6 +434,7 @@ document.getElementById("Start").addEventListener("click", () => {
     table.classList.add("start");
     //change start button to ready
     change_button("Start", "Ready");
+    document.getElementById("Draw").style.display = "none";
 });
 
 
@@ -499,7 +521,7 @@ document.getElementById("Check").addEventListener("click", () => {
         console.log("you lost");
        
         //------------------------------- This will display the wrong cells ----------------//
-        //console.log("Checked: " + JSON.stringify(checkedCanvas) + "\nUser: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
+        console.log("User: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
 
         //change check button to start
         change_button("Check", "Start");
@@ -521,65 +543,26 @@ document.getElementById("Next").addEventListener("click", () => {
     next_puzzle();
 });
 
-//*-------------------------MISC------------------------//
-
-//!RANDOM COLOR GEN IF NEEDED
-// function generate_random_color(rows,columns){
-//     const num_cells = rows * columns;
-//     const col_array = [];
-//     for(let i = 0; i< num_cells; i++){
-//         var r = Math.round(Math.random()*255);
-//         var g = Math.round(Math.random()*255);
-//         var b = Math.round(Math.random()*255);
-//         col_array.splice(i,0,`rgb(${r}, ${g}, ${b})`);
-//     }
-//     return col_array
-
-// }
-
 //*-------------------------Uploading puzzle to database------------------------//
 document.getElementById("Draw").addEventListener("click", () => {
-    //clear cavnas for drawing
-    canvas.clear();
+    //completely clear canvas
+    canvas.clear(userCanvas);
+    //clear Q mark
     table.classList.remove("Q");
     document.getElementById("Start").style.display = "none";
-    //draw user's canvas
-    userCanvas = {};
-    canvas.data = userCanvas;
     canvas.draw();
     //Visual indication of ready
     table.classList.add("ready");
-    //change ready button to check
+    //change draw button to upload
     change_button("Draw", "Upload");
+    document.getElementById("name").style.display = "inline-block";
+    document.getElementById("scores").style.display = "none";
 });
 document.getElementById("Upload").addEventListener("click", () => {
-    let puzzle_size = Object.entries(userCanvas).length;
-    let indexes = "";
-    let colors = "";
-    let difficulty = "";
-    for( let i = 0; i <puzzle_size; i++) {
-        const [key, value] = Object.entries(userCanvas)[i];
-        
-        if (i!=puzzle_size-1){
-            indexes += (key +",");
-            colors += (PALETTEARRAY.indexOf(value) +",");
-        }else{
-            indexes += key ;
-            colors += PALETTEARRAY.indexOf(value) ;
-
-        }
-    }
-    if(DIFFICULTY.toLowerCase() == "hard"){
-        difficulty +=2;
-    }
-    else if(DIFFICULTY.toLowerCase() == "normal"){
-        difficulty +=1;
-    }
-    else{
-        difficulty +=0;
-    }
-    db_data = indexes + "|" + colors + "|" + difficulty;
+    //get name
+    puzzle_name = document.getElementById("name").value;
+    //collect data
+    db_data = JSON.stringify(userCanvas) + "|" + DIFFICULTY + "|" + puzzle_name;
+    //add data to form
     document.getElementById("PuzzleDb").value= db_data;
-    // //change ready button to check
-    change_button("Draw", "Upload");
 });

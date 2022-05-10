@@ -35,12 +35,12 @@ class User(UserMixin,db.Model):
         return '<User {}>'.format(self.username)
 
 class Puzzle(db.Model):
-    __tablename__ = 'puzzles'
+    # __tablename__ = 'puzzles'
     id = db.Column(db.Integer, primary_key=True)
-    index = db.Column(db.String(250),nullable=False)
-    color = db.Column(db.String(250),nullable=False)
-    diff = db.Column(db.Integer)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+    puzzle_dictionary = db.Column(db.String(3600), unique=True, nullable=False)
+    difficulty = db.Column(db.String(6), nullable = False, index=True)
     def __repr__(self):
-        return '<Puzzle {}>'.format(self.username)
+        return '<Dictionary: {}>'.format(self.puzzle_dictionary)
 
 db.create_all()

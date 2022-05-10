@@ -57,7 +57,8 @@
     <input type="button" value="DRAW ART" id="Draw">
   </div>
   <div class="upload_button col-sm-12">
-    <form action="#" method="POST">
+    <form action="{{ url_for('game') }}" method="post">
+      <input type="text" placeholder="Puzzle name" id="name">
       <input type="submit" placeholder="value" value="UPLOAD" id="Upload" name="Upload">
       <input type="hidden" id="PuzzleDb" name="PuzzleDb" value="">
     </form>

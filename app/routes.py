@@ -1,9 +1,10 @@
 #This file is purely responsible for routing
 
+from crypt import methods
 from app import app
 from app import db
 from app import login
-from flask import render_template, request, url_for, flash
+from flask import render_template, request, url_for, flash, jsonify
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.urls import url_parse
 from werkzeug.utils import redirect
@@ -13,7 +14,7 @@ from werkzeug.urls import url_parse
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'Player': User}
+    return {'db': db, 'Player': User, 'Puzzle': Puzzle}
 
 @app.route('/home', methods=["GET","POST"])
 def home():
@@ -28,24 +29,37 @@ def home():
 @app.route('/game', methods=['GET', 'POST'])
 @login_required
 def game():
-    if request.method == "POST":
-        index, color, diff = request.form["PuzzleDb"].split("|")
-        try:
-            puzzle = Puzzle(index=index, color=color,diff=diff)
-            db.session.add(puzzle)
-            db.session.commit()
-            return render_template("HTML/puzzs.html", title ="Homepage", puzzles = Puzzle.query.all())
-        except:
-            return "Couldn't add the puzzle"
-        
-    else:
-        if not current_user.is_authenticated:
+    if not current_user.is_authenticated:
             return redirect(url_for('login'))
+    else:
         difficulty = request.args.get("Difficulty")
         if difficulty is None:
-            difficulty = "easy"
+            difficulty = "EASY"
+        if request.method == "POST":
+            user_puzzle =request.form["PuzzleDb"]
+            user_canvas, diff, puz_name = user_puzzle.split("|")
+            flash(user_canvas)
+            flash(diff)
+            try:
+                puzzle = Puzzle(puzzle_dictionary=user_canvas, difficulty=diff, name=puz_name)
+                db.session.add(puzzle)
+                db.session.commit()
+                flash("Puzzle Successfully Uploaded!")
+                return render_template("HTML/puzzs.html", title ="Puzzle List", puzzles = Puzzle.query.all())
+            except:
+                flash("Could not add puzzle, name or pattern already exists.")
+                return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
+@app.route("/getData", methods=["GET"])
+def getData():
+        difficulty = request.args.get("Difficulty")
+        if difficulty is None:
+            difficulty = "EASY"
+        puzzle = Puzzle.query.filter_by(difficulty=difficulty).first()
+        dictionary = puzzle.puzzle_dictionary
+        name = puzzle.name 
+        return jsonify({"dict":dictionary, "name":name })
 
 
 @app.route('/rules')
