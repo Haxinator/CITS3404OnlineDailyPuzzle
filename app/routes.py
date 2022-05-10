@@ -1,4 +1,5 @@
 #This file is purely responsible for routing
+from sqlalchemy.sql.expression import func
 
 from crypt import methods
 from app import app
@@ -53,13 +54,27 @@ def game():
 
 @app.route("/getData", methods=["GET"])
 def getData():
-        difficulty = request.args.get("Difficulty")
-        if difficulty is None:
-            difficulty = "EASY"
-        puzzle = Puzzle.query.filter_by(difficulty=difficulty).first()
+    # number of puzzles in set
+    numberOfPuzzles = 3
+    # record of iteration
+    i = 0
+    # record of puzzle set
+    puzzles = {}
+    difficulty = request.args.get("Difficulty")
+    # In case difficulty wasn't defined
+    if difficulty is None:
+        difficulty = "EASY"
+    # Get only the puzzles with the same difficulty
+    # Only get 3 puzzles
+    puzzleList = Puzzle.query.filter_by(difficulty=difficulty).limit(numberOfPuzzles)
+    # For each puzzle add the dictionary and name to the puzzles dictionary
+    for puzzle in puzzleList:
         dictionary = puzzle.puzzle_dictionary
         name = puzzle.name 
-        return jsonify({"dict":dictionary, "name":name })
+        puzzles[i] = {"dict":dictionary, "name":name}
+        i+=1
+    # Return a dictionary containing the set of puzzles
+    return jsonify({"0":puzzles[0],"1":puzzles[1],"2":puzzles[2]})
 
 
 @app.route('/rules')

@@ -60,7 +60,7 @@ const PUZZLE_HD = {
 //container for multiple puzzles
 const PUZZLES = [];
 //number of puzzles
-const PUZZLENO = 1;
+const PUZZLENO = 3;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
 //incrementer/decrementer used for score
@@ -76,6 +76,7 @@ var GRIDCOL;
 var GRIDROWS;
 //puzzle currently selected
 var puzzle;
+var puzzleName;
 var result = document.getElementById("result");
 
 
@@ -109,15 +110,17 @@ function generate_random_puzzle(color_array){
 function initalize_puzzle(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
-        //add as many puzzles as directed by PUZZLENO
-        // for(let i = 0; i<PUZZLENO; i++)
-        // {
-        //     //add random puzzle
-        //     PUZZLES.push(generate_random_puzzle(PALETTEIDS));
-        // }
+        
         let response = JSON.parse(this.response);
-        let dictionary = JSON.parse(response.dict);
-        PUZZLES.push(dictionary);
+        console.log(response);
+        console.log(response[1]);
+        //add as many puzzles as directed by PUZZLENO
+        for(let i = 0; i<PUZZLENO; i++)
+        {
+            //add random puzzle
+            PUZZLES.push(response[i]);
+        }
+        
         next_puzzle();
     }
     xhttp.open("GET", "/getData?Difficulty="+DIFFICULTY);
@@ -141,7 +144,10 @@ function next_puzzle(){
     if(PUZZLES.length != 0)
     {
         //assign new puzzle
-        puzzle = PUZZLES.shift();
+        let puzzleData = PUZZLES.shift();
+        console.log(puzzleData);
+        puzzle = JSON.parse(puzzleData.dict);
+        puzzleName = puzzleData.name;
 
         //clear User array and canvas
         canvas.clear(userCanvas);
@@ -428,6 +434,7 @@ document.getElementById("Start").addEventListener("click", () => {
     table.classList.remove("Q");
     //give canvas puzzle data.
     canvas.data = puzzle; 
+    document.querySelector("h2").innerHTML = puzzleName;
     //initalise canvas using the new puzzle.
     canvas.draw(); 
     //visual indication of start
