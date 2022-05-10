@@ -11,6 +11,14 @@ const PALETTE1 = {
     "#FFB000": "#FFB000",
     "eraser" : null
 };
+const PALETTEARRAY = [
+    "#648FFF",
+    "#785EF0",
+    "#DC267F",
+    "#FE6100",
+    "#FFB000",
+    "eraser" 
+];
 
 //may be a better way to do this, used to create IDs for colour pallet cells.
 //also used for random puzzle generator
@@ -528,3 +536,50 @@ document.getElementById("Next").addEventListener("click", () => {
 //     return col_array
 
 // }
+
+//*-------------------------Uploading puzzle to database------------------------//
+document.getElementById("Draw").addEventListener("click", () => {
+    //clear cavnas for drawing
+    canvas.clear();
+    table.classList.remove("Q");
+    document.getElementById("Start").style.display = "none";
+    //draw user's canvas
+    userCanvas = {};
+    canvas.data = userCanvas;
+    canvas.draw();
+    //Visual indication of ready
+    table.classList.add("ready");
+    //change ready button to check
+    change_button("Draw", "Upload");
+});
+document.getElementById("Upload").addEventListener("click", () => {
+    let puzzle_size = Object.entries(userCanvas).length;
+    let indexes = "";
+    let colors = "";
+    let difficulty = "";
+    for( let i = 0; i <puzzle_size; i++) {
+        const [key, value] = Object.entries(userCanvas)[i];
+        
+        if (i!=puzzle_size-1){
+            indexes += (key +",");
+            colors += (PALETTEARRAY.indexOf(value) +",");
+        }else{
+            indexes += key ;
+            colors += PALETTEARRAY.indexOf(value) ;
+
+        }
+    }
+    if(DIFFICULTY.toLowerCase() == "hard"){
+        difficulty +=2;
+    }
+    else if(DIFFICULTY.toLowerCase() == "normal"){
+        difficulty +=1;
+    }
+    else{
+        difficulty +=0;
+    }
+    db_data = indexes + "|" + colors + "|" + difficulty;
+    document.getElementById("PuzzleDb").value= db_data;
+    // //change ready button to check
+    change_button("Draw", "Upload");
+});

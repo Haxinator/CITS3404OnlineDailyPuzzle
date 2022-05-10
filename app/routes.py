@@ -7,7 +7,7 @@ from flask import render_template, request, url_for, flash
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.urls import url_parse
 from werkzeug.utils import redirect
-from app.models import User
+from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 
@@ -25,15 +25,28 @@ def home():
     return render_template("HTML/homepage.html", title ="Homepage")
 
 #
-@app.route('/game')
+@app.route('/game', methods=['GET', 'POST'])
 @login_required
 def game():
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    difficulty = request.args.get("Difficulty")
-    if difficulty is None:
-        difficulty = "easy"
-    return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
+    if request.method == "POST":
+        index, color, diff = request.form["PuzzleDb"].split("|")
+        try:
+            puzzle = Puzzle(index=index, color=color,diff=diff)
+            db.session.add(puzzle)
+            db.session.commit()
+            return render_template("HTML/puzzs.html", title ="Homepage", puzzles = Puzzle.query.all())
+        except:
+            return "Couldn't add the puzzle"
+        
+    else:
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        difficulty = request.args.get("Difficulty")
+        if difficulty is None:
+            difficulty = "easy"
+        return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
+
+
 
 @app.route('/rules')
 def rules():

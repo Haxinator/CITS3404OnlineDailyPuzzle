@@ -127,9 +127,13 @@
   margin-top: 20px;
   font-size: 20px;
 }
-#Upload{
+.upload_button > input{
   background-color: skyblue;
   border-radius: 20px;
   border-width: 5px;
   padding: 10px;
+}
+.upload_button + .upload_button input
+{
+  display: none;
 }
