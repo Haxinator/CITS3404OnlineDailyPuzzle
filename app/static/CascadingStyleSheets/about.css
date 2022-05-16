@@ -1,0 +1,45 @@
+/*----------------------------About page CSS-------------------------*/
+body {
+  color: white;
+  text-align: center;
+}
+
+span:nth-child(2), h1{
+  text-decoration: underline;
+}
+
+.text {
+  background-color: black;
+  padding: 10px;
+}
+
+article {
+  margin: 1em;
+}
+
+.row {
+  margin:auto;
+  margin-bottom: 2em;
+}
+
+.pic {
+  margin-bottom: 1em;
+}
+
+.hold {
+  padding-bottom: 20px;
+  background-color: rgb(0, 81, 255);
+  /* box-shadow: 10px 10px rgba(19, 19, 19, 0.5); */
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(31, 31, 31);
+}
+
+#DontClickMe{
+  text-decoration: none;
+  color: white;
+  cursor: text;
+}
+
+#DontClickMe {
+  color: white;
+}
+  
