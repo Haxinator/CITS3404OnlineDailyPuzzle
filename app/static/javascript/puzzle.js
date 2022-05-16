@@ -134,7 +134,7 @@ function initalize_puzzle(){
 //     {
 //         //add random puzzle
 //         PUZZLES.push(generate_random_puzzle(PALETTEIDS));
-//     }
+//     }next_puzzle
 //     next_puzzle();
 // }
 
@@ -519,6 +519,8 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("start");
         table.classList.remove("ready");
         change_button("Check", "Next");
+        //appearing FBshare button
+        document.getElementById("FBSHARE").style.display = "inline-block";
         //display correct puzzle message
         display_message('<h3><span style ="color:green">Correct!</span></h3>');
     }else{
@@ -546,25 +548,13 @@ document.getElementById("Check").addEventListener("click", () => {
 document.getElementById("Next").addEventListener("click", () => {
     //change next to start
     change_button("Next", "Start");
+    document.getElementById("FBSHARE").style.display = "none";
     //go to next puzzle
     next_puzzle();
 });
 
 //*-------------------------Uploading puzzle to database------------------------//
-document.getElementById("Draw").addEventListener("click", () => {
-    //completely clear canvas
-    canvas.clear(userCanvas);
-    //clear Q mark
-    table.classList.remove("Q");
-    document.getElementById("Start").style.display = "none";
-    canvas.draw();
-    //Visual indication of ready
-    table.classList.add("ready");
-    //change draw button to upload
-    change_button("Draw", "Upload");
-    document.getElementById("name").style.display = "inline-block";
-    document.getElementById("scores").style.display = "none";
-});
+
 document.getElementById("Upload").addEventListener("click", () => {
     //get name
     puzzle_name = document.getElementById("name").value;
@@ -572,4 +562,18 @@ document.getElementById("Upload").addEventListener("click", () => {
     db_data = JSON.stringify(userCanvas) + "|" + DIFFICULTY + "|" + puzzle_name;
     //add data to form
     document.getElementById("PuzzleDb").value= db_data;
+});
+// 
+//*-------------------------Sharing to facebook------------------------//
+document.getElementById("FBSHARE").addEventListener("click", () => {
+
+    final_score = score;
+    const http = new XMLHttpRequest();
+    http.open("POST", "/FBsharing?Score="+ String(score));
+    http.send();
+    http.onreadystatechange=(e)=>{
+        console.log(http.responseText);
+    }
+    
+    display_message('<h3><span style ="color:green">Your result has been share FB</span></h3>');
 });
