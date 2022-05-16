@@ -1,7 +1,7 @@
 #This file is purely responsible for routing
 from sqlalchemy.sql.expression import func
-
-from crypt import methods
+import json
+import requests
 from app import app
 from app import db
 from app import login
@@ -12,6 +12,7 @@ from werkzeug.utils import redirect
 from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+import os
 
 @app.shell_context_processor
 def make_shell_context():
@@ -50,6 +51,8 @@ def game():
             except:
                 flash("Could not add puzzle, name or pattern already exists.")
                 return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
+        
+        
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
 @app.route("/getData", methods=["GET"])
@@ -75,6 +78,35 @@ def getData():
         i+=1
     # Return a dictionary containing the set of puzzles
     return jsonify({"0":puzzles[0],"1":puzzles[1],"2":puzzles[2]})
+
+@app.route("/FBsharing", methods=["POST", "GET"])
+def FBsharing():
+    if request.method == "POST":
+
+        # Getting the name of player
+        name = User.query.filter_by(user_id=int(current_user.get_id())).first().username
+        # Getting Score
+        score = request.args.get("Score")
+
+
+        filename = os.path.join(app.static_folder, 'credentials.json')
+        with open(filename) as file:
+            credentials = json.load(file)
+
+        access_token = credentials["access_token"]
+        id = credentials["id"]
+        msg = f" Player {name} has scored {score} recently"
+        post_url = f"https://graph.facebook.com/{id}/feed"
+        payload = {
+            'message': msg,
+            'access_token': access_token
+        }
+        r = requests.post(post_url, data=payload)
+        return "successfully added"
+    else:
+        return "this page is not usable for client"
+    
+
 
 
 @app.route('/rules')
