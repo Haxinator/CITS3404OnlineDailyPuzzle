@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 import unittest, os , time
+from urllib import response
 from app import app, db
 from app.models import User
 from flask import url_for, request
-from flask_security.utils import login_user
 #python -m tests.testing
 
 class UserModelCase(unittest.TestCase):
@@ -23,42 +23,47 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(self.user1.check_password('asfas'))
         self.assertTrue(self.user1.check_password('123'))
 
-    def test_login_authentication(self):
-        with self.client:
-            response = self.client.post('login', {username: "123", password: "123"})
-            # success
-            assertEquals(current_user.username, '123')
-
-
+    def test_login_page(self):
+        #chck if login page is sent
+        tester = app.test_client(self)
+        response = tester.get('/login')
+        status_code = response.status
+        self.assertEqual(status_code, '200 OK')
+        
     def test_register_page(self):
+        #check if register page is sent
         tester = app.test_client(self)
         response = tester.get('/register')
         status_code = response.status
         self.assertEqual(status_code, '200 OK')
 
     def test_home_page(self):
+        #check if home page is sent
         tester = app.test_client(self)
         response = tester.get('/home')
         status_code = response.status
         self.assertEqual(status_code, '200 OK')
 
+    def test_stat_page(self):
+        #check if stats page is sent
+        tester = app.test_client(self)
+        response = tester.get('/stats')
+        status_code = response.status
+        self.assertEqual(status_code, '200 OK')
+
     def test_game_page(self):
-        test_client = app.test_client(self.user1)
+        #check if resource is found
+        tester = app.test_client(self)
+        response = tester.get('/game')
+        status_code = response.status
+        self.assertEqual(status_code, '302 FOUND')
+
+        #check if user gets redirected (because they're not logged in)
+        test_client = app.test_client(self)
         with test_client:
             response = test_client.get("/game", follow_redirects=True)
             # check that the path changed
             assert request.path == url_for("login")
-
-
-
-
-
-
-
-
-
-
-
 
 
 
