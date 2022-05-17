@@ -59,12 +59,11 @@ const PUZZLE_HD = {
 
 //container for multiple puzzles
 const PUZZLES = [];
-//number of puzzles
-const PUZZLENO = 3;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
-//incrementer/decrementer used for score
-const SCOREVAL = 10;
+//INCREMENTer/decrementer used for score
+const INCREMENT = 10;
+const DECREMENT = 100;
 
 //****************Global Variables************//
 
@@ -111,17 +110,26 @@ function initalize_puzzle(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         
-        let response = JSON.parse(this.response);
-        console.log(response);
-        console.log(response[1]);
-        //add as many puzzles as directed by PUZZLENO
-        for(let i = 0; i<PUZZLENO; i++)
+        if(this.response != "None")
         {
-            //add random puzzle
-            PUZZLES.push(response[i]);
+            var puzzleData = {}
+            let response = JSON.parse(this.response);
+            console.log(response);
+
+            for(const [key,value] of Object.entries(response))
+            {
+                //add puzzle as a dictionary
+                puzzleData[key] = value;
+                console.log(puzzleData)
+                PUZZLES.push(puzzleData);
+                puzzleData = {}
+            }
+            
+            next_puzzle();
+        } else{
+            display_message("!!!!TERMINAL ERROR!!!!!! <br> NO PUZZLES FOUND! <br> Maybe try uploading your own?")
         }
-        
-        next_puzzle();
+
     }
     xhttp.open("GET", "/getData?Difficulty="+DIFFICULTY);
     xhttp.send();
@@ -146,14 +154,15 @@ function next_puzzle(){
         //assign new puzzle
         let puzzleData = PUZZLES.shift();
         console.log(puzzleData);
-        puzzle = JSON.parse(puzzleData.dict);
-        puzzleName = puzzleData.name;
+
+        for(const [key,value] of Object.entries(puzzleData))
+        {
+            puzzle = JSON.parse(value);
+            puzzleName = key;
+        }
 
         //clear User array and canvas
         canvas.clear(userCanvas);
-        //change data to QMARK and draw
-        // canvas.data = QMARK;
-        // canvas.draw();
         table.classList.add("Q");
     } else {
         //wait one second before showing end game screen
@@ -165,12 +174,24 @@ function next_puzzle(){
 //events that occur when the game ends
 //hides everything, except the results
 function end_game(){
-    document.getElementById("Start").style.display = "none";
-    document.getElementById("colorPallet").style.display = "none";
-    document.getElementById("canvas").style.display = "none";
-    display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
-    display_image("win.png", "YOU WIN");
-    scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
+    if(score > 0)
+    {
+        document.getElementById("Start").style.display = "none";
+        document.getElementById("colorPallet").style.display = "none";
+        document.getElementById("canvas").style.display = "none";
+        document.querySelector("h2").style.display = "none";
+        display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
+        display_image("win.png", "YOU WIN");
+        scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
+    } else {
+        document.getElementById("Start").style.display = "none";
+        document.getElementById("colorPallet").style.display = "none";
+        document.getElementById("canvas").style.display = "none";
+        document.querySelector("h2").style.display = "none";
+        display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
+        display_image("GameOver.jpg", "YOU LOST");
+        scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}...</p>`
+    }
 }
 
 /*
@@ -488,12 +509,12 @@ document.getElementById("Check").addEventListener("click", () => {
 
             //Checks if score is greater than 0 
             //Deducts 10 points from the score as wrong cell or color
-            if(score > 0){score = score - SCOREVAL};
+            score = score - DECREMENT;
         }
         //Adds 10 points to the score for each correct cell
         else{
             count++;
-            score = score + SCOREVAL;    //me
+            score = score + INCREMENT;    //me
         }
     }
     //Check items that have been in puzzle and conestant missed it
@@ -533,7 +554,7 @@ document.getElementById("Check").addEventListener("click", () => {
         //change check button to start
         change_button("Check", "Start");
         //If user lose and tries again, it deducts the score for the correct cells.
-        score = score - (SCOREVAL * count);
+        score = score - (INCREMENT * count);
         //Display incorrect puzzle message
         display_message(`<h3><span style ="color:red">Incorrect.</span>
         <br>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>`);

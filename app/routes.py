@@ -12,6 +12,24 @@ from werkzeug.utils import redirect
 from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+import random
+from datetime import datetime, timedelta
+
+# Global time variable
+# time = datetime.date(datetime.utcnow()) + timedelta(days=1)
+# LastRunTime = datetime.utcnow()
+
+
+LastRunTime = {
+    "EASY":datetime.min,
+    "NORMAL":datetime.min,
+    "HARD":datetime.min
+    }
+# Global puzzles variable
+puzzles = {}
+# Global variable that determines if this is the first time
+# The puzzle is retrieved.
+# firstRun = True
 
 @app.shell_context_processor
 def make_shell_context():
@@ -54,27 +72,53 @@ def game():
 
 @app.route("/getData", methods=["GET"])
 def getData():
-    # number of puzzles in set
-    numberOfPuzzles = 3
-    # record of iteration
-    i = 0
-    # record of puzzle set
-    puzzles = {}
+    # global firstRun
+    global puzzles
+    global LastRunTime
+    time = datetime.utcnow()
     difficulty = request.args.get("Difficulty")
     # In case difficulty wasn't defined
     if difficulty is None:
         difficulty = "EASY"
-    # Get only the puzzles with the same difficulty
-    # Only get 3 puzzles
-    puzzleList = Puzzle.query.filter_by(difficulty=difficulty).limit(numberOfPuzzles)
-    # For each puzzle add the dictionary and name to the puzzles dictionary
-    for puzzle in puzzleList:
-        dictionary = puzzle.puzzle_dictionary
-        name = puzzle.name 
-        puzzles[i] = {"dict":dictionary, "name":name}
-        i+=1
-    # Return a dictionary containing the set of puzzles
-    return jsonify({"0":puzzles[0],"1":puzzles[1],"2":puzzles[2]})
+
+    #Breaks on difficulty switch, either only choose one difficulty a day
+    #Or code to account for it
+    print(time)
+    if(time >= (LastRunTime[difficulty] + timedelta(minutes=30))):
+        LastRunTime[difficulty] = time
+        # firstRun = False
+        # clear puzzle set of this difficulty
+        puzzles[difficulty] = {}
+        
+        # number of puzzles stored in the db
+        puzzlesStored = Puzzle.query.filter_by(difficulty=difficulty).count()
+        # number of puzzles in the set to send
+        # Minimum set size is 2, max is 5
+        numberOfPuzzles = int(random.random()*3)+2
+        print("Number of puzzles in set: " + str(numberOfPuzzles))
+        print("Number of " + str(difficulty) + " puzzles stored: " + str(puzzlesStored))
+
+        if(puzzlesStored == 0):
+            return "None"
+        elif(numberOfPuzzles > puzzlesStored):
+            numberOfPuzzles = puzzlesStored
+
+        # Only get number of puzzles specified
+        for i in range(numberOfPuzzles):
+            dictionary = None
+            name = None
+
+            while name in puzzles or name is None:
+                index = int(random.random()*puzzlesStored)
+                puzzle = Puzzle.query.filter_by(difficulty=difficulty).offset(index).first()
+                dictionary = puzzle.puzzle_dictionary
+                name = puzzle.name
+
+            print(index)
+            puzzles[difficulty][name] = dictionary
+
+    return jsonify(puzzles[difficulty])
+
 
 
 @app.route('/rules')
@@ -88,6 +132,7 @@ def stats():
 @app.route('/logout')
 def logout():
     logout_user()
+    flash("You have been successfully logged out.")
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])

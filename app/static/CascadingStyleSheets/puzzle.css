@@ -55,7 +55,7 @@
 }
 
 #canvas table.ready td:hover {
-  outline: 1px solid white;
+  outline: 3px solid grey;
   /* cursor: crosshair; */
 }
 
