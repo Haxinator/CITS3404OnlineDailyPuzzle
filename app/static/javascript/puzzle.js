@@ -307,7 +307,7 @@ CreateTable.prototype.make = function(){
             let index = c + (this.numColumns * r);
             let cell = document.createElement("td");
             if(DIFFICULTY.toLowerCase() == "hard"){
-            cell.style.padding = "1.6vh";
+            cell.style.padding = "1.2vh";
             }
             else if(DIFFICULTY.toLowerCase() == "normal"){
             cell.style.padding = "2.4vh";
