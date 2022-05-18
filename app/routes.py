@@ -1,5 +1,4 @@
 #This file is purely responsible for routing
-from sqlalchemy.sql.expression import func
 
 from crypt import methods
 from app import app

@@ -59,11 +59,14 @@ const PUZZLE_HD = {
 
 //container for multiple puzzles
 const PUZZLES = [];
+//number of puzzles
+const PUZZLENO = 1;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
-//INCREMENTer/decrementer used for score
+document.getElementById("Difficulty").style = "font-size: 5vw;";
+//incrementer/decrementer used for score
 const INCREMENT = 10;
-const DECREMENT = 100;
+const DECREMENT = 20;
 
 //****************Global Variables************//
 
@@ -328,8 +331,13 @@ CreateTable.prototype.make = function(){
             //allocating index to element in the Table
             let index = c + (this.numColumns * r);
             let cell = document.createElement("td");
-
-            //Apply relevant settings.
+            if(DIFFICULTY.toLowerCase() == "hard"){
+            cell.style.padding = "1.2vh";
+            }
+            else if(DIFFICULTY.toLowerCase() == "normal"){
+            cell.style.padding = "2.4vh";
+            }
+//            //Apply relevant settings.
             switch(this.location)
             {
                 //If the table is for canvas
@@ -353,6 +361,13 @@ CreateTable.prototype.make = function(){
                     cell.classList.add("colorPallet");
                     cell.setAttribute("id", colorName);
                     cell.style.backgroundColor = cellColor;
+                    cell.style.padding = "2vh";
+//                    if(DIFFICULTY.toLowerCase() == "hard"){
+//                    cell.style.padding = "3vw";
+//                    }
+//                    else if(DIFFICULTY.toLowerCase() == "normal"){
+//                    cell.style.padding = "2vw";
+//                    }
 
                     //Event listener to remember color chosen
                     cell.addEventListener("click", () => change_color(colorName));
