@@ -1,7 +1,5 @@
 /*--------------------------Game page CSS---------------------------*/
-/* #result {
-  margin-top: 1em;
-} */
+
 .row {
   margin: 0;
 }
@@ -16,6 +14,10 @@
   color: white
 }
 
+#Difficulty {
+  margin: 0px;
+}
+
 /*----------------------------Size of grid CSS--------------------------*/
 #Difficulty {
   text-align:center;
@@ -25,14 +27,11 @@
 /*----------------------------Canvas CSS--------------------------*/
 #canvas table {
   border: 5px solid black;
-  margin-top: 1em;
-  margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
 }
 
 #canvas table td {
-  /**padding: 2vw;**/
   padding: 20px;
 }
 
@@ -57,7 +56,6 @@
 
 #canvas table.ready td:hover {
   outline: 3px solid grey;
-  /* cursor: crosshair; */
 }
 
 #canvas table.ready:hover {
@@ -81,7 +79,6 @@
 
 #colorPallet table td {
   border: 2px solid black;
-  /**padding: 1vw;**/
   padding: 20px;
 }
 
@@ -106,7 +103,6 @@
 /*---------------------Game Buttons CSS--------------------------*/
 .game_button{
   text-align: center;
-  margin-top: 1vw;
   font-size: 20px;
 }
 

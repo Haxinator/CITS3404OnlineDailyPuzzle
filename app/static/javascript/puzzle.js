@@ -63,7 +63,6 @@ const PUZZLES = [];
 const PUZZLENO = 1;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
-document.getElementById("Difficulty").style = "font-size: 5vw;";
 //incrementer/decrementer used for score
 const INCREMENT = 10;
 const DECREMENT = 20;
