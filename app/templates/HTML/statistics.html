@@ -4,96 +4,162 @@
 
 <!-- Add any header in the block below to render it -->
 {% block extraHeaders %}
-<!-- <link rel="stylesheet" href="static/CascadingStyleSheets/statistic.css"> -->
+    <link rel="stylesheet" href="static/CascadingStyleSheets/statistic.css">
 {% endblock %}
 
 <!-- add any body elements in the block below to render it -->
 {% block content %}
 <div class="container">
-    <div class="content">
-        <div id="userScore">
-            <div id="txt">Your score</div>
-            <!--<div id="verscroll">-->
-                <table id="tablecont">
+    <div class="topcontainer">
+        {% if no_score == "None" %}
+        <div class="sections" style="width: 50%;">
+            
+            <div id="txt">LeaderBoard</div>
+            <div id="scroll">
+                <table id="tablecontent">
                     <tr>
-
-                        <th>Level No.</th>
+                        <th>No.</th>
+                        <th>username</th>
                         <th>Score</th>
                     </tr>
-                    <tr>Player: {{current_user.password}} </tr>
+                    {% for row in range(length) %}
                     <tr>
-                        <td>1</td>
-                        <td>100</td>
+                        <td>{{ row + 1 }}</td>
+                        <td>{{ stat_table2[0][row] }}</td>
+                        <td>{{ stat_table2[1][row] }}</td>
+                        
+                    </tr>   
+                    {% endfor %} 
+                </table>
+            
+            </div>
+                
+            <div class="msg">You are at Position {{ i + 1 }}</div>
+        
+        </div>
+        
+        <div class="sections" style="width: 50%;">
+            <div id="txt">Usage Table:</div>
+            <div id="verscroll">
+                <table id="tablecontent">
+                    <tr>
+                        <th rowspan="2"></th>
+                        <th rowspan="2">User</th>
+                        <th colspan="3">Difficulty</th>
+                    </tr>
+                   
+                    <tr id="diff">
+                        <td>Easy</td>
+                        <td>Normal</td>
+                        <td>Hard</td>
+                    </tr>
+
+                    {% for data in range(size_dic) %}
+                    <tr>
+                        <td>{{ data + 1 }}</td>
+                        <td>{{ users_list[data] }}</td>
+                        <td>{{ stat_table3[data][0] }}</td>
+                        <td>{{ stat_table3[data][1] }}</td>
+                        <td>{{ stat_table3[data][2] }}</td>
+                    </tr>
+                    {% endfor %}    
+                </table>   
+            </div>   
+        </div>
+
+        {% else %}
+
+        <div class="sections">
+            <div id="txt">Your score</div>
+            <div id="verscroll">
+                <table id="tablecontent">
+                    <tr>
+                        <th>No.</th>
+                        <th>Score</th>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>50</td>
+                        {% if current_user.is_authenticated %}
+                            <div id="txt">Player: {{current_user.username}} </div>
+                        {% else %}
+                            <div id="txt">Player: Unknown </div>
+                        {% endif %}
                     </tr>
+
+                    {% for data in range(size) %}
                     <tr>
-                        <td>3</td>
-                        <td>30</td>
+                        <td>{{ data + 1 }}</td>
+                        <td>{{ stat_table1[size-1-data] }}</td>
                     </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>70</td>
-                    </tr>
+                    {% endfor %}
                     
                 </table>   
-            <!--</div>-->
+            </div>
             
-            <div class="msg">Total Score: </div>
+            <div class="msg">Total Score: {{total_score}} </div>
         </div>
-    </div>
 
-    <div class="content">
-        <div id="overallscore">
+        <div class="sections">
+            
             <div id="txt">LeaderBoard</div>
-            <table id="tablecont">
-                <tr>
-                    <th>No.</th>
-                    <th>username</th>
-                    <th>Score</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>John123</td>
-                    <td>1250</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Hannah027</td>
-                    <td>1000</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>David8</td>
-                    <td>990</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>YOU</td>
-                    <td>980</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>YOU</td>
-                    <td>980</td>
-                </tr>
-            </table>
-            <div class="msg">You are at 4th position</div>
+            <div id="scroll">
+                <table id="tablecontent">
+                    <tr>
+                        <th>No.</th>
+                        <th>username</th>
+                        <th>Score</th>
+                    </tr>
+                    {% for row in range(length) %}
+                    <tr>
+                        <td>{{ row + 1 }}</td>
+                        <td>{{ stat_table2[0][row] }}</td>
+                        <td>{{ stat_table2[1][row] }}</td>
+                        
+                    </tr>   
+                    {% endfor %}
+                    
+                </table>
+            </div>
+                
+            <div class="msg">You are at Position {{ i + 1 }}</div>
         </div>
+        
+        <div class="sections">
+            <div id="txt">Usage Table:</div>
+            <div id="verscroll">
+                <table id="tablecontent">
+                    <tr>
+                        <th rowspan="2"></th>
+                        <th rowspan="2">User</th>
+                        <th colspan="3">Difficulty</th>
+                    </tr>
+                   
+                    <tr id="diff">
+                        <td>Easy</td>
+                        <td>Normal</td>
+                        <td>Hard</td>
+                    </tr>
+
+                    {% for data in range(size_dic) %}
+                    <tr>
+                        <td>{{ data + 1 }}</td>
+                        <td>{{ users_list[data] }}</td>
+                        <td>{{ stat_table3[data][0] }}</td>
+                        <td>{{ stat_table3[data][1] }}</td>
+                        <td>{{ stat_table3[data][2] }}</td>
+                    </tr>
+                    {% endfor %}    
+                </table>
+                
+            </div>  
+        </div>
+        {% endif %}
     </div>
+    
+    <div class="bottomcontainer" >
+        <img src="../static/pictures/minions.gif" alt="Minions.gif">
+    </div>
+    
 </div>
+
 {% endblock %}
+

@@ -1,42 +1,33 @@
 #This file is purely responsible for routing
+from sqlalchemy.sql.expression import func
 
+#from crypt import methods
 from app import app
 from app import db
 from app import login
-from flask import render_template, request, url_for, flash
+from flask import render_template, request, url_for, flash, jsonify
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.urls import url_parse
 from werkzeug.utils import redirect
-from app.models import User
+from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+from sqlalchemy import desc
+import json
 
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'Player': User, 'Puzzle': Puzzle}
 
-#Temporarily all security systems are disabled and instead of signup when user enter the username and password the information will just get pass into the database
-@app.route('/')
-@app.route('/login',methods = ['GET','POST'])
-#@login_required
-
-<<<<<<< HEAD
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.password == form.password.data and user.username == form.username.data:
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('home')
-        return redirect(next_page)
-    return render_template("HTML/login.html", title='Sign In', form=form)
-
-
-@app.route('/home')
+@app.route('/home', methods=["GET","POST"])
 def home():
+    if request.method == "POST":
+        difficulty = request.form["Difficulty"]
+        return redirect(url_for('game', Difficulty = difficulty))
+
+    difficulty = request.args.get("Difficulty")
     return render_template("HTML/homepage.html", title ="Homepage")
-=======
+
 @app.route('/game', methods=['GET', 'POST'])
 @login_required
 def game():
@@ -46,30 +37,18 @@ def game():
         difficulty = request.args.get("Difficulty")
         if difficulty is None:
             difficulty = "easy"
+
         #gets the current user's difficulty dictionary that contains the total games count according to difficulty
         current_diff = current_user.difficulty_dict
         if(str(current_diff) == "None"): #if user is playing for the first time
-            dic = {"EASY": 0, "NORMAL": 0, "HARD": 0}
-            if difficulty == "easy" or difficulty is None:
-                dic["EASY"] = 1
-            if difficulty == "normal":   
-                dic["NORMAL"] = 1
-            if difficulty == "hard":
-                dic["HARD"] = 1
-            current_user.difficulty_dict = json.dumps(dic)
-            db.session.commit()
-        #updates the count in the difficulty dictionary for the current user
-        elif (str(current_diff != "None")):
+            dic = {"easy": 0, "normal": 0, "hard": 0}
+        else:
             dic = json.loads(current_user.difficulty_dict)
-            if difficulty == "easy" or difficulty is None:
-                dic["EASY"] = dic["EASY"] + 1
-            if difficulty == "normal":
-                dic["NORMAL"] = dic["NORMAL"] + 1
-            if difficulty == "hard":
-                dic["HARD"] = dic["HARD"] + 1
-            current_user.difficulty_dict = json.dumps(dic)
-            db.session.commit()
+
+        dic[difficulty] += 1
         
+        current_user.difficulty_dict = json.dumps(dic)
+        db.session.commit()
         
         if request.method == 'POST':
             user_puzzle = request.form.get("PuzzleDb")
@@ -138,23 +117,59 @@ def getData():
         i+=1
     # Return a dictionary containing the set of puzzles
     return jsonify({"0":puzzles[0],"1":puzzles[1],"2":puzzles[2]})
->>>>>>> b5e0cab35286643d5b996c6c696102c56c3889c4
 
-@app.route('/game')
-def game():
-    return render_template("HTML/dailypuzzle.html", title = "Puzzle")
 
 @app.route('/rules')
 def rules():
     return render_template("HTML/about.html", title = "About")
 
-@app.route('/stats')
+@app.route('/stats', methods = ["GET","POST"])
 def stats():
-    return render_template("HTML/statistics.html", title = "Statistics")
+    #gets the difficulty_dict and usernames from the database
+    users_list = [each.username for each in (User.query.with_entities(User.username).order_by(User.user_id))]
+    stat_table3 = []
+    for u in User.query.with_entities(User.difficulty_dict):
+        dic_diff = []
+        #_asdict() converts SQLAlchemy row object to a python dict
+        u_dict = u._asdict()
+        dic2 = u_dict['difficulty_dict']
+    
+        if type(dic2) == str:
+            dic = json.loads(dic2)
+            dic_diff.append(dic["easy"])
+            dic_diff.append(dic["normal"])
+            dic_diff.append(dic["hard"])
+            stat_table3.append(dic_diff)
+    
+    size_dic = len(stat_table3)
 
-@app.shell_context_processor
-def make_shell_context():
-    return {'db': db, 'Player': User}
+    #gets the username of all users from the database order by highest_score
+    stat_user = [each.username for each in (User.query.with_entities(User.username).order_by(desc(User.highest_score)).all())]
+    #gets the highest_score of all users from the database order by highest_score
+    stat_score = [each.highest_score for each in (User.query.with_entities(User.highest_score).order_by(desc(User.highest_score)).all())]
+    stat_table2 = []
+    #stat_table2 list that contains usernames and scores
+    stat_table2.append(stat_user)
+    stat_table2.append(stat_score)
+    length = len(stat_user)
+    i = stat_user.index(current_user.username)
+
+    #gets the scores of current user for all the games that user has played so far
+    scores_list_str = current_user.scores_array
+    print(scores_list_str)
+    try:
+        stat_table1 = scores_list_str.split(",")
+        size = len(stat_table1)
+        total_score = current_user.highest_score
+        return render_template("HTML/statistics.html", title = "Statistics", stat_table2 = stat_table2, length = length, i = i, stat_table1 = stat_table1, size = size, total_score = total_score, stat_table3 = stat_table3, size_dic = size_dic, users_list = users_list)
+    except:
+        no_score = str(current_user.scores_array)
+        return render_template("HTML/statistics.html", title = "Statistics",no_score = no_score, length = length, i = i, size_dic = size_dic, users_list = users_list, stat_table2 = stat_table2, stat_table3 = stat_table3)
+   
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -162,15 +177,29 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('You have been registered!')
         return redirect(url_for('login'))
     return render_template('HTML/register.html', title='Register', form=form)
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
+#Temporarily all security systems are disabled and instead of signup when user enter the username and password the information will just get pass into the database
+@app.route('/')
+@app.route('/login',methods = ['GET','POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('[Invalid username or password.]')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('home')
+        return redirect(next_page)
+    return render_template("HTML/login.html", title='Sign In', form=form)

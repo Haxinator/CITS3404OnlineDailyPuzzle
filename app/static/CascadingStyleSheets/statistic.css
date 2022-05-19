@@ -1,91 +1,61 @@
-body{
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 .container{
-    position: relative;
-    align-items: center;
-    padding: 50px;
-    width: 400px;
-    background: rgb(247, 150, 150);
-    border-style: double;
-    border-width: 10px;
+    min-height: 80vh;
+    padding-top: 50px;
 }
-.stat{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    
-    width: 70%;
+.sections{
+    width: 33%;
+    float: left;
+    text-align: center;
 }
-.score{
-    padding: 2px 5px;
-    background: white;
-    border-radius: 10px;
-    text-align: left;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-bottom: 2px;
+.topcontainer{
+    height: 50%;
+    background-color: blue;
 }
-.overall{
-    padding: 2px 5px;
-    border-radius: 20px;
-    text-align: right;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-bottom: 2px;
-}
-#tablecont{
+.bottomcontainer img{
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
-      
+    height: 10%;
+    padding-top: 50px;
 }
-th{
-    padding: 10px;
-    background-color: rgb(238, 133, 58);
-}
-td{
-    background-color: rgb(228, 149, 93);
-}
-table,th,td{
-    border: 1px solid black;
-    border-collapse: collapse; 
-}
-#userScore{
-    text-align: center;  
+
+#scroll{
+    height: 350px;  
+    overflow-y: scroll;
 }
 
 #verscroll{
-    height: 150px;  
+    height: 350px;
     overflow-y: scroll;
 }
-#overallscore{
-    text-align: center;
+
+#tablecontent{
+    margin-left: auto;
+    margin-right: auto;
+}
+table,th,td{
+    border: 1px solid white;
+    border-collapse: collapse; 
+    padding: 3px 3px;
 }
 .msg{
-    text-align: right;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: rgb(224, 15, 57);
-    font-weight: 100px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    color: aquamarine;
 }
 #txt{
-    font-size: 20px;
-    font-weight: bold;
-    background-color: lightskyblue;
+    color: aquamarine;
+    padding: 5px;
 }
-thead,tbody{
-    display: block;
+th{
+    background-color: rgb(78, 78, 197);
 }
-tbody{
-    height: 150px;  
-    overflow-y: scroll  
+#diff{
+    background-color: rgb(247, 119, 73);
+}
+tr:nth-child(even){
+    background-color: rgb(247, 86, 86);
+}
+tr:nth-child(odd){
+    background-color: rgb(144, 181, 250);
 }

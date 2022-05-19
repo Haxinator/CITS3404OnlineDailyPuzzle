@@ -1,8 +1,10 @@
 //*----------------GLOBAL VARIABLES AND CONSTANTS-----------------------------------------------//
 
+//******GLOBAL CONSTANTS********/
 //need a color pallet that has black? Or maybe a larger pallet for future.
 // Fixed color array for the palette(length must fit the palette total length, total length = row* column)
 const PALETTE1 = {
+    "#FFFFFF": "#FFFFFF",
     "#648FFF": "#648FFF",
     "#785EF0": "#785EF0",
     "#DC267F": "#DC267F",
@@ -13,7 +15,14 @@ const PALETTE1 = {
 
 //may be a better way to do this, used to create IDs for colour pallet cells.
 //also used for random puzzle generator
-const PALETTEIDS = ["#648FFF","#785EF0","#DC267F","#FE6100","#FFB000", "eraser"];
+const PALETTEIDS = [
+    "#FFFFFF", 
+    "#648FFF",
+    "#785EF0",
+    "#DC267F",
+    "#FE6100",
+    "#FFB000", 
+    "eraser"];
 
 
 //SAMPLE PUZZLES
@@ -48,34 +57,27 @@ const PUZZLE_HD = {
     185: "#648FFF"
   }
 
-  //for 7x7 grid size
-const QMARK = {
-    16: PALETTE1["#648FFF"],
-    10: PALETTE1["#785EF0"],
-    18: PALETTE1["#648FFF"],
-    25: PALETTE1["#785EF0"],
-    31: PALETTE1["#648FFF"],
-    45: PALETTE1["#785EF0"],
-  }
-
-
 //container for multiple puzzles
 const PUZZLES = [];
 //number of puzzles
-const PUZZLENO = 2;
-//controls the number of rows and columns a grid has.
-const GRIDROWS = 4;
-const GRIDCOL = 4;
+const PUZZLENO = 3;
+//get value of difficulty
+const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
 //incrementer/decrementer used for score
 const SCOREVAL = 10;
 
-//Global Variables
-var color = null;
-//puzzle currently selected
-var puzzle;
+//****************Global Variables************//
+
+var COLOR = "eraser";
 //record of user selected cells
 var userCanvas = {};
-let result = document.getElementById("result");
+//controls the number of rows and columns a grid has.
+var GRIDCOL;
+var GRIDROWS;
+//puzzle currently selected
+var puzzle;
+var puzzleName;
+var result = document.getElementById("result");
 
 
 //*---------------SUPPORTING FUNCTIONS-------------------------------------------//
@@ -106,13 +108,35 @@ function generate_random_puzzle(color_array){
 
 //Initalises the PUZZLES array
 function initalize_puzzle(){
-    //add as many puzzles as directed by PUZZLENO
-    for(let i = 0; i<PUZZLENO; i++)
-    {
-        //add random puzzle
-        PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        
+        let response = JSON.parse(this.response);
+        console.log(response);
+        console.log(response[1]);
+        //add as many puzzles as directed by PUZZLENO
+        for(let i = 0; i<PUZZLENO; i++)
+        {
+            //add random puzzle
+            PUZZLES.push(response[i]);
+        }
+        
+        next_puzzle();
     }
+    xhttp.open("GET", "/getData?Difficulty="+DIFFICULTY);
+    xhttp.send();
 }
+
+//Initalises the PUZZLES array
+// function initalize_puzzle(){
+//     //add as many puzzles as directed by PUZZLENO
+//     for(let i = 0; i<PUZZLENO; i++)
+//     {
+//         //add random puzzle
+//         PUZZLES.push(generate_random_puzzle(PALETTEIDS));
+//     }
+//     next_puzzle();
+// }
 
 //Goes to the next puzzle in PUZZLES
 function next_puzzle(){
@@ -120,7 +144,10 @@ function next_puzzle(){
     if(PUZZLES.length != 0)
     {
         //assign new puzzle
-        puzzle = PUZZLES.shift();
+        let puzzleData = PUZZLES.shift();
+        console.log(puzzleData);
+        puzzle = JSON.parse(puzzleData.dict);
+        puzzleName = puzzleData.name;
 
         //clear User array and canvas
         canvas.clear(userCanvas);
@@ -144,15 +171,12 @@ function end_game(){
     display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
     display_image("win.png", "YOU WIN");
     scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
-<<<<<<< HEAD
-=======
 
     const link = '/getScore'
     const xhr = new XMLHttpRequest();
     sender = JSON.stringify(score)
     xhr.open('POST', link);
     xhr.send(sender);   
->>>>>>> b5e0cab35286643d5b996c6c696102c56c3889c4
 }
 
 /*
@@ -169,11 +193,19 @@ function change_button(from, to) {
 
 }
 
+/*
+    displays a message in the result section
+    @param text text to display
+*/ 
 function display_message(text){
     //display text
     result.innerHTML = text;
 }
-
+/*
+    displays an image in the result section
+    @param image image name
+    @param alt the value of the alt attribute of the image
+*/
 function display_image(image, alt)
 {
     let img = document.createElement("img");
@@ -182,6 +214,70 @@ function display_image(image, alt)
     result.appendChild(img);
 }
 
+/*
+    Creates a visual indication of color change
+    @param colorSelected the new color selected
+*/ 
+function change_color(colorSelected)
+{
+    document.getElementById(COLOR).classList.remove("selected");
+    COLOR = colorSelected
+    document.getElementById(COLOR).classList.add("selected");
+}
+
+/*
+Event Listener function for coloring canvas
+@param index the index of the cell to color
+@param cell the DOM reference of the cell
+@param event the event
+*/
+function color(index, cell, event) {
+    // console.log(event);
+
+    //if ready and left mouse is down
+    if(table.classList.contains("ready"))
+    {
+        //if the eraser is selected and the user is left clicking 
+        //or if the user clicked mouse and the
+        //color of the cell is the same as the color selected
+        //remove the color of the cell
+        if(COLOR === "eraser" && event.buttons === 1 || 
+        (event.type === "mousedown" && COLOR === userCanvas[index]))
+        {
+            cell.style.backgroundColor = null;
+            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
+            delete userCanvas[index];
+
+            //else if not eraser and left mouse is down, color.
+        } else if(event.buttons === 1){
+            cell.style.backgroundColor = COLOR;
+            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
+            userCanvas[index] = COLOR;
+        }
+        //if canvas isn't ready and the user tries to color 
+        //display message
+    } else if (event.buttons === 1) {
+        display_message("Can only draw once ready is pressed!");
+    }
+}
+
+//uses DIFFICUTLY to determine the size of the grid.
+function determine_grid_size()
+{
+    console.log(DIFFICULTY);
+    if(DIFFICULTY.toLowerCase() == "hard"){
+        GRIDCOL = 16;
+        GRIDROWS = 16;
+    }
+    else if(DIFFICULTY.toLowerCase() == "normal"){
+        GRIDCOL = 8;
+        GRIDROWS = 8;
+    }
+    else{
+        GRIDCOL = 4;
+        GRIDROWS = 4;
+    }
+}
 //*----------------------------CREATETABLE-------------------------------------------------------------//
 //Below are the functions used to initalise and create the canvas and pallet.
 
@@ -227,11 +323,11 @@ CreateTable.prototype.make = function(){
                     cell.setAttribute("id", index.toString());
 
                     //adding addEventListener after click change the color
+                    //adding addEventListener after mouse over to change the color (if left mouse is pressed)
                     //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    //adding addEventListener after drag to change the color (if left mouse is pressed)
-                    cell.addEventListener("mousedown", () => singleColor(index, cell));
-                    cell.addEventListener("mouseover", (e) => multiColor(index, cell, e));
-                    cell.addEventListener("dragenter", (e) => multiColor(index, cell, e));
+                    cell.addEventListener("mousedown", (e) => color(index, cell, e));
+                    cell.addEventListener("mouseover", (e) => color(index, cell, e));
+                    cell.addEventListener("dragenter", (e) => color(index, cell, e));
                 break;
 
                 //If the table is for colorPallet
@@ -244,7 +340,7 @@ CreateTable.prototype.make = function(){
                     cell.style.backgroundColor = cellColor;
 
                     //Event listener to remember color chosen
-                    cell.addEventListener("click", () => COLOR = cellColor);
+                    cell.addEventListener("click", () => change_color(colorName));
                 break;
             } 
             row.appendChild(cell);
@@ -257,59 +353,6 @@ CreateTable.prototype.make = function(){
     return table;
 }
 
-/*
-Event Listener function for clicking canvas
-*/
-function singleColor(index, cell) {
-    if(table.classList.contains("ready"))
-    {
-        //if COLOR===null isn't specifided it will add null to the userCanvas
-        //which causes the check function to break
-        //same color click to remove functionality (Drag colouring doesn't work well with it on)
-        if (COLOR === userCanvas[index] || COLOR === null) { 
-            cell.style.backgroundColor = null;
-            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
-            delete userCanvas[index];
-
-        } else {
-            cell.style.backgroundColor = COLOR;
-            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            userCanvas[index] = COLOR;
-        }
-    } else {
-        display_message("Can only draw once ready is pressed!");
-    }
-}
-
-/*
-Event Listener function for click dragging canvas
-*/
-function multiColor(index, cell, e) {
-
-    // console.log(e.buttons);
-
-    //if ready and left mouse is down
-    if(table.classList.contains("ready") && e.buttons === 1)
-    {
-        //only if eraser
-        if(COLOR === null)
-        {
-            cell.style.backgroundColor = null;
-            //console.log("deleted: " + userCanvas[index] + " at: " + index); //for debugging check function
-            delete userCanvas[index];
-
-            //else for an actual colour
-        } else {
-            cell.style.backgroundColor = COLOR;
-            //console.log("added: " + COLOR + " at: " + index); //for debugging check function
-            userCanvas[index] = COLOR;
-        }
-    } else if (e.buttons === 1) {
-        display_message("Can only draw once ready is pressed!");
-    }
-}
-
-
 /* draw method for CreateTable
 Fills the respective table (grid or palette) with colors according to the input 
 color array property of createTable*/
@@ -317,10 +360,11 @@ CreateTable.prototype.draw = function() {
 
     //retrieves each key value pair in puzzle as an array
     for (const [key, value] of Object.entries(this.data)) {
-        // console.log(key);
+        console.log(this.data);
+        console.log(key);
         //get cell
         let box = document.getElementById(key.toString());
-        // console.log(box);
+        console.log(box);
         //change color of cell
         box.style.backgroundColor = value;
       }
@@ -374,7 +418,8 @@ generate_random_puzzle function uses the color pallet to generate the random puz
 Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using draw().
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
-
+//uses difficulty to determine size of grid.
+determine_grid_size();
 let canvas = new CreateTable(GRIDROWS,GRIDCOL,"canvas", {});
 canvas.make();
 
@@ -384,8 +429,8 @@ let score = 0
 scoreDisplay = document.getElementById("scores");
 //initalises the puzzles array
 initalize_puzzle();
-//gets first puzzle
-next_puzzle();
+// //gets first puzzle
+// next_puzzle();
 
 //*-----------------------------------------Buttons---------------------------------------------------------------------------//
 
@@ -395,12 +440,14 @@ document.getElementById("Start").addEventListener("click", () => {
     table.classList.remove("Q");
     //give canvas puzzle data.
     canvas.data = puzzle; 
+    document.querySelector("h2").innerHTML = puzzleName;
     //initalise canvas using the new puzzle.
     canvas.draw(); 
     //visual indication of start
     table.classList.add("start");
     //change start button to ready
     change_button("Start", "Ready");
+    document.getElementById("Draw").style.display = "none";
 });
 
 
@@ -464,10 +511,7 @@ document.getElementById("Check").addEventListener("click", () => {
             let cell = document.getElementById(item);
             cell.classList.add("wrong");
             //remove item from canvas
-            delete userCanvas[item];
-
-            //If user didn't select the required cells -> deduct 10 points
-            if(score > 0){score = score - SCOREVAL};       
+            delete userCanvas[item];   
         }
     }
     
@@ -481,11 +525,8 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("start");
         table.classList.remove("ready");
         change_button("Check", "Next");
-        //show win screen
-        display_image("win.png", "YOU WIN");
-
-        
-        
+        //display correct puzzle message
+        display_message('<h3><span style ="color:green">Correct!</span></h3>');
     }else{
         //Displays the score
         scoreDisplay.innerHTML = "Score: " + score;
@@ -493,15 +534,15 @@ document.getElementById("Check").addEventListener("click", () => {
         console.log("you lost");
        
         //------------------------------- This will display the wrong cells ----------------//
-        //console.log("Checked: " + JSON.stringify(checkedCanvas) + "\nUser: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
+        console.log("User: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
 
         //change check button to start
         change_button("Check", "Start");
         //If user lose and tries again, it deducts the score for the correct cells.
         score = score - (SCOREVAL * count);
-        //show picture
-        display_message('<h3>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>');
-        display_image("GameOver.jpg", "Game Over");
+        //Display incorrect puzzle message
+        display_message(`<h3><span style ="color:red">Incorrect.</span>
+        <br>Wrong cells are outlined in <span style ="color:white">WHITE</span></h3>`);
         
         //don't allow user to draw
         table.classList.remove("ready");
@@ -515,18 +556,26 @@ document.getElementById("Next").addEventListener("click", () => {
     next_puzzle();
 });
 
-//*-------------------------MISC------------------------//
-
-//!RANDOM COLOR GEN IF NEEDED
-// function generate_random_color(rows,columns){
-//     const num_cells = rows * columns;
-//     const col_array = [];
-//     for(let i = 0; i< num_cells; i++){
-//         var r = Math.round(Math.random()*255);
-//         var g = Math.round(Math.random()*255);
-//         var b = Math.round(Math.random()*255);
-//         col_array.splice(i,0,`rgb(${r}, ${g}, ${b})`);
-//     }
-//     return col_array
-
-// }
+//*-------------------------Uploading puzzle to database------------------------//
+document.getElementById("Draw").addEventListener("click", () => {
+    //completely clear canvas
+    canvas.clear(userCanvas);
+    //clear Q mark
+    table.classList.remove("Q");
+    document.getElementById("Start").style.display = "none";
+    canvas.draw();
+    //Visual indication of ready
+    table.classList.add("ready");
+    //change draw button to upload
+    change_button("Draw", "Upload");
+    document.getElementById("name").style.display = "inline-block";
+    document.getElementById("scores").style.display = "none";
+});
+document.getElementById("Upload").addEventListener("click", () => {
+    //get name
+    puzzle_name = document.getElementById("name").value;
+    //collect data
+    db_data = JSON.stringify(userCanvas) + "|" + DIFFICULTY + "|" + puzzle_name;
+    //add data to form
+    document.getElementById("PuzzleDb").value= db_data;
+});

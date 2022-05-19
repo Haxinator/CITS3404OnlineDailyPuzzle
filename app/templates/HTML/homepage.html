@@ -19,12 +19,13 @@
 
     <div class="col-lg-4 col-sm-12 assassin">
         <div class="my-auto">
+
             <a href="/game">
                 <img src="static/pictures/play.png" alt="Puzzle in progress" class="d-none d-sm-block">
                 <h1 id="play" class="logo_texts">PLAY</h1>
             </a>
-            <form action="">
-                <select name="" id="">
+            <form action="{{url_for('home')}}" method="post" id="Difficulty">
+                <select  name="Difficulty" onchange="this.form.submit()">
                     <option value="none" selected disabled hidden>DIFFICULTY</option>
                     <option value="easy">EASY</option>
                     <option value="normal">NORMAL</option>
