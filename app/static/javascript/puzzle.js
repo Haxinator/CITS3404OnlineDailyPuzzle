@@ -144,6 +144,15 @@ function end_game(){
     display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
     display_image("win.png", "YOU WIN");
     scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
+<<<<<<< HEAD
+=======
+
+    const link = '/getScore'
+    const xhr = new XMLHttpRequest();
+    sender = JSON.stringify(score)
+    xhr.open('POST', link);
+    xhr.send(sender);   
+>>>>>>> b5e0cab35286643d5b996c6c696102c56c3889c4
 }
 
 /*
