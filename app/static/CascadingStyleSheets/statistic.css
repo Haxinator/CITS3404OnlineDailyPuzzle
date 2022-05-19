@@ -1,0 +1,63 @@
+.container{
+    min-height: 80vh;
+    
+    padding-top: 50px;
+}
+
+.sections{
+    width: 33%;
+    float: left;
+    text-align: center;
+}
+.topcontainer{
+    height: 50%;
+    background-color: blue;
+}
+.bottomcontainer img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10%;
+    padding-top: 50px;
+}
+
+#scroll{
+    height: 350px;  
+    overflow-y: scroll;
+}
+
+#verscroll{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#tablecontent{
+    margin-left: auto;
+    margin-right: auto;
+}
+table,th,td{
+    border: 1px solid white;
+    border-collapse: collapse; 
+    padding: 3px 3px;
+}
+.msg{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    color: aquamarine;
+}
+#txt{
+    color: aquamarine;
+    padding: 5px;
+}
+th{
+    background-color: rgb(78, 78, 197);
+}
+#diff{
+    background-color: rgb(247, 119, 73);
+}
+tr:nth-child(even){
+    background-color: rgb(247, 86, 86);
+}
+tr:nth-child(odd){
+    background-color: rgb(144, 181, 250);
+}
