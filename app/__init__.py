@@ -29,3 +29,9 @@ from app import routes, models
 #run app and turn debug mode on
 if __name__ == "__main__":
     app.run(debug=True)
+
+with app.app_context():
+    if db.engine.url.drivername == 'sqlite':
+        migrate.init_app(app, db, render_as_batch=True)
+    else:
+        migrate.init_app(app, db)

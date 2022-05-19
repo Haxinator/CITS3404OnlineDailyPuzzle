@@ -59,8 +59,6 @@ const PUZZLE_HD = {
 
 //container for multiple puzzles
 const PUZZLES = [];
-//number of puzzles
-const PUZZLENO = 1;
 //get value of difficulty
 const DIFFICULTY = document.getElementById("Difficulty").innerHTML;
 //incrementer/decrementer used for score
@@ -137,17 +135,6 @@ function initalize_puzzle(){
     xhttp.send();
 }
 
-//Initalises the PUZZLES array
-// function initalize_puzzle(){
-//     //add as many puzzles as directed by PUZZLENO
-//     for(let i = 0; i<PUZZLENO; i++)
-//     {
-//         //add random puzzle
-//         PUZZLES.push(generate_random_puzzle(PALETTEIDS));
-//     }
-//     next_puzzle();
-// }
-
 //Goes to the next puzzle in PUZZLES
 function next_puzzle(){
     //if PUZZLES is not empty
@@ -184,7 +171,13 @@ function end_game(){
         document.querySelector("h2").style.display = "none";
         display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
         display_image("win.png", "YOU WIN");
-        scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!</p>`
+        scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!<br>Your score has been updated!</p>`
+
+        const link = '/getScore'
+        const xhr = new XMLHttpRequest();
+        sender = JSON.stringify(score)
+        xhr.open('POST', link);
+        xhr.send(sender); 
     } else {
         document.getElementById("Start").style.display = "none";
         document.getElementById("colorPallet").style.display = "none";
@@ -194,6 +187,8 @@ function end_game(){
         display_image("GameOver.jpg", "YOU LOST");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}...</p>`
     }
+
+
 }
 
 /*
@@ -600,7 +595,9 @@ document.getElementById("Draw").addEventListener("click", () => {
     document.getElementById("name").style.display = "inline-block";
     document.getElementById("scores").style.display = "none";
 });
-document.getElementById("Upload").addEventListener("click", () => {
+
+document.getElementById("Upload").addEventListener("click", () => 
+{
     //get name
     puzzle_name = document.getElementById("name").value;
     //collect data

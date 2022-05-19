@@ -27,9 +27,9 @@ class User(UserMixin,db.Model):
     def get_id(self):
         return (self.user_id)
 
-    correct_attempt = db.Column(db.Integer)
-    wrong_attempt = db.Column(db.Integer)
     highest_score = db.Column(db.Integer)
+    scores_array = db.Column(db.String(3000))
+    difficulty_dict = db.Column(db.String(300))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

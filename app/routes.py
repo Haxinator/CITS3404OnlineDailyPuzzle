@@ -1,6 +1,3 @@
-#This file is purely responsible for routing
-
-from crypt import methods
 from app import app
 from app import db
 from app import login
@@ -11,13 +8,10 @@ from werkzeug.utils import redirect
 from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+from sqlalchemy import desc
 import random
+import json
 from datetime import datetime, timedelta
-
-# Global time variable
-# time = datetime.date(datetime.utcnow()) + timedelta(days=1)
-# LastRunTime = datetime.utcnow()
-
 
 LastRunTime = {
     "EASY":datetime.min,
@@ -26,9 +20,6 @@ LastRunTime = {
     }
 # Global puzzles variable
 puzzles = {}
-# Global variable that determines if this is the first time
-# The puzzle is retrieved.
-# firstRun = True
 
 @app.shell_context_processor
 def make_shell_context():
@@ -52,7 +43,21 @@ def game():
     else:
         difficulty = request.args.get("Difficulty")
         if difficulty is None:
-            difficulty = "EASY"
+            difficulty = "easy"
+
+        #gets the current user's difficulty dictionary that contains the total games count according to difficulty
+        current_diff = current_user.difficulty_dict
+
+        if(str(current_diff) == "None"): #if user is playing for the first time
+            dic = {"easy": 0, "normal": 0, "hard": 0}
+        else:
+            dic = json.loads(current_user.difficulty_dict)
+
+        dic[difficulty] += 1
+        
+        current_user.difficulty_dict = json.dumps(dic)
+        db.session.commit()
+        
         if request.method == "POST":
             user_puzzle =request.form["PuzzleDb"]
             user_canvas, diff, puz_name = user_puzzle.split("|")
@@ -118,21 +123,87 @@ def getData():
 
     return jsonify(puzzles[difficulty])
 
-
+@app.route("/getScore", methods=["POST"])
+def getScore():
+    if request.method == 'POST':
+            #gets the final score when game ends
+            info = request.data #type: binary
+            #converts the score into str(.decode('utf-8') removes binary from the info)
+            score_str = info.decode('utf-8')
+            #converts str to int
+            s = int(info.decode('utf-8'))
+            player = current_user
+            #gets the data from the database for the current user
+            old_score = current_user.highest_score
+            old_score_str = str(player.scores_array)
+            #if user is playing the game for the first time
+            if str(old_score_str) == "None" and str(old_score) == "None": 
+                final_score_str = score_str
+                player.highest_score = s
+                player.scores_array = final_score_str
+                db.session.commit()
+            else:
+                final_score_str = old_score_str + "," + score_str
+        
+                split_str = final_score_str.split(",")
+                final_score = s + old_score
+                player.highest_score = final_score
+                player.scores_array = final_score_str
+                db.session.commit()
 
 @app.route('/rules')
 def rules():
     return render_template("HTML/about.html", title = "About")
 
-@app.route('/stats')
+@app.route('/stats', methods = ["GET","POST"])
 def stats():
-    return render_template("HTML/statistics.html", title = "Statistics")
+    #gets the difficulty_dict and usernames from the database
+    users_list = [each.username for each in (User.query.with_entities(User.username).order_by(User.user_id))]
+    stat_table3 = []
+    for u in User.query.with_entities(User.difficulty_dict):
+        dic_diff = []
+        #_asdict() converts SQLAlchemy row object to a python dict
+        u_dict = u._asdict()
+        dic2 = u_dict['difficulty_dict']
+    
+        if type(dic2) == str:
+            dic = json.loads(dic2)
+            dic_diff.append(dic["easy"])
+            dic_diff.append(dic["normal"])
+            dic_diff.append(dic["hard"])
+            stat_table3.append(dic_diff)
+    
+    size_dic = len(stat_table3)
+
+    #gets the username of all users from the database order by highest_score
+    stat_user = [each.username for each in (User.query.with_entities(User.username).order_by(desc(User.highest_score)).all())]
+    #gets the highest_score of all users from the database order by highest_score
+    stat_score = [each.highest_score for each in (User.query.with_entities(User.highest_score).order_by(desc(User.highest_score)).all())]
+    stat_table2 = []
+    #stat_table2 list that contains usernames and scores
+    stat_table2.append(stat_user)
+    stat_table2.append(stat_score)
+    length = len(stat_user)
+    i = stat_user.index(current_user.username)
+
+    #gets the scores of current user for all the games that user has played so far
+    scores_list_str = current_user.scores_array
+    print(scores_list_str)
+    try:
+        stat_table1 = scores_list_str.split(",")
+        size = len(stat_table1)
+        total_score = current_user.highest_score
+        return render_template("HTML/statistics.html", title = "Statistics", stat_table2 = stat_table2, length = length, i = i, stat_table1 = stat_table1, size = size, total_score = total_score, stat_table3 = stat_table3, size_dic = size_dic, users_list = users_list)
+    except:
+        no_score = str(current_user.scores_array)
+        return render_template("HTML/statistics.html", title = "Statistics",no_score = no_score, length = length, i = i, size_dic = size_dic, users_list = users_list, stat_table2 = stat_table2, stat_table3 = stat_table3)
+   
 
 @app.route('/logout')
 def logout():
     logout_user()
     flash("You have been successfully logged out.")
-    return redirect(url_for('login'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

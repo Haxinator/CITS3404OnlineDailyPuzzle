@@ -31,12 +31,16 @@ Models are the tables stored in the database in this case the user and the puzzl
 The controller (flask) prepares the view based on the route and information given by the model.
 View is what the client sees, which is the page the controller developed serverside and sent to the client's machine.
 
+<<<<<<< HEAD
 Login Page - Allow user to login with an existing account <br/><br/>
 Register Page - Allow user to register a new account<br/><br/>
 Home Page - Allow user to select difficulty for the puzzle or to go to the rules page or the statistics page<br/><br/>
 Game/Play Page - Allow user to create or solve the puzzle based on difficulty(Default: easy)<br/><br/>
 About/Rules Page - Tell the user how to play the game<br/><br/>
 Statistics/Leaderboard Page - Show the stats and ranking of the player compare to themselves or other players<br/><br/>
+=======
+**NEEDS TO BE REVIEWED**
+>>>>>>> dhwani
 
 # describe how to launch the web application.
 
@@ -47,6 +51,7 @@ Once the application is running, open the page in a browser by typing in the URL
 
 # describe some unit tests for the web application, and how to run them.
 
+<<<<<<< HEAD
 To run the unit test, simply enter command (python -m tests.testing) in the terminal and it will activate the testing.py, which is the unit test python script.<br/>
 Each unit test will be run for 2-5 times<br/>
 The following criteria will be tested in the unit test:
@@ -69,6 +74,10 @@ The following criteria will be tested in the unit test:
    <br />
 4. The Scoring system<br /><br />
 5. The Sharing system<br /><br />
+=======
+**UNIT TESTS TO BE ADDED**
+**NEEDS TO BE COMPLETED**
+>>>>>>> dhwani
 
 # Include commit logs, showing contributions and review from both contributing students.
 

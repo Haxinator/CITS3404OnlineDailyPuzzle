@@ -1,5 +1,4 @@
 /*--------------------------Game page CSS---------------------------*/
-
 .row {
   margin: 0;
 }
@@ -18,14 +17,13 @@
   margin: 0px;
 }
 
-/*----------------------------Size of grid CSS--------------------------*/
 #Difficulty {
   text-align:center;
   color: white;
   font-size: 50px;
 }
-/*----------------------------Canvas CSS--------------------------*/
-#canvas table {
+
+  #canvas table {
   border: 5px solid black;
   margin-left: auto;
   margin-right: auto;
