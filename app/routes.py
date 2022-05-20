@@ -1,3 +1,5 @@
+#This file is purely responsible for routing
+
 from app import app
 from app import db
 from app import login
@@ -8,10 +10,12 @@ from werkzeug.utils import redirect
 from app.models import User, Puzzle
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+from datetime import datetime, timedelta
 from sqlalchemy import desc
 import random
+import requests
 import json
-from datetime import datetime, timedelta
+import os
 
 LastRunTime = {
     "EASY":datetime.min,
@@ -20,6 +24,7 @@ LastRunTime = {
     }
 # Global puzzles variable
 puzzles = {}
+
 
 @app.shell_context_processor
 def make_shell_context():
@@ -72,6 +77,8 @@ def game():
             except:
                 flash("Could not add puzzle, name or pattern already exists.")
                 return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
+        
+        
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
 @app.route("/getData", methods=["GET"])
@@ -127,7 +134,8 @@ def getData():
 def getScore():
     if request.method == 'POST':
             #gets the final score when game ends
-            info = request.data #type: binary
+            #type: binary
+            info = request.data 
             #converts the score into str(.decode('utf-8') removes binary from the info)
             score_str = info.decode('utf-8')
             #converts str to int
@@ -150,6 +158,36 @@ def getScore():
                 player.highest_score = final_score
                 player.scores_array = final_score_str
                 db.session.commit()
+                
+@app.route("/FBsharing", methods=["POST", "GET"])
+def FBsharing():
+    if request.method == "POST":
+
+        # Getting the name of player
+        name = User.query.filter_by(user_id=int(current_user.get_id())).first().username
+        # Getting Score
+        score = request.args.get("Score")
+
+
+        filename = os.path.join(app.static_folder, 'credentials.json')
+        with open(filename) as file:
+            credentials = json.load(file)
+
+        access_token = credentials["access_token"]
+        id = credentials["id"]
+        msg = f" Player {name} has scored {score} recently"
+        post_url = f"https://graph.facebook.com/{id}/feed"
+        payload = {
+            'message': msg,
+            'access_token': access_token
+        }
+        r = requests.post(post_url, data=payload)
+        return "successfully added"
+    else:
+        return "this page is not usable for client"
+    
+
+
 
 @app.route('/rules')
 def rules():
