@@ -23,6 +23,14 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(self.user1.check_password('asfas'))
         self.assertTrue(self.user1.check_password('123'))
 
+    #Tests user information stored
+    def test_user_info(self):
+        pass
+
+    #tests the user score information 
+    def test_user_score(self):
+        pass
+
     def test_login_page(self):
         #chck if login page is sent
         tester = app.test_client(self)
