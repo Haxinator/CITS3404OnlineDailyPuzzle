@@ -172,7 +172,8 @@ function end_game(){
         display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
         display_image("win.png", "YOU WIN");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!<br>Your score has been updated!</p>`
-
+        //appearing FBshare button
+        document.getElementById("FBSHARE").style.display = "inline-block";
         const link = '/getScore'
         const xhr = new XMLHttpRequest();
         sender = JSON.stringify(score)
@@ -516,14 +517,13 @@ document.getElementById("Check").addEventListener("click", () => {
             //remove item from canvas
             delete userCanvas[item];
 
-            //Checks if score is greater than 0 
-            //Deducts 10 points from the score as wrong cell or color
+            //Deducts from the score as wrong cell or color
             score = score - DECREMENT;
         }
-        //Adds 10 points to the score for each correct cell
+        //Adds points to the score for each correct cell
         else{
             count++;
-            score = score + INCREMENT;    //me
+            score = score + INCREMENT; 
         }
     }
     //Check items that have been in puzzle and conestant missed it
@@ -549,8 +549,6 @@ document.getElementById("Check").addEventListener("click", () => {
         table.classList.remove("start");
         table.classList.remove("ready");
         change_button("Check", "Next");
-        //appearing FBshare button
-        document.getElementById("FBSHARE").style.display = "inline-block";
         //display correct puzzle message
         display_message('<h3><span style ="color:green">Correct!</span></h3>');
     }else{
@@ -619,6 +617,6 @@ document.getElementById("FBSHARE").addEventListener("click", () => {
     http.onreadystatechange=(e)=>{
         console.log(http.responseText);
     }
-    
-    display_message('<h3><span style ="color:green">Your result has been share FB</span></h3>');
+    change_button("FBSHARE", "FBPage");
+    display_message('<h3><span style ="color:green">Your result has been shared to our Facebook page!</span></h3>');
 });

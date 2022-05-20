@@ -133,31 +133,32 @@ def getData():
 @app.route("/getScore", methods=["POST"])
 def getScore():
     if request.method == 'POST':
-            #gets the final score when game ends
-            #type: binary
-            info = request.data 
-            #converts the score into str(.decode('utf-8') removes binary from the info)
-            score_str = info.decode('utf-8')
-            #converts str to int
-            s = int(info.decode('utf-8'))
-            player = current_user
-            #gets the data from the database for the current user
-            old_score = current_user.highest_score
-            old_score_str = str(player.scores_array)
-            #if user is playing the game for the first time
-            if str(old_score_str) == "None" and str(old_score) == "None": 
-                final_score_str = score_str
-                player.highest_score = s
-                player.scores_array = final_score_str
-                db.session.commit()
-            else:
-                final_score_str = old_score_str + "," + score_str
-        
-                split_str = final_score_str.split(",")
-                final_score = s + old_score
-                player.highest_score = final_score
-                player.scores_array = final_score_str
-                db.session.commit()
+        #gets the final score when game ends
+        #type: binary
+        info = request.data 
+        #converts the score into str(.decode('utf-8') removes binary from the info)
+        score_str = info.decode('utf-8')
+        #converts str to int
+        s = int(info.decode('utf-8'))
+        player = current_user
+        #gets the data from the database for the current user
+        old_score = current_user.highest_score
+        old_score_str = str(player.scores_array)
+        #if user is playing the game for the first time
+        if str(old_score_str) == "None" and str(old_score) == "None": 
+            final_score_str = score_str
+            player.highest_score = s
+            player.scores_array = final_score_str
+            db.session.commit()
+        else:
+            final_score_str = old_score_str + "," + score_str
+    
+            split_str = final_score_str.split(",")
+            final_score = s + old_score
+            player.highest_score = final_score
+            player.scores_array = final_score_str
+            db.session.commit()
+        return "Score uploaded"
                 
 @app.route("/FBsharing", methods=["POST", "GET"])
 def FBsharing():
@@ -175,7 +176,7 @@ def FBsharing():
 
         access_token = credentials["access_token"]
         id = credentials["id"]
-        msg = f" Player {name} has scored {score} recently"
+        msg = f" {name} got a score of {score}!"
         post_url = f"https://graph.facebook.com/{id}/feed"
         payload = {
             'message': msg,
