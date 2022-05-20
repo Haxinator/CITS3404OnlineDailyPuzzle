@@ -110,7 +110,7 @@ function initalize_puzzle(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         
-        if(this.response != "None")
+        if(this.response != "None" && this.response != "Complete" )
         {
             var puzzleData = {}
             let response = JSON.parse(this.response);
@@ -126,8 +126,11 @@ function initalize_puzzle(){
             }
             
             next_puzzle();
-        } else{
+        } else if(this.response == "None"){
             display_message("!!!!TERMINAL ERROR!!!!!! <br> NO PUZZLES FOUND! <br> Maybe try uploading your own?")
+        } else {
+            document.getElementById("Start").style.display = "none";
+            display_message("<span style='color:red;'>"+DIFFICULTY+" Puzzles already Completed!</span><br>Try doing another difficulty. <br>Otherwise new puzzles will be avaliable tomorrow.")
         }
 
     }
@@ -166,32 +169,25 @@ function end_game(){
     if(score > 0)
     {
         //visual win screen
-        document.getElementById("Start").style.display = "none";
-        document.getElementById("colorPallet").style.display = "none";
-        document.getElementById("canvas").style.display = "none";
-        document.querySelector("h2").style.display = "none";
-        display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
         display_image("win.png", "YOU WIN");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!<br>Your score has been updated!</p>`
-        
-        //appearing FBshare button
-        document.getElementById("FBSHARE").style.display = "inline-block";
 
-        //upload score
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', "/getScore?Score="+score+"&Difficulty="+DIFFICULTY);
-        xhr.send(); 
     } else {
-        document.getElementById("Start").style.display = "none";
-        document.getElementById("colorPallet").style.display = "none";
-        document.getElementById("canvas").style.display = "none";
-        document.querySelector("h2").style.display = "none";
-        display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
         display_image("GameOver.jpg", "YOU LOST");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}...</p>`
     }
 
-
+    document.getElementById("Start").style.display = "none";
+    document.getElementById("colorPallet").style.display = "none";
+    document.getElementById("canvas").style.display = "none";
+    document.querySelector("h2").style.display = "none";
+    display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
+    //appearing FBshare button
+    document.getElementById("FBSHARE").style.display = "inline-block";
+    //upload score
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', "/getScore?Score="+score+"&Difficulty="+DIFFICULTY);
+    xhr.send(); 
 }
 
 /*

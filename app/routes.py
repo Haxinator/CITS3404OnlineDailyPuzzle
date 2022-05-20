@@ -67,18 +67,30 @@ def game():
         
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
+# Creates the a random puzzle set on user request
+# Or will return the puzzle already generated if it's the same day.
 @app.route("/getData", methods=["GET"])
 def getData():
     global puzzles
     global LastRunTime
     time = datetime.utcnow()
     difficulty = request.args.get("Difficulty")
+    print(current_user.isComplete)
+    isComplete = json.loads(current_user.isComplete)
     # In case difficulty wasn't defined
     if difficulty is None:
         difficulty = "EASY"
 
     print(time)
-    if(time >= (LastRunTime[difficulty] + timedelta(minutes=30))):
+    if(time >= (LastRunTime[difficulty] + timedelta(minutes=3))):
+        # Reset Personal score counter on a new day
+        current_user.scores_array = ""
+        # New puzzle set for this difficulty
+        # So it is not complete
+        isComplete[difficulty] = False
+        current_user.isComplete = json.dumps(isComplete)
+        db.session.commit()
+        # Update the time this puzzle was last generated
         LastRunTime[difficulty] = time
         # clear puzzle set of this difficulty
         puzzles[difficulty] = {}
@@ -115,16 +127,22 @@ def getData():
             print(index)
             puzzles[difficulty][name] = dictionary
 
-    return jsonify(puzzles[difficulty])
-
+    # If User already completed this set of puzzles today
+    if(isComplete[difficulty]):
+        return "Complete"
+    else:
+       return jsonify(puzzles[difficulty])
+    
 @app.route("/getScore", methods=["POST"])
 def getScore():
     if request.method == 'POST':
-        json.loads(current_user.isComplete)
         # gets difficulty as a string
-        difficulty = request.args.get("Difficulty").lower()
+        difficulty = request.args.get("Difficulty")
         #gets score as a string    
         score = request.args.get("Score")
+        isComplete = json.loads(current_user.isComplete)
+        isComplete[difficulty] = True
+        current_user.isComplete = json.dumps(isComplete)
 
         player = current_user
         #gets the old scores
@@ -193,9 +211,9 @@ def stats():
     
         if type(dic2) == str:
             dic = json.loads(dic2)
-            dic_diff.append(dic["easy"])
-            dic_diff.append(dic["normal"])
-            dic_diff.append(dic["hard"])
+            dic_diff.append(dic["EASY"])
+            dic_diff.append(dic["NORMAL"])
+            dic_diff.append(dic["HARD"])
             stat_table3.append(dic_diff)
     
     size_dic = len(stat_table3)

@@ -30,8 +30,8 @@ class User(UserMixin,db.Model):
 
     highest_score = db.Column(db.Integer, default = 0)
     scores_array = db.Column(db.String(3000), default = "")
-    difficulty_dict = db.Column(db.String(300), default='{"easy":0,"normal":0,"hard":0}')
-    isComplete = db.Column(db.String(50), default='{"easy":False,"normal":False,"hard":False}')
+    difficulty_dict = db.Column(db.String(300), default='{"EASY":0,"NORMAL":0,"HARD":0}')
+    isComplete = db.Column(db.String(50), default='{"EASY":false,"NORMAL":false,"HARD":false}')
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
