@@ -184,25 +184,26 @@ def stats():
     stat_table2.append(stat_user)
     stat_table2.append(stat_score)
     length = len(stat_user)
-    i = stat_user.index(current_user.username)
-
-    #gets the scores of current user for all the games that user has played so far
-    scores_list_str = current_user.scores_array
-    print(scores_list_str)
-    try:
+    
+    if current_user.is_authenticated:
+        #gets the scores of current user for all the games that user has played so far
+        scores_list_str = current_user.scores_array
+        print(scores_list_str)
+        i = stat_user.index(current_user.username)
         stat_table1 = scores_list_str.split(",")
         size = len(stat_table1)
         total_score = current_user.highest_score
         return render_template("HTML/statistics.html", title = "Statistics", stat_table2 = stat_table2, length = length, i = i, stat_table1 = stat_table1, size = size, total_score = total_score, stat_table3 = stat_table3, size_dic = size_dic, users_list = users_list)
-    except:
-        no_score = str(current_user.scores_array)
-        return render_template("HTML/statistics.html", title = "Statistics",no_score = no_score, length = length, i = i, size_dic = size_dic, users_list = users_list, stat_table2 = stat_table2, stat_table3 = stat_table3)
+    else:
+        # no_score = str(current_user.scores_array)
+        return render_template("HTML/statistics.html", title = "Statistics", length = length, size_dic = size_dic, users_list = users_list, stat_table2 = stat_table2, stat_table3 = stat_table3)
    
 
 @app.route('/logout')
 def logout():
     logout_user()
     flash("You have been successfully logged out.")
+    return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])

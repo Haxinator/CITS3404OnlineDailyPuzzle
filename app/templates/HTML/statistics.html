@@ -69,6 +69,7 @@
 
         {% else %}
 
+        {% if current_user.is_authenticated %}
         <div class="sections">
             <div id="txt">Your score</div>
             <div id="verscroll">
@@ -97,6 +98,7 @@
             
             <div class="msg">Total Score: {{total_score}} </div>
         </div>
+        {% endif %}
 
         <div class="sections">
             
@@ -120,7 +122,9 @@
                 </table>
             </div>
                 
+            {% if current_user.is_authenticated %}
             <div class="msg">You are at Position {{ i + 1 }}</div>
+            {% endif %}
         </div>
         
         <div class="sections">
@@ -155,9 +159,11 @@
         {% endif %}
     </div>
     
+    {% if current_user.username == stat_table2[0][0] %}
     <div class="bottomcontainer" >
         <img src="../static/pictures/minions.gif" alt="Minions.gif">
     </div>
+    {% endif %}
     
 </div>
 

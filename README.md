@@ -16,7 +16,7 @@ The purpose of the web application is to enhance the user's memory, whilst also 
 
 The daily puzzle developed is a memory game in nature. The user must complete the set of given puzzles to win the daily puzzle. A pattern/picture is shown to a user and they must recreate it in the web application. The puzzle allows an indefinite number of attempts until the user gets is correct, upon which a next button will appear allowing the user to go to the next puzzle in the set or if it is the last puzzle in the set, the user gets a final score and wins the game.
 
-There are three difficulties: easy, medium and hard. The size of puzzle to remember increases with an increase in difficulty. Meaning each puzzle in the set will take a longer time to complete and there is a greater chance of the user making a mistake.
+There are three difficulties: easy, normal and hard. The size of puzzle to remember increases with an increase in difficulty. Meaning each puzzle in the set will take a longer time to complete and there is a greater chance of the user making a mistake.
 
 Users can also create and upload their own puzzles via the upload button.
 
@@ -47,9 +47,47 @@ Once the application is running, open the page in a browser by typing in the URL
 
 # describe some unit tests for the web application, and how to run them.
 
-**UNIT TESTS TO BE ADDED**
-**NEEDS TO BE COMPLETED**
+To run the unit test, simply enter command (python -m tests.testing) in the terminal and it will activate the testing.py, which is the unit test python script.
+Each unit test will be run for 2-5 times
+The following criteria will be tested in the unit test:
+
+Login and register functionality and authentication
+Normal login (Successful)
+Entering login details without account
+Not entering field/fields in register form
+Entering email address without @gmail.com at the end
+Entering a different repeated password to the password
+Entering an existing username in the register form
+
+Access to different pages
+Trying to access to every page
+Trying to access to every page without login
+
+The puzzle game
+Test different difficulty
+Test when player finishes puzzle(s)
+
+The Scoring system
+
+The Sharing system
 
 # Include commit logs, showing contributions and review from both contributing students.
 
 **TO BE ADDED ONCE PROJECT IS FINALISED**
+
+# References:
+
+External CSS(Bootstrap):
+https://getbootstrap.com/docs/5.1/getting-started/introduction/#css
+External JS(Bootstrap):
+https://getbootstrap.com/docs/5.1/getting-started/introduction/#js
+
+APA Referencing Guide for images (https://libguides.murdoch.edu.au/APA/images):
+
+1. Minions.gif
+   FoxIsHere. 10 Wacky And Silly Minion Gifs. LOVETHISPIC
+   https://www.lovethispic.com/blog/49150/10-wacky-and-silly-minion-gifs
+2. win.png
+   https://www.ajournalofmusicalthings.com/wp-content/uploads/YouWin.png
+3. GameOver.jpg
+   https://npinopunintended.files.wordpress.com/2012/05/game-over-1.jpeg
