@@ -165,6 +165,7 @@ function next_puzzle(){
 function end_game(){
     if(score > 0)
     {
+        //visual win screen
         document.getElementById("Start").style.display = "none";
         document.getElementById("colorPallet").style.display = "none";
         document.getElementById("canvas").style.display = "none";
@@ -172,13 +173,14 @@ function end_game(){
         display_message("<h1>Daily Puzzle Supply Depleted <br> For Now...</h1>", false);
         display_image("win.png", "YOU WIN");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!<br>Your score has been updated!</p>`
+        
         //appearing FBshare button
         document.getElementById("FBSHARE").style.display = "inline-block";
-        const link = '/getScore'
+
+        //upload score
         const xhr = new XMLHttpRequest();
-        sender = JSON.stringify(score)
-        xhr.open('POST', link);
-        xhr.send(sender); 
+        xhr.open('POST', "/getScore?Score="+score+"&Difficulty="+DIFFICULTY);
+        xhr.send(); 
     } else {
         document.getElementById("Start").style.display = "none";
         document.getElementById("colorPallet").style.display = "none";

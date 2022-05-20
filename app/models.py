@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from email.policy import default
 from app import app
 from app import db
 from app import login
@@ -27,10 +28,10 @@ class User(UserMixin,db.Model):
     def get_id(self):
         return (self.user_id)
 
-    highest_score = db.Column(db.Integer)
-    scores_array = db.Column(db.String(3000))
-    difficulty_dict = db.Column(db.String(300))
-
+    highest_score = db.Column(db.Integer, default = 0)
+    scores_array = db.Column(db.String(3000), default = "")
+    difficulty_dict = db.Column(db.String(300), default='{"easy":0,"normal":0,"hard":0}')
+    isComplete = db.Column(db.String(50), default='{"easy":False,"normal":False,"hard":False}')
     def __repr__(self):
         return '<User {}>'.format(self.username)
 

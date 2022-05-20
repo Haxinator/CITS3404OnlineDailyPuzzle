@@ -1,5 +1,4 @@
 #This file is purely responsible for routing
-
 from app import app
 from app import db
 from app import login
@@ -48,21 +47,8 @@ def game():
     else:
         difficulty = request.args.get("Difficulty")
         if difficulty is None:
-            difficulty = "easy"
+            difficulty = "EASY"
 
-        #gets the current user's difficulty dictionary that contains the total games count according to difficulty
-        current_diff = current_user.difficulty_dict
-
-        if(str(current_diff) == "None"): #if user is playing for the first time
-            dic = {"easy": 0, "normal": 0, "hard": 0}
-        else:
-            dic = json.loads(current_user.difficulty_dict)
-
-        dic[difficulty] += 1
-        
-        current_user.difficulty_dict = json.dumps(dic)
-        db.session.commit()
-        
         if request.method == "POST":
             user_puzzle =request.form["PuzzleDb"]
             user_canvas, diff, puz_name = user_puzzle.split("|")
@@ -83,7 +69,6 @@ def game():
 
 @app.route("/getData", methods=["GET"])
 def getData():
-    # global firstRun
     global puzzles
     global LastRunTime
     time = datetime.utcnow()
@@ -92,12 +77,9 @@ def getData():
     if difficulty is None:
         difficulty = "EASY"
 
-    #Breaks on difficulty switch, either only choose one difficulty a day
-    #Or code to account for it
     print(time)
     if(time >= (LastRunTime[difficulty] + timedelta(minutes=30))):
         LastRunTime[difficulty] = time
-        # firstRun = False
         # clear puzzle set of this difficulty
         puzzles[difficulty] = {}
         
@@ -114,17 +96,22 @@ def getData():
         elif(numberOfPuzzles > puzzlesStored):
             numberOfPuzzles = puzzlesStored
 
-        # Only get number of puzzles specified
-        for i in range(numberOfPuzzles):
+        # Get number of puzzles specified
+        while len(puzzles[difficulty]) < numberOfPuzzles:
+            print("length" + str(len(puzzles[difficulty])))
+
             dictionary = None
             name = None
 
+            # If no puzzle or if the puzzle is already in the set
+            # get a new puzzle
             while name in puzzles or name is None:
                 index = int(random.random()*puzzlesStored)
                 puzzle = Puzzle.query.filter_by(difficulty=difficulty).offset(index).first()
                 dictionary = puzzle.puzzle_dictionary
                 name = puzzle.name
 
+            #Add puzzle to the set
             print(index)
             puzzles[difficulty][name] = dictionary
 
@@ -133,31 +120,30 @@ def getData():
 @app.route("/getScore", methods=["POST"])
 def getScore():
     if request.method == 'POST':
-        #gets the final score when game ends
-        #type: binary
-        info = request.data 
-        #converts the score into str(.decode('utf-8') removes binary from the info)
-        score_str = info.decode('utf-8')
-        #converts str to int
-        s = int(info.decode('utf-8'))
+        json.loads(current_user.isComplete)
+        # gets difficulty as a string
+        difficulty = request.args.get("Difficulty").lower()
+        #gets score as a string    
+        score = request.args.get("Score")
+
         player = current_user
-        #gets the data from the database for the current user
+        #gets the old scores
         old_score = current_user.highest_score
-        old_score_str = str(player.scores_array)
-        #if user is playing the game for the first time
-        if str(old_score_str) == "None" and str(old_score) == "None": 
-            final_score_str = score_str
-            player.highest_score = s
-            player.scores_array = final_score_str
-            db.session.commit()
-        else:
-            final_score_str = old_score_str + "," + score_str
-    
-            split_str = final_score_str.split(",")
-            final_score = s + old_score
-            player.highest_score = final_score
-            player.scores_array = final_score_str
-            db.session.commit()
+        score_list = str(player.scores_array)
+
+        #gets the current user's difficulty dictionary that contains the total games count according to difficulty
+        dic = json.loads(current_user.difficulty_dict)
+        print(dic)
+        print(difficulty)
+        dic[difficulty] += 1
+        current_user.difficulty_dict = json.dumps(dic)
+
+        final_score_str = score_list + "," + score
+        final_score = int(score) + old_score
+        player.highest_score = final_score
+        player.scores_array = final_score_str
+
+        db.session.commit()
         return "Score uploaded"
                 
 @app.route("/FBsharing", methods=["POST", "GET"])
@@ -224,7 +210,7 @@ def stats():
     stat_table2.append(stat_score)
     length = len(stat_user)
     
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.scores_array is not None:
         #gets the scores of current user for all the games that user has played so far
         scores_list_str = current_user.scores_array
         print(scores_list_str)
