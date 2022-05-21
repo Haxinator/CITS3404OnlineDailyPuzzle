@@ -59,14 +59,12 @@ def game():
         if request.method == "POST":
             user_puzzle =request.form["PuzzleDb"]
             user_canvas, diff, puz_name = user_puzzle.split("|")
-            flash(user_canvas)
-            flash(diff)
             # Add puzzle to db
             try:
                 puzzle = Puzzle(puzzle_dictionary=user_canvas, difficulty=diff, name=puz_name)
                 db.session.add(puzzle)
                 db.session.commit()
-                flash("Puzzle Successfully Uploaded!")
+                flash(diff + " Puzzle " + puz_name + " Successfully Uploaded!")
             except:
                 flash("Could not add puzzle, name or pattern already exists.")
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
