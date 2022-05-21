@@ -80,7 +80,7 @@ def getData():
 
     # If the current time is greater or equal to the time at which
     # The puzzles should be updated
-    if(time >= (LastRunTime[difficulty] + timedelta(minutes=3))):
+    if(time >= (LastRunTime[difficulty] + timedelta(days=1))):
         # get all users
         users = User.query.all()
 

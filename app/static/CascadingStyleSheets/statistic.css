@@ -6,11 +6,10 @@
 
 .box{
     border: 1px solid grey;
+    padding-bottom: 1em;
 }
 
 .scroll{
-    /* height: 350px;
-    overflow-y: scroll; */
     padding: 0px;
 }
 
@@ -21,7 +20,6 @@
 } 
 
 table,th,td{
-    /* border: 1px solid white; */
     border-bottom: 2px solid white;
     border-collapse: collapse; 
     padding: 3px 3px;
@@ -32,19 +30,6 @@ h1, h3{
     color: aquamarine;
 }
 
-th{
-    /* background-color: rgb(78, 78, 197); */
-    /* background-color: gray; */
-}
 #diff{
-    /* background-color: rgb(247, 119, 73); */
     background-color: red;
-}
-tr:nth-child(even){
-    /* background-color: rgb(247, 86, 86); */
-    /* background-color: grey; */
-}
-tr:nth-child(odd){
-    /* background-color: rgb(144, 181, 250); */
-
 }

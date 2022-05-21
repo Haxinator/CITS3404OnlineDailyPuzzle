@@ -1,2 +1,2 @@
 FLASK_APP=puzzle.py
-FLASK_DEBUG=1
+FLASK_ENV=production
