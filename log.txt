@@ -1,4 +1,22 @@
-* commit 9534967003197ee3e3901d540c6b1663d0c4651e (HEAD -> main, origin/main, origin/HEAD)
+* commit 85c26edf2f019b3f2623852c517e2c1c268da29e (HEAD -> main, origin/main, origin/HEAD)
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 22:04:08 2022 +0800
+| 
+|     bug fix and puzzles added
+| 
+* commit 9ad64916f14f5fc73298b328ba038febff8cf835
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 21:41:14 2022 +0800
+| 
+|     Comments added
+| 
+* commit 646c235932362326c43ca7078a603cb349a53697
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 21:03:15 2022 +0800
+| 
+|     logs
+| 
+* commit 9534967003197ee3e3901d540c6b1663d0c4651e
 | Author: Haxinator <22760978@student.uwa.edu.au>
 | Date:   Sat May 21 20:53:43 2022 +0800
 | 
