@@ -1,5 +1,3 @@
-#python3 -m venv venv
-#source venv/bin/activate
 #This file creates an instance of flask
 #called "app".
 from flask import Flask
@@ -21,6 +19,7 @@ migrate = Migrate(app, db)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #FLASK LOGIN
 
+# login manager initalisation
 login = LoginManager(app)
 login.login_view = 'login'
 
@@ -29,9 +28,3 @@ from app import routes, models
 #run app and turn debug mode on
 if __name__ == "__main__":
     app.run(debug=True)
-
-with app.app_context():
-    if db.engine.url.drivername == 'sqlite':
-        migrate.init_app(app, db, render_as_batch=True)
-    else:
-        migrate.init_app(app, db)

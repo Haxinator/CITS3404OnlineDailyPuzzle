@@ -67,6 +67,7 @@ const DECREMENT = 20;
 
 //****************Global Variables************//
 
+// eraser selected by default
 var COLOR = "eraser";
 //record of user selected cells
 var userCanvas = {};
@@ -84,6 +85,7 @@ var result = document.getElementById("result");
 
 /*
 Generates a random puzzle (supported for all grid sizes)
+! NO LONGER USED. KEPT IN FILE FOR TESTING PURPOSES.
 @param color_array is the array that we used as the colors for the palette
 @return the generated puzzle
 */
@@ -95,7 +97,7 @@ function generate_random_puzzle(color_array){
         //get a random cell
         let key = Math.round(Math.random()*(num_cells-1));
         //get a random colour
-        //-2 in stead of -1 so eraser isn't included
+        //-2 instead of -1 so eraser isn't included
         let index = Math.round(Math.random()*(color_array.length-2));
         //add random color to random cell
         puzzle_color_dict[key] = color_array[index];
@@ -107,6 +109,7 @@ function generate_random_puzzle(color_array){
 
 //Initalises the PUZZLES array
 function initalize_puzzle(){
+    // send a request to get the puzzles
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         
@@ -127,13 +130,16 @@ function initalize_puzzle(){
             
             next_puzzle();
         } else if(this.response == "None"){
+            // No puzzles found
             display_message("!!!!TERMINAL ERROR!!!!!! <br> NO PUZZLES FOUND! <br> Maybe try uploading your own?")
         } else {
+            // puzzles already completed today
             document.getElementById("Start").style.display = "none";
             display_message("<span style='color:red;'>"+DIFFICULTY+" Puzzles already Completed!</span><br>Try doing another difficulty. <br>Otherwise new puzzles will be avaliable tomorrow.")
         }
 
     }
+    // get puzzles of DIFFICULTY
     xhttp.open("GET", "/getData?Difficulty="+DIFFICULTY);
     xhttp.send();
 }
@@ -143,10 +149,11 @@ function next_puzzle(){
     //if PUZZLES is not empty
     if(PUZZLES.length != 0)
     {
-        //assign new puzzle
+        //get data
         let puzzleData = PUZZLES.shift();
         console.log(puzzleData);
 
+        //assign new puzzle
         for(const [key,value] of Object.entries(puzzleData))
         {
             puzzle = JSON.parse(value);
@@ -173,10 +180,12 @@ function end_game(){
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}!<br>Your score has been updated!</p>`
 
     } else {
+        //visual lose
         display_image("GameOver.jpg", "YOU LOST");
         scoreDisplay.innerHTML = `<p>YOUR FINAL SCORE IS:<br> ${score}...</p>`
     }
 
+    //always do this regardless of win or lose
     document.getElementById("Start").style.display = "none";
     document.getElementById("colorPallet").style.display = "none";
     document.getElementById("canvas").style.display = "none";
@@ -231,6 +240,7 @@ function display_image(image, alt)
 */ 
 function change_color(colorSelected)
 {
+    //responsible for CSS change when color is selected
     document.getElementById(COLOR).classList.remove("selected");
     COLOR = colorSelected
     document.getElementById(COLOR).classList.add("selected");
@@ -310,7 +320,6 @@ function CreateTable(numRows,numColumns,location,data){
 
 /* make method for CreateTable
 Creates a grid (for canvas or pallet) with a specified number of rows and columns.
-///! USED TO BE TWO SEPERATE METHODS, NOW JUST ONE.
 @return the table html
 */
 CreateTable.prototype.make = function(){
@@ -355,13 +364,6 @@ CreateTable.prototype.make = function(){
                     cell.setAttribute("id", colorName);
                     cell.style.backgroundColor = cellColor;
                     cell.style.padding = "2vh";
-//                    if(DIFFICULTY.toLowerCase() == "hard"){
-//                    cell.style.padding = "3vw";
-//                    }
-//                    else if(DIFFICULTY.toLowerCase() == "normal"){
-//                    cell.style.padding = "2vw";
-//                    }
-
                     //Event listener to remember color chosen
                     cell.addEventListener("click", () => change_color(colorName));
                 break;
@@ -419,8 +421,6 @@ CreateTable.prototype.clear = function() {
 //*-----------------------------------------INITALISATION---------------------------------------------------------------------------//
 //below are the function calls
 
-//! Need to have initalization only occur in dailypuzzle.html
-
 /*
 First we create a new instance of CreateTable and assign it to a variable to store it (this object is for the palette).
 Then we create the palette using make() and fill in the color using the constant array that stores the colors of the pallet (PALETTE1).
@@ -438,7 +438,7 @@ pallet.draw();
 
 /*
 generate_random_puzzle function uses the color pallet to generate the random puzzle dictionary.
-Create the canvas using make() and fill in the color (according to the data parameter of Createtable object) using draw().
+Create the canvas using make()
 !NOTE: At the moment the data parameter for canvas starts an empty. Puzzle data is assigned on start.
 */ 
 //uses difficulty to determine size of grid.
@@ -553,7 +553,6 @@ document.getElementById("Check").addEventListener("click", () => {
 
         console.log("you lost");
        
-        //------------------------------- This will display the wrong cells ----------------//
         console.log("User: " + JSON.stringify(userCanvas) + "\nPuzzle " + JSON.stringify(puzzle));
 
         //change check button to start
@@ -607,6 +606,7 @@ document.getElementById("Upload").addEventListener("click", () =>
 //*-------------------------Sharing to facebook------------------------//
 document.getElementById("FBSHARE").addEventListener("click", () => {
 
+    // Send score to flask
     final_score = score;
     const http = new XMLHttpRequest();
     http.open("POST", "/FBsharing?Score="+ String(score)+"&difficulty="+DIFFICULTY);
@@ -614,6 +614,7 @@ document.getElementById("FBSHARE").addEventListener("click", () => {
     http.onreadystatechange=(e)=>{
         console.log(http.responseText);
     }
+    // change button to go to FB page
     change_button("FBSHARE", "FBPage");
     display_message('<h3><span style ="color:green">Your result has been shared to our Facebook page!</span></h3>');
 });
