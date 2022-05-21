@@ -1,5 +1,4 @@
 #This file is purely responsible for routing
-from inspect import isclass
 from app import app
 from app import db
 from app import login
@@ -60,12 +59,8 @@ def game():
                 db.session.add(puzzle)
                 db.session.commit()
                 flash("Puzzle Successfully Uploaded!")
-                return render_template("HTML/puzzs.html", title ="Puzzle List", puzzles = Puzzle.query.all())
             except:
                 flash("Could not add puzzle, name or pattern already exists.")
-                return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
-        
-        
         return render_template("HTML/dailypuzzle.html", title = "Puzzle",Difficulty = difficulty)
 
 # Creates the a random puzzle set on user request

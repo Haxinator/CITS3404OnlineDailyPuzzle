@@ -36,7 +36,6 @@ Home Page - Allow user to select difficulty for the puzzle or to go to the rules
 Game/Play Page - Allow user to create or solve the puzzle based on difficulty(Default: easy)<br/><br/>
 About/Rules Page - Tell the user how to play the game<br/><br/>
 Statistics/Leaderboard Page - Show the stats and ranking of the player compared to themselves or other players<br/><br/>
-puzz.html page - A page that shows the list of all puzzles uploaded to the server. Can be accessed only once the user submits their own puzzle.
 
 # describe how to launch the web application.
 
