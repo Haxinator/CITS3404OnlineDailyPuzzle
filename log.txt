@@ -1,0 +1,1729 @@
+* commit 9534967003197ee3e3901d540c6b1663d0c4651e (HEAD -> main, origin/main, origin/HEAD)
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 20:53:43 2022 +0800
+| 
+|     requirements.txt
+|   
+*   commit 0877b6a2f28be8a6883f5a6befd0c6bb4db0b3ae
+|\  Merge: 359517c f60c2a9
+| | Author: Haxinator <22760978@student.uwa.edu.au>
+| | Date:   Sat May 21 20:43:22 2022 +0800
+| | 
+| |     Merge branch 'main' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into main
+| | 
+| * commit f60c2a9b7f15967c239c9b1ad5b0fd51e7ef0394
+| | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | Date:   Sat May 21 20:28:51 2022 +0800
+| | 
+| |     Update requirements.txt
+| | 
+* | commit 359517ccd5b8fcd855c92ce6b7bb32a82dbec3d3
+|/  Author: Haxinator <22760978@student.uwa.edu.au>
+|   Date:   Sat May 21 20:43:06 2022 +0800
+|   
+|       Selenium, Validation and Readme
+| 
+* commit c57ceaf6537ada227765140b92086c7d8856daed
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 18:24:37 2022 +0800
+| 
+|     bug fixes
+| 
+* commit 123a099f065ae5b6c36e15b42ca174be08505b69
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 17:38:37 2022 +0800
+| 
+|     Merging Amir's validation work
+| 
+* commit 8d588542d4075c6b8190f153c696aadcb5bedb35
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 16:34:58 2022 +0800
+| 
+|     Final small changes
+| 
+* commit 37e28b52f891da683c0ece5df7f033cee6d1b84f
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 15:45:32 2022 +0800
+| 
+|     Small changes
+| 
+* commit 08e154f73040347b527fd72e7f96823f644b8259
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 13:59:00 2022 +0800
+| 
+|     Final Version before Validation
+| 
+* commit 2f6003df5482d093f8f80eb535907aed63a5aef5
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Sat May 21 11:33:53 2022 +0800
+| 
+|     All unit tests completed
+| 
+* commit d3e9e42c5dc453d7910bc6ceb6c4f7a56d0a4b8f
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Fri May 20 22:52:54 2022 +0800
+| 
+|     test layout
+| 
+* commit 24438a0ec5c8d74c0dff2ab72a2e924e0dad8c0b
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Fri May 20 22:13:47 2022 +0800
+| 
+|     Fixes and User can only do puzzle once
+| 
+* commit 7f612f3ff62532ee69d73aaa8b5f2dd341300e3b
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Fri May 20 17:50:59 2022 +0800
+| 
+|     bug fixes and code simplification
+| 
+* commit c05398bb1540898ed0524e292305d556a50c8a5f
+| Author: Haxinator <22760978@student.uwa.edu.au>
+| Date:   Fri May 20 16:23:06 2022 +0800
+| 
+|     bug fix, small changes
+|   
+*   commit 8e35f16748fcaab71dc6ffcf82522ca2875756bf
+|\  Merge: ed1b249 10a5e4c
+| | Author: Haxinator <22760978@student.uwa.edu.au>
+| | Date:   Fri May 20 14:58:04 2022 +0800
+| | 
+| |     Merged Amir's share into main
+| | 
+* | commit ed1b249e5684d26b38ccc913cb6766c607de710f
+| | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | Date:   Fri May 20 10:03:22 2022 +0800
+| | 
+| |     fixed bug stat page
+| | 
+* | commit 6006701fc0ce9f4bff1c203c92ab8412a529deef
+| | Author: Haxinator <22760978@student.uwa.edu.au>
+| | Date:   Fri May 20 14:11:14 2022 +0800
+| | 
+| |     removed unnecessary file
+| | 
+* | commit d33694fad41d99bee40b867279b16f3f8dc4bb1d
+| | Author: Haxinator <22760978@student.uwa.edu.au>
+| | Date:   Thu May 19 16:36:57 2022 +0800
+| | 
+| |     Puzzles added back
+| | 
+* | commit b3bf07fc278f8f8130ef8598940e0b40e4dfe67f
+| | Author: Haxinator <22760978@student.uwa.edu.au>
+| | Date:   Thu May 19 16:12:06 2022 +0800
+| | 
+| |     small change
+| |   
+* |   commit ac5b3e8dc9dd8b2dc797d76814fafd25ddeca428
+|\ \  Merge: 41b8d44 786cee3
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 19 16:09:30 2022 +0800
+| | | 
+| | |     Merge branch 'dhwani' into main
+| | |   
+| | | * commit 93d96dbc5f37933760caff833202f415e47b4edb (origin/dhwani)
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Fri May 20 10:03:22 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+| | | * commit 2e54a02655674ab151a328797b9b15c9b0fdf43a
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Fri May 20 10:02:37 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+| | | * commit 0b3958a87f33b456dbf375210856e261e476acf1
+| | |/  Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| |/|   Date:   Fri May 20 09:59:39 2022 +0800
+| | |   
+| | |       Update README.md
+| | |   
+| * |   commit 786cee36aca72a4e6a7e9f707665c8bf40bd8a63 (dhwani)
+| |\ \  Merge: 57b19ef e284ba2
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Thu May 19 15:25:18 2022 +0800
+| | | | 
+| | | |     Merge branch 'dhwani' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into dhwani
+| | | | 
+| | * | commit e284ba2e30ab0089e2a8fa73fd7df88229f32e18
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 13:34:39 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit aace0d5e5654e14a92b6455094dea0cc679f1be2
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 13:34:06 2022 +0800
+| | | | 
+| | | |     Delete __pycache__ directory
+| | | | 
+| | * | commit c0b920c7810e163a84d414f7401bb7870f708285
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 13:33:46 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit 663a72c562144b9f93d79af56d90dd22af546767
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 13:31:22 2022 +0800
+| | | | 
+| | | |     Delete migrations directory
+| | | | 
+| | * | commit 3be988fdcadd1b1c0bfca0ace380e15cb0a73fea
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 13:29:40 2022 +0800
+| | | | 
+| | | |     Delete app directory
+| | | | 
+| * | | commit 57b19ef9fb98b8b8cb098533cdbc33cff2d8ec5f
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Thu May 19 15:23:03 2022 +0800
+| | | | 
+| | | |     bug fixes
+| | | |   
+| * | |   commit 37a2c24210724e6dbacbe081c81beabf51e96ab9
+| |\ \ \  Merge: 2fb0750 b5e0cab
+| | |/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | | |   Date:   Thu May 19 11:32:04 2022 +0800
+| | | |   
+| | | |       Merge branch 'dhwani' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into dhwani
+| | | | 
+| | * | commit b5e0cab35286643d5b996c6c696102c56c3889c4
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 10:36:49 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit ae61652f3cbc4fc72decc32a6bcacac9a73e0ddf
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Thu May 19 10:34:35 2022 +0800
+| | | | 
+| | | |     Delete app directory
+| | | |   
+| * | |   commit 2fb075041a5a6a0f6e5aaa281ab44d23546badcd
+| |\ \ \  Merge: 573d8b1 ec719cd
+| | |/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | | |   Date:   Wed May 18 19:53:44 2022 +0800
+| | | |   
+| | | |       dont know
+| | | | 
+| | * | commit ec719cdc9054533a08547ab8be442e121276de8d
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:32:34 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit a9a265cfa96d257aefb72d57d73dc63551f92926
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:31:24 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit 262de9102ae73728b614faf34497b4ca8b004ca8
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:26:36 2022 +0800
+| | | | 
+| | | |     Delete puzzle.py
+| | | | 
+| | * | commit fd6cb47f9498e9b664cf48bd26ee43233ac2854c
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:26:27 2022 +0800
+| | | | 
+| | | |     Delete data.txt
+| | | | 
+| | * | commit b391be8dbad616523fc1094769dca21354d1da4c
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:26:15 2022 +0800
+| | | | 
+| | | |     Delete README.md
+| | | | 
+| | * | commit 81a38044edd41204ac9250caa9d48ab4de1a4aaa
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:26:00 2022 +0800
+| | | | 
+| | | |     Delete .flaskenv
+| | | | 
+| | * | commit 0d6f777bfebbc03c9fbd71e6aca4ab04b03bb357
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:25:43 2022 +0800
+| | | | 
+| | | |     Delete app directory
+| | | | 
+| | * | commit 4d4039dfdd72b742cc042faad04c6811463685b8
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed May 18 18:25:23 2022 +0800
+| | | | 
+| | | |     Delete __pycache__ directory
+| | | | 
+| | * | commit 61a27e3329a627be345f40f7d57a337012f06590
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Thu May 5 14:29:00 2022 +0800
+| | | | 
+| | | |     removed unnecessary files
+| | | |   
+| | | | * commit d6d780ff8e1c40105f261a2d81a3d65fa60ba121 (mainCopy)
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Thu May 19 16:25:13 2022 +0800
+| | | | | 
+| | | | |     small change
+| | | | | 
+| | | | * commit 85c767df585b56dd010e588c323419c55b519f0e
+| |_|_|/  Author: Haxinator <22760978@student.uwa.edu.au>
+|/| | |   Date:   Thu May 19 16:22:11 2022 +0800
+| | | |   
+| | | |       full desc
+| | | | 
+* | | | commit 41b8d441adf389e57f81a77a2c9bf589ed15cc8a (origin/mainCopy)
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Wed May 18 17:19:29 2022 +0800
+| | | | 
+| | | |     forgot to add readme
+| | | | 
+* | | | commit dd45b244ae222632ff59bf9f5574ed16c6e1a5f9
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Wed May 18 17:17:49 2022 +0800
+| | | | 
+| | | |     back to login
+| | | | 
+* | | | commit b92d197476e62e73fb0cf35904694c0e826d9ce6
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Wed May 18 17:08:02 2022 +0800
+| | | | 
+| | | |     Finishing touches to responsiveness
+| | | |   
+* | | |   commit 16e7050a89c69f5cd8d3e5d053d0ae114ca3c8d1
+|\ \ \ \  Merge: 1daae2f 0afd2a3
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Wed May 18 16:54:10 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'WillTestResponsive' into main
+| | | | | 
+| * | | | commit 0afd2a3b41d2f388a2897ba232b45c130b8504a8 (origin/WillTestResponsive, WillTestResponsive)
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Wed May 18 16:35:26 2022 +0800
+| | | | | 
+| | | | |     removed junk
+| | | | | 
+| * | | | commit c51e2d5422c1ce38d6aa1714edcbbe423e5d05b4
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Wed May 18 16:31:12 2022 +0800
+| | | | | 
+| | | | |     Fix for hard puzzle on small phone
+| | | | | 
+| * | | | commit ee5385be64d05c2869113bad2d1759f16ec8818e
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:16:56 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit 1ed580f49a5de12b1f0b546890608864ae6cb498
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:16:30 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.css
+| | | | | 
+| * | | | commit 50456037e72a1bd319d0d4e1d343fadb9a9d267d
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:13:29 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit f18f928c7574bab44194be9b0b7995af55907330
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:13:17 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.css
+| | | | | 
+| * | | | commit f1a9fce3dc440bf4a9764d820fca0e50b631359a
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:12:33 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit e7acc5b0dee4ecc43840f58711fdac7c8b2d7cbd
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:12:20 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.js
+| | | | | 
+| * | | | commit ad203bd89bafec654eb6ecf8c2ecf6444968d27c
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:02:56 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit 21727586775ba41cfe23d049e0de7c56c13aa614
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:02:43 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.css
+| | | | | 
+| * | | | commit e6e09c654ecf43715cae2dce0d4e0d517cc2d223
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:02:16 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit 6c6fdd769701a288ed1977fab447e878323681a3
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 16:02:06 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.js
+| | | | | 
+| * | | | commit ecb9f032e68ca4c4ed2d3d990053f8fe05e5f8ac
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 15:49:14 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit db2f6ba4f5239b5d7098c48795a7256bd4383661
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 15:48:37 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.js
+| | | | | 
+| * | | | commit dacf8f26589c7814e4337d0615c8cf2eeda5a624
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 14:04:25 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit d5c9d391364c605bdc496e1f6ff610fb0c2a4ac1
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 14:03:18 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.js
+| | | | | 
+| * | | | commit 2236f549fa10a6c729080444268ac80d67125f0f
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 14:02:55 2022 +0800
+| | | | | 
+| | | | |     Add files via upload
+| | | | | 
+| * | | | commit 7387470e726344c3c263c35d23af304f55b63bad
+| | | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | | Date:   Wed May 18 14:02:32 2022 +0800
+| | | | | 
+| | | | |     Delete puzzle.css
+| | | | | 
+| * | | | commit 550f6df869a83c42ce5e433b563ffb340ab7eb64
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Tue May 17 14:27:29 2022 +0800
+| | | | | 
+| | | | |     checking
+| | | | | 
+| * | | | commit 87336dfac96acc22b596b78b1bc92e0519b795c0
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Tue May 17 14:15:05 2022 +0800
+| | | | | 
+| | | | |     Added more tests, removed unnecessary test
+| | | | | 
+| * | | | commit a9b721c69a320e17537376f873191b5a281dc991
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Tue May 17 14:10:45 2022 +0800
+| | | | | 
+| | | | |     cleaning
+| | | | | 
+| * | | | commit 864c23a2bf51eaeee8450a811024e8a8ae52559d (origin/master)
+|  / / /  Author: Will-H007 <wkayi076@gmail.com>
+| | | |   Date:   Mon May 16 17:06:10 2022 +0800
+| | | |   
+| | | |       adding files
+| | | | 
+* | | | commit 1daae2facf512a12454128477e61e2031382f74c
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Tue May 17 14:17:05 2022 +0800
+| | | | 
+| | | |     requirements
+| | | | 
+* | | | commit f8f1ecfc2047c4756cc93ebe7e6e6971ae9b94f6
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Tue May 17 11:30:19 2022 +0800
+| | | | 
+| | | |     30 minute puzzle change
+| | | |   
+| | | | * commit 0d06e8f78602524e91ab8d2c214474b30a84a599 (origin/sharing_result)
+| | | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | | Date:   Wed May 18 00:00:29 2022 +0800
+| | | | | 
+| | | | |     updating the rout page
+| | | | | 
+| | | | * commit 1f8c7f0173c500b6bb70a29c3957ba908477e252
+| | | |/  Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | |   Date:   Tue May 17 23:59:48 2022 +0800
+| | | |   
+| | | |       Updating requirment file
+| | | | 
+| | | * commit 10a5e4c338adb3a2dbb727772ec78e04a89b1bc4 (sharing_result)
+| | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | Date:   Mon May 16 16:56:57 2022 +0800
+| | | | 
+| | | |     adding Fbsharing rout to upload result to fb
+| | | | 
+| | | * commit 6c835e8939c47f4e834e710c092103c4fb3297f6
+| | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | Date:   Mon May 16 16:56:15 2022 +0800
+| | | | 
+| | | |     adding the credential file
+| | | | 
+| | | * commit 043caba302441e26b1355ea696cce513cb2b34b5
+| | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | Date:   Mon May 16 16:55:37 2022 +0800
+| | | | 
+| | | |     all the changes that has been done to login puzzle
+| | | | 
+| | | * commit 9cd7dfaa3712f9a8cf964eb35f629ccb7ca1591c
+| |_|/  Author: amirandakhs <amirandakhs1375@gmail.com>
+|/| |   Date:   Mon May 16 16:54:19 2022 +0800
+| | |   
+| | |       all the requirements library needed before running flask run
+| | | 
+* | | commit a4d1160a299bbac7cd6392e2f848fa52dafddc82
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 10 21:34:09 2022 +0800
+| | | 
+| | |     Puzzles sets added
+| | | 
+* | | commit f08097c403f378960b958eae8d04ef9d8eb02a6e
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 10 20:35:52 2022 +0800
+| | | 
+| | |     merged Amir's work & completed download
+| | | 
+* | | commit 60fc089f7c37d30ee73c99eb50547f46ce386fda (origin/drawingUpload, drawingUpload)
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 10 20:33:51 2022 +0800
+| | | 
+| | |     deleted seemingly pointless file
+| | | 
+* | | commit 59bb4043687ded992973c2d618ccb3686196962b
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 10 20:31:49 2022 +0800
+| | | 
+| | |     Upload done & changes
+| | | 
+* | | commit 904afa4c15c6a4afa5fa9d25d00dde3fbd610fa5
+| | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | Date:   Tue May 10 13:15:46 2022 +0800
+| | | 
+| | |     Typo fixing
+| | | 
+* | | commit ad4a75ccb8935886ea452835de100e5100b3e6b1
+| | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | Date:   Tue May 10 13:13:30 2022 +0800
+| | | 
+| | |     puzzle model is made, puzzle upload, puzzs page just for demonstration of puzzle
+| | | 
+* | | commit 253daf2ba5c056f0e91e8c19e210b52b0795450f
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 9 17:57:30 2022 +0800
+| | | 
+| | |     fixed spelling mistakes
+| | | 
+* | | commit 1160c406df8e1c169eb97bc3ebf3625ec4725561
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 9 17:51:54 2022 +0800
+| | | 
+| | |     Readme progress
+| | |   
+* | |   commit fa051baaea9f22a7e08c7e4732690dfaad29ea82
+|\ \ \  Merge: ae75c83 849acf5
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Mon May 9 16:56:51 2022 +0800
+| | | | 
+| | | |     Merge branch 'main' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into main
+| | | | 
+| * | | commit 849acf5d95973d1d479c6e344d6c2306362b42be
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Mon May 9 11:46:23 2022 +0800
+| | | | 
+| | | |     I wrote CITS3404 instead of CITS3403
+| | | | 
+* | | | commit ae75c8300c309e0c11a90441b65aeb86cd73e994
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Mon May 9 16:55:56 2022 +0800
+| | | | 
+| | | |     cleaned js code
+| | | | 
+* | | | commit 9018bb9feab35a928f3260967310086b9bf5b84d
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Mon May 9 16:29:53 2022 +0800
+| | | | 
+| | | |     Score adjusted for harder puzzles
+| | | | 
+* | | | commit bb5df6b872654638fe027db302b779c74244683c
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Mon May 9 15:34:33 2022 +0800
+| | | | 
+| | | |     Indicator of color chosen
+| | | | 
+* | | | commit c580738da380edc74fb3af226ef9aa1b291749f6
+|/ / /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | |   Date:   Mon May 9 13:22:09 2022 +0800
+| | |   
+| | |       password hashes, fixed flash messages, and cleared db
+| | |   
+* | |   commit e1f21b025364e412d9ad061ba34b979a8b8e714e
+|\ \ \  Merge: fb052fa 6220308
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Sun May 8 14:18:51 2022 +0800
+| | | | 
+| | | |     Merged Will with main
+| | | |   
+| * | |   commit 6220308b85a82b804068f1a1e0aaf5f2423d96d2 (origin/Will, Will)
+| |\ \ \  Merge: 7682895 75c0dc1
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Sun May 8 14:09:02 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'Will' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into Will
+| | | | | 
+| | * | | commit 75c0dc1ec8525a405ba9bd1a45269ba82d7fd58b
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Sun May 8 13:59:41 2022 +0800
+| | | | | 
+| | | | |     Accidently added
+| | | | | 
+| * | | | commit 7682895a98f2fc3406b7e015a43164d69423c671
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Sun May 8 14:08:41 2022 +0800
+| | | | | 
+| | | | |     cleaned, easy if click play
+| | | | | 
+| * | | | commit 61085547b107b45f4d344e5048383604032316e4
+| |/ / /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | | |   Date:   Sun May 8 14:03:09 2022 +0800
+| | | |   
+| | | |       cleaned Directory
+| | | |   
+| * | |   commit 40d9d59515a5a5469b5f4393e033ce088a2f3775
+| |\ \ \  Merge: 573d8b1 3f74d91
+| | |/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+| |/| |   Date:   Sun May 8 13:58:05 2022 +0800
+| | | |   
+| | | |       Default Difficulty added
+| | | | 
+| | * | commit 3f74d91b745cecb472cd449cf6e7f4b1ff7f7cca
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:17:18 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+| | * | commit 5a2c9d7f26e96dfeb33dd464128b339989d0d929
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:13:30 2022 +0800
+| | | | 
+| | | |     Delete puzzle.py
+| | | | 
+| | * | commit cf912b35d29b588281c968076679eee1e9029a44
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:13:22 2022 +0800
+| | | | 
+| | | |     Delete app directory
+| | | | 
+| | * | commit dafbfdff2c07f0b7060a077c66203d8738a42a28
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:13:09 2022 +0800
+| | | | 
+| | | |     Delete data.txt
+| | | | 
+| | * | commit 44663f613b9507714164654195b9862e66f64281
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:13:02 2022 +0800
+| | | | 
+| | | |     Delete README.md
+| | | | 
+| | * | commit 457fe7e679bb8ad196c67ebeaee61940ec0da084
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Sun May 8 05:12:54 2022 +0800
+| | | | 
+| | | |     Delete __pycache__ directory
+| | | | 
+* | | | commit fb052fa68fa94ea94e01772e12b8c918e06cc928
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Sun May 8 13:09:28 2022 +0800
+| | | | 
+| | | |     small update
+| | | | 
+* | | | commit 81d0422f4734fdc1a697c52aed5a67de9552bb93
+|/ / /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | |   Date:   Thu May 5 19:54:50 2022 +0800
+| | |   
+| | |       redirect to login page
+| | |   
+* | |   commit 573d8b1590dc8b1334783fa47bd48dd136c4e467
+|\ \ \  Merge: 3b21fd7 b837d72
+| |/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+| | |   Date:   Thu May 5 17:46:29 2022 +0800
+| | |   
+| | |       Merged Will/Dhwani's work
+| | | 
+| * | commit b837d72d5583afb5caad74871d2aac391a4fa83a (master)
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 16:54:42 2022 +0800
+| | | 
+| | |     removed old dir
+| | | 
+| * | commit 8c5ae2139fafbea3ae2ad31a8bcd2c2466f9b76c
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 16:53:33 2022 +0800
+| | | 
+| | |     cleaned directories
+| | | 
+| * | commit 3183ec0cb2905df8baaa558ee7d0ab1bdb025fe6
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:18:56 2022 +0800
+| | | 
+| | |     Delete routes.py
+| | | 
+| * | commit b7df01a33d4eba832cbb6300b0c501ad466616f5
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:18:32 2022 +0800
+| | | 
+| | |     Delete models.py
+| | | 
+| * | commit 83aee87214e9ae5ec9ac7f2b1508d18943969c79
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:16:30 2022 +0800
+| | | 
+| | |     Delete forms.py
+| | | 
+| * | commit 3d6916aad697c0e56ef0395a1f22895886d2fb66
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:15:40 2022 +0800
+| | | 
+| | |     Delete config.py
+| | | 
+| * | commit 5dbdc32df539fb68741048c3a794c28915386966
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:15:04 2022 +0800
+| | | 
+| | |     Delete app.db
+| | | 
+| * | commit 1ccacb22f7aab626ad61364e8c12c5bbce498d80
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:14:06 2022 +0800
+| | | 
+| | |     Delete __init__.py
+| | | 
+| * | commit 72f9d9028fa15a17743748293c905c3d2bd40ee9
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:13:33 2022 +0800
+| | | 
+| | |     Delete README.md
+| | | 
+| * | commit 1770c90ae655a9f036a4ba221c82b9e6630490cd
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:13:25 2022 +0800
+| | | 
+| | |     Delete Flask.py
+| | | 
+| * | commit 87f0856f83464d7bd6a571a41d475c15ce6430af
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:13:14 2022 +0800
+| | | 
+| | |     Delete .flaskenv
+| | | 
+| * | commit 50a7a15e0f74d514e139f8646b3d5df1f6dc7787
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:13:02 2022 +0800
+| | | 
+| | |     Delete templates/HTML directory
+| | | 
+| * | commit f750df486aa0ace74a090a41c3d4af9fd32ef031
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:11:13 2022 +0800
+| | | 
+| | |     Delete static directory
+| | | 
+| * | commit ce7354a0545c304a1f0a8069f6d49cf7aad276ec
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 16:10:32 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+| * | commit 8ab3f7d59dac02e9fd2490480c7e3393b751e247
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 15:10:20 2022 +0800
+| | | 
+| | |     removed unnecessary files
+| | | 
+| * | commit 0c690487078b1ba1cf4d864c76edca22138b4d87
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Thu May 5 13:42:26 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+| * | commit be271d4f0368777fd8c2ce6c2fb33c3d81c37fa1
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 23:32:13 2022 +0800
+| | | 
+| | |     Delete database.db
+| | | 
+| * | commit 4246f1a8ff4bbdb37c1557745d220da17284cc3d
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 23:31:06 2022 +0800
+| | | 
+| | |     Delete data.txt
+| | | 
+| * | commit 8000ea8746883ebd09a6aa96161c015eb33f8956
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 23:29:23 2022 +0800
+| | | 
+| | |     Add files via upload
+| | |     
+| | |     The whole folder is too large to be imported
+| | | 
+| * | commit be322de36bce98cebb2573cfaac7fe4c1d67606d
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 22:43:59 2022 +0800
+| | | 
+| | |     Delete create_database.py
+| | | 
+| * | commit 39ead07033b91346d0abe6eefa141aafa2e5e24a
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 22:43:41 2022 +0800
+| | | 
+| | |     Delete static directory
+| | | 
+| * | commit fb3c2f5635671f79f79b56603fbbfba2cb12d5c5
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 22:43:30 2022 +0800
+| | | 
+| | |     Delete __pycache__ directory
+| | | 
+| * | commit de182bae6867aab7ad03812bb6414bbfe46998f8
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 22:43:20 2022 +0800
+| | | 
+| | |     Delete templates/HTML directory
+| | | 
+| * | commit df70be6640da4d52447b601997dda07fa5886dd9
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 14:39:25 2022 +0800
+| | | 
+| | |     Delete CITS3404OnlineDailyPuzzle-main directory
+| | | 
+| * | commit 3b1b90e15e7b608abbfe14b973c43e4bd39d23cb
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Tue May 3 14:38:24 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+* | | commit 3b21fd73a7a6eb711f2fe1ae581df3adb185f484
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 16:50:14 2022 +0800
+| | | 
+| | |     small changes
+| | | 
+* | | commit 790e18334f1517a070fb1b20b112ad38a9abc665
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 15:04:41 2022 +0800
+| | | 
+| | |     Merged Dhwani's changes
+| | | 
+* | | commit bed05a25068ad20af5dc69fb5c7f1e0458a05c41
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 14:28:14 2022 +0800
+| | | 
+| | |     minor change
+| | | 
+* | | commit b0458ba9c0fb9483997cc34244137f194ae29a16
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 14:24:37 2022 +0800
+| | | 
+| | |     finished dhwani merge
+| | |   
+* | |   commit 3c4a154b87f758c6259abf9245f7cf15b7be2780
+|\ \ \  Merge: f30b830 1022d34
+| | |/  Author: Haxinator <22760978@student.uwa.edu.au>
+| |/|   Date:   Thu May 5 14:16:48 2022 +0800
+| | |   
+| | |       merge with dhwani
+| | | 
+| * | commit 1022d34dd2495234ca6ffe4f1b22e6d86d2e3957
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu May 5 14:13:29 2022 +0800
+| | | 
+| | |     Corrected directory
+| | | 
+| * | commit d3a7b814fdbed446146df05f9094ad0247c7e5a9
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:13:21 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+| * | commit b088b6d378e3468e68ef5aee6861c5892aaed42a
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:11:26 2022 +0800
+| | | 
+| | |     Delete __pycache__ directory
+| | | 
+| * | commit bacc338245b5bd35ce9927adf23d4e13a668b91b
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:11:12 2022 +0800
+| | | 
+| | |     Delete app directory
+| | | 
+| * | commit 22f4a44bb1c740a2740c6af46f807d30088ae67f
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:10:47 2022 +0800
+| | | 
+| | |     Delete puzzle.py
+| | | 
+| * | commit c2f8cd35d80513432f980dff80bc4995213ead30
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:10:16 2022 +0800
+| | | 
+| | |     Delete statistic.css
+| | | 
+| * | commit 82f852f637fa767dc3ffd07c664cd2a1c51b9f58
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Wed May 4 12:09:54 2022 +0800
+| | | 
+| | |     Delete statistic.html
+| | |   
+| | | * commit a39b5d1619b3345ce81848bca1a4ba6443cef829 (origin/database)
+| | | | Author: Amir andakhs <69596856+amirandakhs@users.noreply.github.com>
+| | | | Date:   Wed May 4 21:57:54 2022 +0800
+| | | | 
+| | | |     explaining how to run the app
+| | | | 
+| | | * commit 215afc788356273f60a460dbe0357f9b15cacdaa
+| |_|/  Author: amirandakhs <amirandakhs1375@gmail.com>
+|/| |   Date:   Wed May 4 21:54:42 2022 +0800
+| | |   
+| | |       adding database, changing login page, getting result of puzzle
+| | | 
+* | | commit f30b8302dbedf2c42eae7fd23709aa8dbfcef98c
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 19:51:14 2022 +0800
+| | | 
+| | |     Fixed navbar issue
+| | | 
+* | | commit efa0d71487534fe6f71b3cb2bc88d1c7d42e02d2
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 19:37:48 2022 +0800
+| | | 
+| | |     homepage images reponsive
+| | | 
+* | | commit a06d5ea2bd8cebc05616547fc3417e550b80d3a7
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 18:25:07 2022 +0800
+| | | 
+| | |     fixed CSS
+| | | 
+* | | commit e5f66bfcbb311117fcea97fbb0012aab46443360
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 18:19:06 2022 +0800
+| | | 
+| | |     Updated homepage style
+| | | 
+* | | commit 33031eeac70ac4ed8a17a549aefd6a2d7511a0f1
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 16:39:11 2022 +0800
+| | | 
+| | |     responsive homepage
+| | | 
+* | | commit 46f55a5f4805a27b81a270aa033326ffceb5424e
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 13:23:49 2022 +0800
+| | | 
+| | |     Finishing touches to About
+| | | 
+* | | commit bbc646623ec73dee4f7602982bb0b6ef58132cd3
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 13:04:18 2022 +0800
+| | | 
+| | |     about page FINITO
+| | | 
+* | | commit f0efe82e85c15bb033c06fcb892d47fa66fb1ae6
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Tue May 3 11:53:30 2022 +0800
+| | | 
+| | |     About page Layout Complte
+| | | 
+* | | commit 3ef083f606dbc2f450f51bda541af5fc24735b57
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 21:04:08 2022 +0800
+| | | 
+| | |     mostly fixed style
+| | | 
+* | | commit 7d237c2b56445156513a7a3b79e86b1f6aafae27
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 20:26:03 2022 +0800
+| | | 
+| | |     CSS simplification
+| | | 
+* | | commit 08874113584213dfbed42763d518adcf2ac24224
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 16:56:45 2022 +0800
+| | | 
+| | |     Added eraser image
+| | | 
+* | | commit 694cb2aaddb6cabf1cec167119b2633d0f4a2117
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 15:51:40 2022 +0800
+| | | 
+| | |     fixed comment
+| | | 
+* | | commit 492684d29ce16b4aaf18d257771fb0b4e498dd09
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 15:50:33 2022 +0800
+| | | 
+| | |     check reduced code
+| | | 
+* | | commit 22537961625bd10ba7300c8c929d6fb5bf8caae3
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 15:14:31 2022 +0800
+| | | 
+| | |     code simplification and clean
+| | | 
+* | | commit ffbc4f836b6e3540589fee6de4b06e64ef32bbaf
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 13:39:48 2022 +0800
+| | | 
+| | |     Clean code, more puzzle comfort
+| | | 
+* | | commit 89aac3b88e51ab0b55c2d8410656439abbe476c2
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Mon May 2 12:14:50 2022 +0800
+| | | 
+| | |     Stripes and changes
+| | | 
+* | | commit aaaca25f1feba3bf1bdd700325f64fd63c5a5352
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Sat Apr 30 12:45:32 2022 +0800
+| | | 
+| | |     Eraser in Pallet
+| | | 
+* | | commit f16b97e44f76b93dcfff02ceb80a15d218a1c836
+|/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+| |   Date:   Fri Apr 29 20:15:53 2022 +0800
+| |   
+| |       Hold mouse to Color
+| |   
+* |   commit 40f9f040b9ba0aa87675f7768543a72104976d0e
+|\ \  Merge: cc2cb82 0a9a1f2
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Fri Apr 29 14:48:34 2022 +0800
+| | | 
+| | |     Merge branch 'dhwani' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into dhwani
+| | | 
+| * | commit 0a9a1f2bc1bc1ddfe1bf254500db8831d4337a27
+| | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | Date:   Fri Apr 29 11:13:02 2022 +0800
+| | | 
+| | |     Add files via upload
+| | |   
+* | |   commit cc2cb828af1f84b352aa28c9309562b056d18777
+|\ \ \  Merge: 8ce71b3 4e84e3c
+| |/ /  Author: Haxinator <22760978@student.uwa.edu.au>
+|/| |   Date:   Fri Apr 29 14:47:45 2022 +0800
+| | |   
+| | |       Updated to most reset version
+| | | 
+| * | commit 4e84e3c129815649b03b28c46c2bf751d8e55c5d
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu Apr 28 17:46:43 2022 +0800
+| | | 
+| | |     Logo & flexible QMark
+| | | 
+| * | commit bed164767161e8603249d009244591b1288f852f
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu Apr 28 15:59:40 2022 +0800
+| | | 
+| | |     Added titles, removed turtle package
+| | | 
+| * | commit fa957c7fe5feaea04ae84e90670a9febed9524cc
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu Apr 28 12:08:13 2022 +0800
+| | | 
+| | |     removed outdated files
+| | | 
+| * | commit a2767572eafbf5fa951fe02e5fb545a6b922d85b
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu Apr 28 11:55:18 2022 +0800
+| | | 
+| | |     Modularised Flask
+| | | 
+| * | commit 84074fad5835bfac772516d3cc515ec21e8ab78b
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Thu Apr 28 11:21:10 2022 +0800
+| | | 
+| | |     All HTML files inheret from base
+| | | 
+| * | commit 9a19329a60d003aaf1204521e100cc8e4ea12482
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Wed Apr 27 19:23:55 2022 +0800
+| | | 
+| | |     implemented base.html some html pages now inheret it's properties e.g. NavBar
+| | |   
+| * |   commit 3bafacc8ad4837aa858af976a907146a606be250
+| |\ \  Merge: 8f927cb 4f4d5ab
+| | |/  Author: Haxinator <22760978@student.uwa.edu.au>
+| | |   Date:   Wed Apr 27 18:37:51 2022 +0800
+| | |   
+| | |       Merge branch 'Will' into main
+| | | 
+| | * commit 4f4d5ab14c9ec34aaba4b831cda326d7998a8eaa
+| | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | Date:   Wed Apr 27 17:23:52 2022 +0800
+| | | 
+| | |     Hopefully finished merging changes to Will
+| | |   
+| | *   commit 78784ad50241a06c18d7e1146c6bc62b97d06179
+| | |\  Merge: 596c30b 4b05689
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Wed Apr 27 17:19:43 2022 +0800
+| | | | 
+| | | |     Merge branch 'Will' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into Will
+| | | | 
+| | | * commit 4b0568987a866dc38ba5c75580c6c2c82d80f5aa
+| | | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | | Date:   Wed Apr 27 00:01:57 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | |   
+| | | *   commit f7e8ef6849c61be6c6911e6ce2a60e3c08407217
+| | | |\  Merge: 2639512 cb9115c
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Mon Apr 25 13:58:42 2022 +0800
+| | | | | 
+| | | | |     Merge pull request #7 from Haxinator/main
+| | | | |     
+| | | | |     Updating Branch to most recent commit
+| | | | | 
+| | * | | commit 596c30b8ccba19e136c6db8d285d2f016ac141ec
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Wed Apr 27 15:49:36 2022 +0800
+| | | | | 
+| | | | |     combined with recent version of main
+| | | | | 
+| * | | | commit 8f927cb90f141f0eb5f78458261cbcb8a9034261
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Wed Apr 27 14:48:05 2022 +0800
+| | | | | 
+| | | | |     Fixed bugs + added features
+| | | | |     
+| | | | |     -Buttons now have a delay.
+| | | | |     -Fixed issue with buttons when delay is used.
+| | | | |     -On incorrect attempt the canvas will go to the ready state (skips the start button).
+| | | | |     -Cleaned code.
+| | | | |     -Added new function that is responsible for hiding and showing buttons called "change_button()".
+| | | | |     -Click with same colour to delete functionality is back!
+| | | | |     -Drag colouring no longer interferes with delete to click functionality.
+| | | | |     -maybe more changes I've forgotten.
+| | | | | 
+| * | | | commit 5926a466b73f834218076ea0f9b0c6ff92a91d43
+| | | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | | Date:   Tue Apr 26 20:26:35 2022 +0800
+| | | | | 
+| | | | |     Red cells bug fixied, relative pass improved, 5 second delays implemented
+| | | | | 
+| * | | | commit 753579217a218405e0b0ad8cf6fd1e7141c69528
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:21:49 2022 +0800
+| | | | | 
+| | | | |     Deleted Duplicate
+| | | | |     
+| | | | |     No Longer relevant. Split into multiple CSS files, one for each page and one global CSS file. Named accordingly.
+| | | | | 
+| * | | | commit cab9961e8801db888ff7c9dfe7f1bf98f279e250
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:21:05 2022 +0800
+| | | | | 
+| | | | |     Deleted duplicate
+| | | | |     
+| | | | |     Found in HTML folder, under new name: "login.html".
+| | | | | 
+| * | | | commit 6476db8d0948787646e33caec657452e1ecc479e
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:20:37 2022 +0800
+| | | | | 
+| | | | |     Deleted Duplicate
+| | | | |     
+| | | | |     Found in HTML folder under new name: "homepage.html".
+| | | | | 
+| * | | | commit ae11f64dfa54ccda342eb5f405a6d0084f72db1c
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:20:03 2022 +0800
+| | | | | 
+| | | | |     No Longer relevant
+| | | | |     
+| | | | |     Has been split into two files: login.js and puzzle.js, both are contained in the JavaScript folder.
+| | | | | 
+| * | | | commit 34f49a28bca8a500109dbf4a62ef27c1329d0590
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:19:00 2022 +0800
+| | | | | 
+| | | | |     Deleted Duplicate
+| | | | |     
+| | | | |     Now in HTML folder
+| | | | | 
+| * | | | commit 080bcfa35192819014abda65febad44020e60073
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:18:40 2022 +0800
+| | | | | 
+| | | | |     Deleted duplicate
+| | | | |     
+| | | | |     Now in HTML folder
+| | | | | 
+| * | | | commit 966fa8b4bf8998454f81adb4f5b4f44ce63fd70c
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:18:25 2022 +0800
+| | | | | 
+| | | | |     Deleted Duplicate
+| | | | |     
+| | | | |     now in HTML folder
+| | | | | 
+| * | | | commit 4dc3a6c295923412c7e7517a4a6585d1d0d05356
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Tue Apr 26 13:17:42 2022 +0800
+| | | | | 
+| | | | |     Organised files
+| | | | |     
+| | | | |     Tim gave approval for splitting files, so now we have much cleaner files and code.
+| | | | |     - Each html file has it's own CSS and JavaScript files where relevant.
+| | | | |     - Created a new CSS file "global.css", which is applied to all files, or at least it should be.
+| | | | |     - Updated all HTML files so that they extract what they need from the new locations.
+| | | | | 
+| * | | | commit e70db8bc2768bdd0ea83f3bbc6175e4c1d3bd5d0
+| | |_|/  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| |/| |   Date:   Tue Apr 26 12:23:56 2022 +0800
+| | | |   
+| | | |       Puzzle remembers correct cells
+| | | |       
+| | | |       - User can no longer interact with the canvas unless ready is selected.
+| | | |       - When user gets the puzzle wrong, the cells the user got correct are remembered.
+| | | |       - It's now possible to do harder puzzles!
+| | | |       - Puzzle is now 7x7 to make it difficult.
+| | | | 
+* | | | commit 8ce71b39a3586d52a1ce1ed050c02238b76ff39a
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 14:35:10 2022 +0800
+| | | | 
+| | | |     Now in javascript.js
+| | | | 
+* | | | commit 55d22919503fc44de8008a5967ba78335b1b10dd
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 14:34:53 2022 +0800
+| | | | 
+| | | |     Now in StyleSheet.css
+| | | | 
+* | | | commit 2243fcf5fa7a2ad674c15c6c79a9454e04772af9
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 14:34:29 2022 +0800
+| | | | 
+| | | |     game3.jpg now in picture folder
+| | | | 
+* | | | commit fc08c2c7667517db7a88d0640c9903472114ed35
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 14:34:02 2022 +0800
+| | | | 
+| | | |     Attempted update to most recent version
+| | | |     
+| | | |     -Placed login page background in picture folder.
+| | | |     -Merged login.js and javascript.js, everything in login.js is now in javascript.js.
+| | | |     -Merged login.css and stylesheet.css, everything in login.css is now in stylesheet.css.
+| | | |     -Added retro font to login page.
+| | | |     -Login page now has an id in its body to distinguish it's css from other pages.
+| | | |     -href of nav bars now point to the web pages we currently have. e.g. Clicking about takes the user to about.html.
+| | | |     -A lot  of inline (onclick) javascript in the HTML files, I changed some but others also need to be changed to event listeners to modularise our project.
+| | | |     -CSS of login page, needs to be fixed to work with the new font style. Also needs to feel more retro.
+| | | |     -Need to change javascript, so it only loads the initializations for particular pages. E.g. DailyPuzzle's JS won't look for the canvas id when in the login page.
+| | | |     -Merged Dhwani's button rework with most recent version, removed inline javascript in dailypuzzle.html. Added them to the click event listeners for the buttons.
+| | | |     -Dhwani's CSS could be reduced, some statements could be merged, simplifying the code and reducing clutter.
+| | | |     -probably some other minor changes I've forgotten.
+| | | | 
+* | | | commit 6ce7101b4288960d716ec96c2378c9d3db94bae1
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:07:26 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | | 
+* | | | commit 92b2b15d8e29eb27152f963f768fae2fa46e1532
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:06:38 2022 +0800
+| | | | 
+| | | |     Delete dailypuzzle.html
+| | | | 
+* | | | commit d43d1555778b1af476cc0c9438ddb2b9d0494baa
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:06:24 2022 +0800
+| | | | 
+| | | |     Delete stylesheet.css
+| | | | 
+* | | | commit 92bbe1a7f8297ca6479560fce861236e334a7f82
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:06:05 2022 +0800
+| | | | 
+| | | |     Delete loginform.html
+| | | | 
+* | | | commit 378e00d1b7f681e7aaa95effd5e32242cfc850cf
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:05:44 2022 +0800
+| | | | 
+| | | |     Delete login.html
+| | | | 
+* | | | commit efba1dbc0e9ea617e6d7538c39f64bc9b5225dec
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:05:30 2022 +0800
+| | | | 
+| | | |     Delete login.css
+| | | | 
+* | | | commit 13a7439553355ccd5498f7d64046a11d71c137c5
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:05:15 2022 +0800
+| | | | 
+| | | |     Delete javascript.js
+| | | | 
+* | | | commit 03d60dafb984c6ddc2100816bbf82b1f2373a2fd
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Apr 20 02:04:48 2022 +0800
+| | | | 
+| | | |     Delete login.js
+| | | | 
+* | | | commit b929b86f7752c20ae1c89723d1e99f2ac546411d
+| | | | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | | | Date:   Wed Mar 30 20:21:28 2022 +0800
+| | | | 
+| | | |     Add files via upload
+| | | |     
+| | | | *   commit 9cfc29919c64daf3c895f47f683a59685f52ca54 (origin/amir)
+| | | | |\  Merge: cd6aff4 cb9115c
+| | |_|_|/  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| |/| | |   Date:   Mon Apr 25 13:59:59 2022 +0800
+| | | | |   
+| | | | |       Merge pull request #8 from Haxinator/main
+| | | | |       
+| | | | |       Updating to most recent version
+| | | | | 
+| * | | | commit cb9115c4a3d7e158dd217fffd8ef4c0781876363
+| | | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | | Date:   Mon Apr 25 13:57:11 2022 +0800
+| | | | | 
+| | | | |     Added next puzzle functionality
+| | | | |     
+| | | | |     - When you successfully complete a puzzle you can press next to start the next puzzle.
+| | | | |     - When you fail the puzzle you can try again until you get it right.
+| | | | |     - Currently removed QMARK for testing purposes.
+| | | | |     - All supporting functions are in snake_case.
+| | | | |     - renamed a few variables to make it easier to read.
+| | | | |     - Added more supporting functions.
+| | | | |     - Possibly more.
+| | | | |   
+| * | | |   commit 71484febb18d883f20f78859852a091a1e7bbe37
+| |\ \ \ \  Merge: b234f18 2639512
+| | | |/ /  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | |/| |   Date:   Thu Apr 21 14:47:31 2022 +0800
+| | | | |   
+| | | | |       Merge pull request #6 from Haxinator/Will
+| | | | |       
+| | | | |       Will and main should now point to the same commit
+| | | | |   
+| | * | |   commit 263951207da4f66dfbca8e1c63f109ba1e6d3e2a
+| | |\ \ \  Merge: cdcc5b4 b234f18
+| | |/ / /  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| |/| / /   Date:   Thu Apr 21 14:44:10 2022 +0800
+| | |/ /    
+| | | |         Merge pull request #5 from Haxinator/main
+| | | |         
+| | | |         Update Will branch to the most recent version
+| | | | 
+| * | | commit b234f1833e0120539d5ecbdbe3d0be62a9e13f7c
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 13:11:40 2022 +0800
+| | | | 
+| | | |     CSS changes + QMARK
+| | | |     
+| | | |     -Looks nicer.
+| | | |     -Added visual indication of game not start, start, ready, and win.
+| | | |     -Added a question mark when the user hasn't pressed start.
+| | | |     -Increased canvas size to 7x7 (any size smaller then this, a legible question mark can't be drawn).
+| | | |     -Updated the question mark so it's works for a 7x7 canvas (question mark before only worked for a 16x16 canvas).
+| | | |     -Hints needed to solve puzzles greater then 3x3. If you want to lower the grid size (for testing check or some other reason) make sure to replace QMARK in the initialization section to {} (empty dictionary).
+| | | | 
+| * | | commit c0e4b85b68d1b742ab6da065cfe5d7ede869334a
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 12:28:44 2022 +0800
+| | | | 
+| | | |     Retro Style + About page
+| | | |     
+| | | |     Gave the game a retro feel and an about page:
+| | | |     -All pages are now black.
+| | | |     -New google font added and applied to all webpages ('VT323').
+| | | |     -About page added (not finished).
+| | | |     -Comprehensive about page CSS added.
+| | | |     -Daily Puzzle page updated to suit Retro feel.
+| | | |     -Currently puzzle before start is pressed is nothing, question mark to be added.
+| | | |     -New class added to JS ("ready"), applies new CSS on canvas class change.
+| | | |     -Possibly more changes.
+| | | |   
+| * | |   commit 2537df51c0e2c7d61d137d978314aab0023a2dfa
+| |\ \ \  Merge: 34f3c2d cd6aff4
+| | | |/  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | |/|   Date:   Thu Apr 21 12:03:04 2022 +0800
+| | | |   
+| | | |       Merge pull request #4 from Haxinator/amir
+| | | |       
+| | | |       Merging Amir's work
+| | | |       Amir added:
+| | | |       
+| | | |       a ready button, which clears canvas on ready.
+| | | |       a start button which showed the puzzle for the user to copy.
+| | | |       a check button which checks if the user canvas matches the puzzle.
+| | | |       a sample puzzle and question mark.
+| | | |       a draw function which draws a predefined puzzle.
+| | | |       Possibly more that I've forgotten.
+| | | |       
+| | | |       I added:
+| | | |       
+| | | |       Bug fixes to the check function.
+| | | |       Updated code to merge with Will's.
+| | | |       Changed sample puzzles to Will's color pallet.
+| | | |       Merged some of Amir's functions with Will's.
+| | | |       Changed variable and function names to those that I believe make more sense.
+| | | |       Updated Amir's code to work with current version of main.
+| | | |       More that I can't be bothered rewriting, check Amir's branch to see more changes.
+| | | |       
+| | | |       Additionally adding Amir's new updates to the check function and his implementation of user feedback.
+| | | | 
+| | * | commit cd6aff4a198f9f8d9809fecc6fe498c3b900d7f2
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Thu Apr 21 12:00:10 2022 +0800
+| | | | 
+| | | |     Accidently added when playing with git
+| | | | 
+| | * | commit 6aceef6fabd1b302bc1829074135c2006bf21671 (amir)
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Thu Apr 21 11:55:29 2022 +0800
+| | | | 
+| | | |     Revert "Revert "Merge branch 'amir' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into amir""
+| | | |     
+| | | |     This reverts commit 02bc44a18d492c37ef1f80eae6f1038a7743369b.
+| | | | 
+| | * | commit 02bc44a18d492c37ef1f80eae6f1038a7743369b
+| | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | Date:   Thu Apr 21 11:50:15 2022 +0800
+| | | | 
+| | | |     Revert "Merge branch 'amir' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into amir"
+| | | |     
+| | | |     This reverts commit c0878687e62a55acec7cdfd401e7a876a7543362, reversing
+| | | |     changes made to 0829403f274f0d6af05c861fcffcbaa772efbd5f.
+| | | |   
+| | * |   commit c0878687e62a55acec7cdfd401e7a876a7543362
+| | |\ \  Merge: 0829403 ff6edee
+| | | | | Author: Haxinator <22760978@student.uwa.edu.au>
+| | | | | Date:   Thu Apr 21 11:40:18 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'amir' of https://github.com/Haxinator/CITS3404OnlineDailyPuzzle into amir
+| | | | | 
+| | | * | commit ff6edee4c30f51566679e3a722b8d9a76f3f5569
+| | | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | | Date:   Tue Apr 19 14:10:56 2022 +0800
+| | | | | 
+| | | | |     adding result div
+| | | | | 
+| | | * | commit 7c3f7bad254330ece95570d4cc615e1728866bc8
+| | | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | | Date:   Tue Apr 19 12:25:10 2022 +0800
+| | | | | 
+| | | | |     adding win and gameover pictures
+| | | | | 
+| | | * | commit 6519a1f8e92b1fc0bc7566e912a346a2f3f2d0a1
+| | | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | | Date:   Tue Apr 19 01:27:58 2022 +0800
+| | | | | 
+| | | | |     Puzzle checking bug fixed and checking visualised
+| | | | |   
+| | * | |   commit 0829403f274f0d6af05c861fcffcbaa772efbd5f
+| | |\ \ \  Merge: 2bd6274 34f3c2d
+| | |/ / /  Author: Haxinator <22760978@student.uwa.edu.au>
+| |/| / /   Date:   Thu Apr 21 11:37:08 2022 +0800
+| | |/ /    
+| | | |         Merge branch 'main' into amir
+| | | | 
+| * | | commit 34f3c2d181a73911620856d3565cc289b04a2fc9
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Sun Apr 3 21:22:37 2022 +0800
+| | | | 
+| | | |     Removed orange background for the Puzzle page
+| | | |     
+| | | |     Background colour is now white.
+| | | | 
+| * | | commit 7ef05334c437d7e39533178fbc9322c82a57ee58
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Sun Apr 3 21:16:58 2022 +0800
+| | | | 
+| | | |     Removed old js file
+| | | |   
+| * | |   commit 4fce375ea73fefe306b5d1a42dfb38543fd7643f
+| |\ \ \  Merge: 5f2b8f4 cdcc5b4
+|/ / / /  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | _   Date:   Sun Apr 3 21:12:31 2022 +0800
+| | |     
+| | |         Merge pull request #3 from Haxinator/Will
+| | |         
+| | |         Merging Will's branch
+| | | 
+| * | commit cdcc5b4fb5a9078cc2be082430ddd660c511fcef
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Sun Apr 3 21:10:05 2022 +0800
+| | | 
+| | |     Made code easier to read (even more efficient)
+| | |     
+| | |     - Merged grid and pallet methods into a new method called "make()".
+| | |     - Cleaned up some spelling mistakes in comments.
+| | |     - Removed some old comments.
+| | |     - Added and modified some comments so they're easier to understand.
+| | |     - Changed some variable names and types, so they're easier to read.
+| | |     - More white space in code.
+| | |     - Probably some other small changes I don't remember.
+| | | 
+| * | commit c96c230184f17c359ae83111584a09493c979cb7
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Fri Apr 1 12:57:17 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+| * | commit 2b6aeaf995fcec5caf2722f08356235ccfcce376
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 13:00:03 2022 +0800
+| | | 
+| | |     Add files via upload
+| | | 
+| * | commit 579488c2907f62c89a6e6aa1e98c44d6d66e01f7
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:59:40 2022 +0800
+| | | 
+| | |     Delete javascript.js
+| | | 
+| * | commit d1e7710023157647e81cefc567647864275c91f5
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:59:12 2022 +0800
+| | | 
+| | |     Delete stylesheet.css
+| | | 
+| * | commit 6a1a5d129f9cbfce9db17ce6d563713725420903
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:25:16 2022 +0800
+| | | 
+| | |     Delete login.html
+| | | 
+| * | commit b3bef37997263734bfb3888e246693f1f7d92375
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:24:00 2022 +0800
+| | | 
+| | |     Delete javascript.js
+| | | 
+| * | commit 3a15c5f315ce442b01ef630a0a8584542e3603da
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:23:32 2022 +0800
+| | | 
+| | |     Delete index.html
+| | | 
+| * | commit 6ad40427bf8f8befd814a77662b26c80d9590502
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:23:14 2022 +0800
+| | | 
+| | |     Delete dailypuzzle.html
+| | | 
+| * | commit 924cd9b4c7c6553d12814cf2fc6d3b92b15b7949
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:22:58 2022 +0800
+| | | 
+| | |     Delete README.md
+| | | 
+| * | commit 72e27d20d9e6973e9571b799c91d9a4ddc00dcfb
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Wed Mar 30 12:22:47 2022 +0800
+| | | 
+| | |     Delete pictures directory
+| | | 
+| * | commit aecb2f3d177a31fd7bc8fa2b59c885cad9a8b153
+|/ /  Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| |   Date:   Wed Mar 30 12:20:32 2022 +0800
+| |   
+| |       Add files via upload
+| |       
+| |       Basically restructure the functions into prototype-based and also now the canvas and the pallet can randomly generate color everytime the page is refreshed.
+| | 
+* | commit 5f2b8f43be32c9c2616026157073260aa9686416
+| | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | Date:   Wed Mar 30 11:20:51 2022 +0800
+| | 
+| |     Merged with stylesheet.css
+| |     
+| |     No longer necessary, all CSS in "colourful.css" is now in "stylesheet.css".
+| | 
+* | commit b9b88cfa8e5e7d07cf6fde3cd148811c443efbf5
+| | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | Date:   Wed Mar 30 11:19:58 2022 +0800
+| | 
+| |     Merged colourful.css and stylesheet.css
+| |     
+| |     - "stylesheet.css" now contains "colorful.css".
+| |     - HTML for login.html has been updated accordingly.
+| |   
+* |   commit 57781db7b78db268c8c5252cdd6962d2cb36cedf
+|\ \  Merge: 79e1592 6e0c0b8
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Wed Mar 30 11:13:24 2022 +0800
+| | | 
+| | |     Merge pull request #2 from Haxinator/Game_home_page
+| | |     
+| | |     Merging Will's homepage to main
+| | | 
+| * | commit 6e0c0b8cf4164e0b2f39f44e76ed9a183072804d (origin/Game_home_page)
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Wed Mar 30 11:11:23 2022 +0800
+| | | 
+| | |     Deleted duplicate
+| | |     
+| | |     warrior.png is now in the pictures folder.
+| | | 
+| * | commit 662eb033837f639856ffd33181da91144235fb00
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Wed Mar 30 11:10:58 2022 +0800
+| | | 
+| | |     Removed duplicate
+| | |     
+| | |     magic_staff.png is now in pictures folder.
+| | | 
+| * | commit 4419be8529392c434c95ab38e1898ac8e41768eb
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Wed Mar 30 11:10:10 2022 +0800
+| | | 
+| | |     Deleted duplicate
+| | |     
+| | |     dagger.png now in pictures folder
+| | | 
+| * | commit ce67b5bfbf74c2ff87d9a7a6fd21fc58d1de1bde
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Wed Mar 30 11:09:24 2022 +0800
+| | | 
+| | |     Clean CSS and added picture folder
+| | |     
+| | |     - Added #homepage id to the html tag of "login.html". Used id to specify that CSS is to applied only to this page. Might need to be done better.
+| | |     - Cleaned CSS a bit, removed a few unnecessary lines.
+| | |     - Added folder for pictures, adjusted HTML references accordingly.
+| | | 
+| * | commit 279856774682dbaa1095c91c8e666421598fcb65
+| | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | Date:   Mon Mar 28 20:20:37 2022 +0800
+| | | 
+| | |     Accidental upload
+| | | 
+| * | commit 791d9d5a8b8e4bb0ea0b8bf7e55abcd152cfaf89
+| | | Author: Will-H007 <88605676+Will-H007@users.noreply.github.com>
+| | | Date:   Mon Mar 28 19:56:43 2022 +0800
+| | | 
+| | |     Add files via upload
+| | |   
+* | |   commit 79e1592b7c72c5e06c37a6135f11fd7d015ab9d6
+|\ \ \  Merge: 39a61c6 7e5185a
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Wed Mar 30 10:53:08 2022 +0800
+| | | | 
+| | | |     Merge pull request #1 from Haxinator/amir
+| | | |     
+| | | |     Merging Amir's Task
+| | | |   
+| * | |   commit 7e5185a9c6c6f6a9815bf0427dd2220135c9e7d0
+| |\ \ \  Merge: 6dfa3cc 39a61c6
+| |/ / /  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+|/| | |   Date:   Wed Mar 30 10:52:41 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' into amir
+| | | | 
+* | | | commit 39a61c668d6c313e308a9013d70453ec650e82ba
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Wed Mar 30 10:23:15 2022 +0800
+| | | | 
+| | | |     Merged Dhwani's Skeleton
+| | | |     
+| | | |     - All html files now using her skeleton. Put puzzle in "dailypuzzle.html". "index.html" is now just a skeleton html to copy when we make more webpages.
+| | | |     - Changed grid size from 16x16 to 8x8.
+| | | |     - Updated nav Bar to conform with most recent version of Bootstrap, now collapses on small screens, nav bar is now black.
+| | | |     - Attached style sheet and javascript files to "dailypuzzle.html", moved Dhawni's CSS into the stylesheet, commented out, not sure of it's purpose.
+| | | | 
+| * | | commit 6dfa3cc5dda8581dc7a31ecc683156e65e140877
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Wed Mar 30 10:44:08 2022 +0800
+| | | | 
+| | | |     Made some changes needed for merging.
+| | | |     
+| | | |     - Grid and pallet now in "dailypuzzle.html".
+| | | |     - Cleaned some java script code: added white space, semicolons, and brackets; removed my old comments; added some new comments.
+| | | |     - updated dailypuzzle.html and index.html so that they're the same as main.
+| | | |     - updated stylesheet so it's the same as main.
+| | | | 
+| | | * commit 2bd6274616d3bf8254c98eb8d206ffda85c44d14
+| | | | Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| | | | Date:   Tue Apr 12 14:45:53 2022 +0800
+| | | | 
+| | | |     Updated old files + merging changes
+| | | |     
+| | | |     -dailypuzzle.html now contains the puzzle.
+| | | |     -index.html now a skeleton for future html pages.
+| | | |     -Updated css files to new versions.
+| | | |     -Updated dailypuzzle.html to new version.
+| | | |     -javascript.js contains the upto date code, including Will's code.
+| | | |     -Merged Amir's code with the new version.
+| | | |     -Changed will's code to use dictionaries instead of arrays.
+| | | |     -Commented out some style sheet parameters that didn't seem to have a purpose?
+| | | |     -Fixed bug with the Checking user canvas.
+| | | |     -Added in depth comments to all functions and code.
+| | | |     -Changed many variable and function names.
+| | | |     -Merged Amir's draw function and Will's initialize canvas function.
+| | | |     -Made borderCollapse change values depending on whether the user is ready.
+| | | |     -Made canvas size smaller for easy testing.
+| | | |     -Changed Will's random puzzle generator to be compatible with Amir's draw function.
+| | | |     -I may have done more that I have forgotten.
+| | | | 
+| | | * commit 4bbdeea24806185bfa1cd0185a221ee5bc2c1fc0
+| | | | Author: amirandakhs <amirandakhs1375@gmail.com>
+| | | | Date:   Tue Apr 5 00:53:42 2022 +0800
+| | | | 
+| | | |     Bug with colors were fixes
+| | | | 
+| | | * commit 05c6f43bc09147874d7544f583212f69cc497f97
+| | |/  Author: amirandakhs <amirandakhs1375@gmail.com>
+| |/|   Date:   Fri Apr 1 03:06:19 2022 +0800
+| | |   
+| | |       Puzlle gameplay first version
+| | | 
+| * | commit 37493b29bc8c8d425855a2a52309e064b67da08b
+|/ /  Author: amirandakhs <amirandakhs1375@gmail.com>
+| |   Date:   Tue Mar 29 00:34:24 2022 +0800
+| |   
+| |       adding choosing functionality and simple color pallete
+| | 
+* | commit 7561247db9751d6cc6f3f893cc73cb7c99a24cfd
+| | Author: Bye0123 <102362821+Bye0123@users.noreply.github.com>
+| | Date:   Mon Mar 28 21:28:20 2022 +0800
+| | 
+| |     Add files via upload
+| | 
+* | commit dc624cca72104b4fc427e35bac9f850c433670f2
+|/  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+|   Date:   Mon Mar 28 20:07:42 2022 +0800
+|   
+|       Added HTML skeleton, css and javascript files.
+|       
+|       HTML with bootstrap imported and basic skeleton done. Custom CSS (mainly for the grid). Javascript file that creates the grid for the puzzle including notes.
+| 
+* commit 49b94a6e0a1fc297d2230bf1f30863baef338217
+| Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+| Date:   Sun Mar 27 20:40:06 2022 +0800
+| 
+|     Updated the readme (what it need to contain)
+|     
+|     Added a list of the things we need to add to the read me.
+| 
+* commit 245b446a24c0f74fd763eb36d639812782c54ba3
+  Author: Haxinator <72430334+Haxinator@users.noreply.github.com>
+  Date:   Fri Mar 25 12:52:00 2022 +0800
+  
+      Initial commit

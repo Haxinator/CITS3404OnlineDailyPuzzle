@@ -84,7 +84,7 @@ All files used for validation can be found in the validation folder.
 
 # Include commit logs, showing contributions and review from both contributing students.
 
-**TO BE ADDED ONCE PROJECT IS FINALISED**
+Can be found in the log.txt file.
 
 # References:
 
