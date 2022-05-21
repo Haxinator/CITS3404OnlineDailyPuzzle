@@ -1,61 +1,50 @@
-.container{
-    min-height: 80vh;
-    padding-top: 50px;
+.row{
+    padding:0px;
+    margin: 0px;
+    margin-bottom: 1em;
 }
-.sections{
-    width: 33%;
-    float: left;
-    text-align: center;
+
+.box{
+    border: 1px solid grey;
 }
-.topcontainer{
-    height: 50%;
-    background-color: blue;
+
+.scroll{
+    /* height: 350px;
+    overflow-y: scroll; */
+    padding: 0px;
 }
-.bottomcontainer img{
-    display: block;
+
+.tablecontent{
     margin-left: auto;
     margin-right: auto;
-    height: 10%;
-    padding-top: 50px;
-}
+   
+} 
 
-#scroll{
-    height: 350px;  
-    overflow-y: scroll;
-}
-
-#verscroll{
-    height: 350px;
-    overflow-y: scroll;
-}
-
-#tablecontent{
-    margin-left: auto;
-    margin-right: auto;
-}
 table,th,td{
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    border-bottom: 2px solid white;
     border-collapse: collapse; 
     padding: 3px 3px;
+    color: white;
 }
-.msg{
-    padding-top: 10px;
-    padding-bottom: 20px;
+
+h1, h3{
     color: aquamarine;
 }
-#txt{
-    color: aquamarine;
-    padding: 5px;
-}
+
 th{
-    background-color: rgb(78, 78, 197);
+    /* background-color: rgb(78, 78, 197); */
+    /* background-color: gray; */
 }
 #diff{
-    background-color: rgb(247, 119, 73);
+    /* background-color: rgb(247, 119, 73); */
+    background-color: red;
 }
 tr:nth-child(even){
-    background-color: rgb(247, 86, 86);
+    /* background-color: rgb(247, 86, 86); */
+    /* background-color: grey; */
 }
 tr:nth-child(odd){
-    background-color: rgb(144, 181, 250);
+    /* background-color: rgb(144, 181, 250); */
+
 }

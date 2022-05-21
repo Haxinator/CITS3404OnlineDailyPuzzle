@@ -330,7 +330,7 @@ CreateTable.prototype.make = function(){
             else if(DIFFICULTY.toLowerCase() == "normal"){
             cell.style.padding = "2.4vh";
             }
-//            //Apply relevant settings.
+            //Apply relevant settings.
             switch(this.location)
             {
                 //If the table is for canvas
@@ -452,8 +452,6 @@ let score = 0
 scoreDisplay = document.getElementById("scores");
 //initalises the puzzles array
 initalize_puzzle();
-// //gets first puzzle
-// next_puzzle();
 
 //*-----------------------------------------Buttons---------------------------------------------------------------------------//
 
@@ -575,7 +573,8 @@ document.getElementById("Next").addEventListener("click", () => {
     //change next to start
     change_button("Next", "Start");
     document.getElementById("FBSHARE").style.display = "none";
-    //go to next puzzle
+    //go to next puzzle and remove puzzle name
+    document.querySelector("h2").innerHTML = "";
     next_puzzle();
 });
 
@@ -610,7 +609,7 @@ document.getElementById("FBSHARE").addEventListener("click", () => {
 
     final_score = score;
     const http = new XMLHttpRequest();
-    http.open("POST", "/FBsharing?Score="+ String(score));
+    http.open("POST", "/FBsharing?Score="+ String(score)+"&difficulty="+DIFFICULTY);
     http.send();
     http.onreadystatechange=(e)=>{
         console.log(http.responseText);

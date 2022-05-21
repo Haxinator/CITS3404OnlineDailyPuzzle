@@ -1,4 +1,5 @@
 #This file is purely responsible for routing
+from inspect import isclass
 from app import app
 from app import db
 from app import login
@@ -75,20 +76,31 @@ def getData():
     global LastRunTime
     time = datetime.utcnow()
     difficulty = request.args.get("Difficulty")
-    print(current_user.isComplete)
     isComplete = json.loads(current_user.isComplete)
     # In case difficulty wasn't defined
     if difficulty is None:
         difficulty = "EASY"
 
     print(time)
+
+    # If the current time is greater or equal to the time at which
+    # The puzzles should be updated
     if(time >= (LastRunTime[difficulty] + timedelta(minutes=3))):
-        # Reset Personal score counter on a new day
-        current_user.scores_array = ""
-        # New puzzle set for this difficulty
-        # So it is not complete
-        isComplete[difficulty] = False
-        current_user.isComplete = json.dumps(isComplete)
+        # get all users
+        users = User.query.all()
+
+        for user in users:
+            # Reset Personal score counter on a new day
+            # New puzzle set for this difficulty
+            # So set isComplete to false
+            user.scores_array = ""
+            Complete = json.loads(user.isComplete)
+            Complete[difficulty] = False
+            user.isComplete = json.dumps(Complete)
+
+            # update current users isComplete for this function
+            isComplete[difficulty] = False
+
         db.session.commit()
         # Update the time this puzzle was last generated
         LastRunTime[difficulty] = time
@@ -100,6 +112,7 @@ def getData():
         # number of puzzles in the set to send
         # Minimum set size is 2, max is 5
         numberOfPuzzles = int(random.random()*3)+2
+        
         print("Number of puzzles in set: " + str(numberOfPuzzles))
         print("Number of " + str(difficulty) + " puzzles stored: " + str(puzzlesStored))
 
@@ -172,6 +185,7 @@ def FBsharing():
         name = User.query.filter_by(user_id=int(current_user.get_id())).first().username
         # Getting Score
         score = request.args.get("Score")
+        difficulty = request.args.get("difficulty")
 
 
         filename = os.path.join(app.static_folder, 'credentials.json')
@@ -180,7 +194,7 @@ def FBsharing():
 
         access_token = credentials["access_token"]
         id = credentials["id"]
-        msg = f" {name} got a score of {score}!"
+        msg = f" {name} completed {list(puzzles[difficulty].keys())} and got a score of {score}!"
         post_url = f"https://graph.facebook.com/{id}/feed"
         payload = {
             'message': msg,
