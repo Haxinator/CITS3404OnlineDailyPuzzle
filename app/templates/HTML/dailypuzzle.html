@@ -9,7 +9,6 @@
 {% block content %}
 
 <h1 id="Difficulty">{{Difficulty.upper()}}</h1>
-<h2></h2>
 
 <div class="row justify-content-md-center">
   <!-- Size of colorPallet -->
@@ -68,7 +67,7 @@
   <div class="upload_button col-sm-12">
     <form action="{{ url_for('game') }}" method="post">
       <input type="text" placeholder="Puzzle name" id="name">
-      <input type="submit" placeholder="value" value="UPLOAD" id="Upload" name="Upload">
+      <input type="submit"  value="UPLOAD" id="Upload" name="Upload">
       <input type="hidden" id="PuzzleDb" name="PuzzleDb" value="">
     </form>
   </div>
