@@ -1,0 +1,35 @@
+.row{
+    padding:0px;
+    margin: 0px;
+    margin-bottom: 1em;
+}
+
+.box{
+    border: 1px solid grey;
+    padding-bottom: 1em;
+}
+
+.scroll{
+    padding: 0px;
+}
+
+.tablecontent{
+    margin-left: auto;
+    margin-right: auto;
+   
+} 
+
+table,th,td{
+    border-bottom: 2px solid white;
+    border-collapse: collapse; 
+    padding: 3px 3px;
+    color: white;
+}
+
+h1, h3{
+    color: aquamarine;
+}
+
+#diff{
+    background-color: red;
+}

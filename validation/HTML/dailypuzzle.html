@@ -1,0 +1,96 @@
+<!-- base.html is inhereted by all HTML pages -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- name="viewport" content="width=device-width, initial-scale=1" it was not allowed in meta-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <title>CITS3404 Project Page</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/pictures/favicon.ico">
+  <!-- GoogleFonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <!-- BootStrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="static/CascadingStyleSheets/global.css">
+  <!-- Any specific headers for the page are added here -->
+  <script src="static/javascript/puzzle.js" defer></script>
+  <link rel="stylesheet" href="static/CascadingStyleSheets/puzzle.css">
+</head>
+
+<body>
+
+  <h1 id="Difficulty">{{Difficulty.upper()}}</h1>
+  <h2>Press start to reveal</h2>
+  
+  <div class="row justify-content-md-center">
+    <!-- Size of colorPallet -->
+    <!-- canvas -->
+    <div id="canvas" class="col-xs-12"></div>
+  </div>
+  
+  <!-- Color pallet -->
+  <div class="row justify-content-md-center">
+    <!-- colorPallet -->
+    <div id="colorSelected" class="col-sm-12"></div>
+  </div>
+  
+  <!-- Color pallet -->
+  <div class="row justify-content-md-center">
+    <!-- colorPallet -->
+    <div id="colorPallet" class="col-sm-12"></div>
+  </div>
+  
+  <div class="row justify-content-md-center">
+    <!-- container for scores -->
+    <div id="scores">Score: 0</div>
+  </div>
+  
+  <div class="row justify-content-md-center">
+    <!-- container for results -->
+    <div id="result" class="text-center"></div>  
+  </div>
+  
+  <!--Game Buttons START/READY/CHECK-->
+  
+    <div class="game_button col-sm-12">
+      <input type="button" class="game_button" value="START" id="Start">
+    </div>
+    <div class="game_button col-sm-12">
+      <input type="button" class="game_button" value="READY" id="Ready">
+    </div>  
+    <div class="game_button col-sm-12">  
+      <input type="button" class="game_button" value="CHECK" id="Check">        
+    </div> 
+    <div class="game_button col-sm-12">
+      <input type="button" class="game_button" value="NEXT" id="Next">
+    </div>
+    <div class="game_button col-sm-12">
+      <input type="button" class="game_button" value="FBSHARE" id="FBSHARE">
+    </div>
+    <div class="game_button col-sm-12">
+        <form action="https://www.facebook.com/Puzzle-Game-Cits3403-Project-113737358002383/" target="_blank">
+          <input type="submit" class="game_button" value="Go to Facebook Page" id="FBPage">
+        </form>
+    </div>
+    <!--Upload puzzle to database button-->
+    <div class="upload_button col-sm-12">
+      <input type="button" value="DRAW ART" id="Draw">
+    </div>
+    <div class="upload_button col-sm-12">
+      <form action="URLFORGAME" method="post">
+        <input type="text" placeholder="Puzzle name" id="name">
+        <input type="submit"  value="UPLOAD" id="Upload" name="Upload">
+        <input type="hidden" id="PuzzleDb" name="PuzzleDb" value="">
+      </form>
+    </div>
+  
+</body>
+
+</html>

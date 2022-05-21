@@ -1,14 +1,28 @@
-{% extends "HTML/navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-<!--Temporary replacement for the stats page-->
+<head>
 
-<!-- Add any header in the block below to render it -->
-{% block extraHeaders %}
-    <link rel="stylesheet" href="static/CascadingStyleSheets/statistic.css">
-{% endblock %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CITS3404 Project Page</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/pictures/favicon.ico">
+  <!-- GoogleFonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <!-- BootStrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="static/CascadingStyleSheets/global.css">
+  <link rel="stylesheet" href="static/CascadingStyleSheets/about.css">
+  <!-- Any specific headers for the page are added here -->
+</head>
 
-<!-- add any body elements in the block below to render it -->
-{% block content %}
+
+
+<body>
 {% if length > 0 %}
     <div class="row">
         {% if current_user.is_authenticated %}
@@ -27,12 +41,12 @@
                     <th>No.</th>
                     <th>Score</th>
                 </tr>
-                {% for data in range(size-1) %}
+                <!-- {% for data in range(size-1) %} -->
                     <tr>
                         <td>{{ data + 1 }}</td>
                         <td>{{ stat_table1[size-1-data] }}</td>
                     </tr>
-                {% endfor %}
+                <!-- {% endfor %} -->
                 
             </table>   
             
@@ -42,9 +56,9 @@
 
         {% if current_user.is_authenticated and current_user.scores_array != "" %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 box">
-        {% else %}
+        <!-- {% else %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 box">
-        {% endif %}
+        {% endif %} -->
                 <h1 class="txt">LeaderBoard</h1>
                 <table class="tablecontent">
                     <tr>
@@ -52,14 +66,14 @@
                         <th>username</th>
                         <th>Score</th>
                     </tr>
-                    {% for row in range(length) %}
+                    <!-- {% for row in range(length) %} -->
                     <tr>
                         <td>{{ row + 1 }}</td>
                         <td>{{ stat_table2[0][row] }}</td>
                         <td>{{ stat_table2[1][row] }}</td>
                         
                     </tr>   
-                    {% endfor %}
+                    <!-- {% endfor %} -->
                 </table>
                 {% if current_user.is_authenticated %}
                 <h3 class="txt">You are at Position {{ i + 1 }}</h3>
@@ -68,9 +82,9 @@
             
         {% if current_user.is_authenticated and current_user.scores_array != "" %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 box">
-        {% else %}
+        <!-- {% else %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 box">
-        {% endif %}
+        {% endif %} -->
                 <h1 class="txt">Usage Table</h1>
                 <table class="tablecontent">
                     <tr>
@@ -85,7 +99,7 @@
                         <td>Hard</td>
                     </tr>
 
-                    {% for data in range(size_dic) %}
+                    <!-- {% for data in range(size_dic) %} -->
                     <tr>
                         <td>{{ data + 1 }}</td>
                         <td>{{ users_list[data] }}</td>
@@ -93,7 +107,7 @@
                         <td>{{ stat_table3[data][1] }}</td>
                         <td>{{ stat_table3[data][2] }}</td>
                     </tr>
-                    {% endfor %}    
+                    <!-- {% endfor %}     -->
                 </table>
             </div>
 
@@ -116,6 +130,7 @@
 </p>
 {% endif %}
 
+    
+</body>
 
-{% endblock %}
-
+</html>
